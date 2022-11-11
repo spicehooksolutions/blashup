@@ -150,7 +150,7 @@
                             <li><a href="<?php echo base_url(); ?>administrator/team/list" data-i18n="nav.basic-components.breadcrumbs">List Teams</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="#!">
                             <i class="ti-direction-alt"></i>
                             <span data-i18n="nav.basic-components.main">Testimonials</span>
@@ -159,7 +159,7 @@
                             <li><a href="<?php echo base_url(); ?>administrator/testimonials/add" data-i18n="nav.basic-components.alert">Add Testimonial</a></li>
                             <li><a href="<?php echo base_url(); ?>administrator/testimonials/list" data-i18n="nav.basic-components.breadcrumbs">List Testimonials</a></li>
                         </ul>
-                    </li>
+                    </li> -->
             </ul>
         </div>
     </div>
