@@ -27,39 +27,40 @@
  <!-- Page body start -->
  <div class="page-body">
      <div class="row">
-       
+
          <div class="col-sm-12">
-         <form method="post" action="">
+         <?php echo form_open_multipart('administrator/payment_gateway_integration_update'); ?>
 
-             <div class="tab-content">
-                 <div class="tab-pane active" id="">
+                 <div class="tab-content">
+                     <div class="tab-pane active" id="">
+                     <input value="<?php echo (isset($paymentconfiguration['id'])?$paymentconfiguration['id']:'');?>" name="id" type="hidden">
 
-                     <div class="form-group row">
-                         <label class="col-sm-2 col-form-label">RAZORPAY KEY ID</label>
-                         <div class="col-sm-6">
-                             <input class="form-control" value="" name="razorpay_key_id" placeholder="RAZORPAY KEY ID"
-                                 type="text">
+                         <div class="form-group row">
+                             <label class="col-sm-2 col-form-label">RAZORPAY KEY ID</label>
+                             <div class="col-sm-6">
+                                 <input class="form-control" value="<?php echo (isset($paymentconfiguration['payment_gateway_key_id'])?$paymentconfiguration['payment_gateway_key_id']:'');?>" name="razorpay_key_id"
+                                     placeholder="RAZORPAY KEY ID" type="text">
+                             </div>
                          </div>
-                     </div>
-                     <div class="form-group row">
-                         <label class="col-sm-2 col-form-label">RAZORPAY KEY SECRET</label>
-                         <div class="col-sm-6">
-                             <input class="form-control" value="" placeholder="RAZORPAY KEY SECRET" name="razorpay_key_secret"
-                                 type="text">
+                         <div class="form-group row">
+                             <label class="col-sm-2 col-form-label">RAZORPAY KEY SECRET</label>
+                             <div class="col-sm-6">
+                                 <input class="form-control" value="<?php echo (isset($paymentconfiguration['payment_gateway_key_secret'])?$paymentconfiguration['payment_gateway_key_secret']:'');?>" placeholder="RAZORPAY KEY SECRET"
+                                     name="razorpay_key_secret" type="text">
+                             </div>
                          </div>
-                     </div>
 
-                     <div class="form-group">
-                         <button type="submit" class="btn btn-primary waves-effect waves-light">Submit
-                         </button>
-                     </div>
+                         <div class="form-group">
+                             <button type="submit" class="btn btn-primary waves-effect waves-light">Submit
+                             </button>
+                         </div>
 
+                     </div>
                  </div>
-             </div>
 
          </div>
      </div>
-     </form>
+     <?php echo form_close() ?>
  </div>
  </div>
  </div>

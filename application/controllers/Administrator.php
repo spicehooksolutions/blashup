@@ -494,7 +494,7 @@
 		{
 			 
 			$config['base_url'] = base_url(). 'administrator/payment-gateway-integration/';
-	
+			$data['paymentconfiguration'] = $this->Administrator_Model->get_paymentconfiguration(1);
 			$data['title'] = 'Payment Gateway Integration';
 
 			 	$this->load->view('administrator/header-script');
@@ -509,14 +509,7 @@
 		{
 			 
 			$data['paymentgateway'] = $this->Administrator_Model->payment_gateway_integration_update();
-			$data['title'] = 'Add Payment Settings';
-
-			$this->load->view('administrator/header-script');
-	 	 	$this->load->view('administrator/header');
-	  		$this->load->view('administrator/header-bottom');
-	   		$this->load->view('administrator/payment-gateway-integration', $data);
-	  		$this->load->view('administrator/footer');
-		
+			redirect('administrator/site-configuration/payment-gateway-integration');
 
 		}
 
@@ -707,8 +700,3 @@ public function update_password(){
 
 		
 	}
-	
-
-
-
-
