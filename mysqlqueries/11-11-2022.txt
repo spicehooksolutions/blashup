@@ -1,0 +1,8 @@
+CREATE TABLE `paymentgateways` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `gatewaytag` varchar(15) NOT NULL,
+ `payment_gateway_key_id` text DEFAULT NULL,
+ `payment_gateway_key_secret` text DEFAULT NULL,
+ `gateway_status` enum('Y','N') NOT NULL DEFAULT 'Y',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4

@@ -52,7 +52,7 @@ $route['administrator/sliders/update/(:any)'] = 'administrator/update_slider/$1'
 $route['administrator/site-configuration'] = 'administrator/get_siteconfiguration';
 $route['administrator/site-configuration/update/(:any)'] = 'administrator/update_siteconfiguration/$1';
 
-$route['(:any)'] = 'pages/view/$1';
+//$route['(:any)'] = 'pages/view/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 

@@ -1,33 +1,98 @@
-<div class="row">
-	<div class="col-md-4 col-md-offset-4">
-		<?php echo validation_errors(); ?>
-		<?php echo form_open_multipart('users/register'); ?>
-		<h3 class="text-center"><?= $title ?></h3>
-		   <div class="form-group">
-		   	 <label>Name</label>
-		   	 <input type="text" class="form-control" name="name" placeholder="Name">
-		   </div>
-		   <div class="form-group">
-		   	 <label>Username</label>
-		   	 <input type="text" name="username" class="form-control" placeholder="Username">
-		   </div>
-		   <div class="form-group">
-		   	 <label>Email</label>
-		   	 <input type="text" name="email" class="form-control" placeholder="Email">
-		   </div>
-		   <div class="form-group">
-		   	 <label>Password</label>
-		   	 <input type="password" class="form-control" name="password" placeholder="Password">
-		   </div>
-		   <div class="form-group">
-		   	 <label>Confirm Password</label>
-		   	 <input type="password" class="form-control" name="password2" placeholder="Confirm Password">
-		   </div>
-		   <div class="form-group">
-		   	 <label>Zipcode</label>
-		   	 <input type="text" name="zipcode" class="form-control" placeholder="Zipcode">
-		   </div>
-		   <button type="submit" class="btn btn-primary">Submit</button>
-		<?php echo form_close() ?>
-	</div>
-</div>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
+        <div class="row flex-grow">
+          <div class="col-lg-6 d-flex align-items-center justify-content-center">
+            <div class="auth-form-transparent text-left p-3">
+              <div class="brand-logo">
+                <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/frontend/images/logo.png" alt="logo"></a>
+              </div>
+              <h4>New here?</h4>
+              <h6 class="font-weight-light">Join us today! It takes only few steps</h6>
+			  <?php echo validation_errors(); ?>
+			  <?php echo form_open_multipart('users/register',array('class'=>'pt-3')); ?>
+			  <div class="form-group">
+                  <label>Name</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend bg-transparent">
+                      <span class="input-group-text bg-transparent border-right-0">
+                        <i class="mdi mdi-account-outline text-primary"></i>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control form-control-lg border-left-0" name="name" placeholder="Name" id="name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Username</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend bg-transparent">
+                      <span class="input-group-text bg-transparent border-right-0">
+                        <i class="mdi mdi-account-outline text-primary"></i>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control form-control-lg border-left-0" placeholder="Username" name="username" id="username">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend bg-transparent">
+                      <span class="input-group-text bg-transparent border-right-0">
+                        <i class="mdi mdi-email-outline text-primary"></i>
+                      </span>
+                    </div>
+                    <input type="email" class="form-control form-control-lg border-left-0" placeholder="Email" name="email" id="email">
+                  </div>
+                </div>                
+                <div class="form-group">
+                  <label>Password</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend bg-transparent">
+                      <span class="input-group-text bg-transparent border-right-0">
+                        <i class="mdi mdi-lock-outline text-primary"></i>
+                      </span>
+                    </div>
+                    <input type="password" class="form-control form-control-lg border-left-0" name="password" id="password" placeholder="Password">                        
+                  </div>
+                </div>
+
+				<div class="form-group">
+                  <label>Confirm password</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend bg-transparent">
+                      <span class="input-group-text bg-transparent border-right-0">
+                        <i class="mdi mdi-lock-outline text-primary"></i>
+                      </span>
+                    </div>
+                    <input type="password" class="form-control form-control-lg border-left-0" name="password2" id="password2" placeholder="Password">                        
+                  </div>
+                </div>
+
+
+                <div class="mb-4">
+                  <div class="form-check">
+                    <label class="form-check-label text-muted">
+                      <input type="checkbox" class="form-check-input" name="agree" id="agree" value="agree">
+                      I agree to all Terms & Conditions
+                    </label>
+                  </div>
+                </div>
+                <div class="mt-3">
+				<button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
+                </div>
+                <div class="text-center mt-4 font-weight-light">
+                  Already have an account? <a href="<?php echo base_url(); ?>users/login" class="text-primary">Login</a>
+                </div>
+				<?php echo form_close() ?>
+            </div>
+          </div>
+          <div class="col-lg-6 register-half-bg d-flex flex-row">
+            <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright &copy; 2021  All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->

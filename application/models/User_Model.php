@@ -5,8 +5,7 @@
 			$data = array('name' => $this->input->post('name'), 
 						  'email' => $this->input->post('email'),
 						  'password' => $encrypt_password,
-						  'username' => $this->input->post('username'),
-						  'zipcode' => $this->input->post('zipcode')
+						  'username' => $this->input->post('username')
 						  );
 
 			return $this->db->insert('users', $data);
