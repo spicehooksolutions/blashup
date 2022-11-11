@@ -1,0 +1,41 @@
+CREATE TABLE `vendor_campaigns` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `campaign_title` varchar(256) NOT NULL,
+ `campaign_description` text NOT NULL,
+ `campaign_media_type` enum('video','image') DEFAULT NULL,
+ `link_of_product` text NOT NULL,
+ `ad_type` enum('in between video','full screen video') NOT NULL,
+ `video_or_image_file` varchar(512) NOT NULL,
+ `banner_add` varchar(256) NOT NULL,
+ `budget_per_day` double(10,2) NOT NULL,
+ `campaign_pack` varchar(256) NOT NULL,
+ `total_campaign_value` double(10,2) NOT NULL,
+ `campaign_creation_date` datetime NOT NULL,
+ `campaign_created_by` int(11) NOT NULL,
+ `campaign_approved_by` int(11) NOT NULL,
+ `campaign_approval_date` datetime NOT NULL,
+ `campaign_start_date` datetime NOT NULL,
+ `campaign_end_date` datetime NOT NULL,
+ `campaign_pause_date` datetime NOT NULL,
+ `campaign_pause_by` int(11) NOT NULL,
+ `campaign_restart_date` datetime NOT NULL,
+ `campaign_restart_by` int(11) NOT NULL,
+ `campaign_status` enum('active','inactive','pending','approved','suspend','paused','completed') NOT NULL DEFAULT 'pending',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+
+
+
+
+CREATE TABLE `campaign_transactions` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `transaction_code` varchar(256) NOT NULL,
+ `campaign_id` int(11) NOT NULL,
+ `user_id` int(11) NOT NULL,
+ `transaction_date` datetime NOT NULL,
+ `transaction_response` text NOT NULL,
+ `transaction_status` enum('success','processed','failed','declined') NOT NULL DEFAULT 'processed',
+ `response_update_time` datetime NOT NULL,
+ `transaction_amount` double(10,2) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
