@@ -575,6 +575,18 @@
 			return $this->db->update('site_config', $data);
 		}
 
+		//Save payment settings
+
+		public function payment_gateway_integration_update()
+		{
+			$data = array('payment_gateway_key_id' => $this->input->post('razorpay_key_id'), 
+							'payment_gateway_key_secret' => $this->input->post('razorpay_key_secret')
+						  );
+			 $this->db->insert('paymentgateways', $data);
+			
+		}
+
+
 		//Page Content pages details start
 		public function get_pagecontents($id = FALSE)
 		{

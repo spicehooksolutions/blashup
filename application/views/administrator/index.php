@@ -19,7 +19,7 @@
                     <div class="login-card card-block auth-body">
 
                             <div class="text-center">
-                                <img src="<?php echo base_url(); ?>assets/images/yadi-ci-logo.png" alt="logo.png">
+                                <img src="" alt="logo.png">
                             </div>
                               	
                             <div class="auth-box">
@@ -90,7 +90,7 @@
                                         <p class="text-inverse text-left"><b>Your Autentification Team</b></p>
                                     </div>
                                     <div class="col-md-2">
-                                        <img src="<?php echo base_url(); ?>admintemplate/assets/images/auth/Logo-small-bottom.png" alt="small-logo.png">
+                                        <img src="" alt="small-logo.png">
                                     </div>
                                 </div>
                             </form>

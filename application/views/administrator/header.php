@@ -17,9 +17,9 @@
                 </a>
                 <a href="<?php echo base_url(); ?>administrator/dashboard">
                  <?php if($this->session->userdata('image') != ""){ ?>
-                        <img src="<?php echo base_url(); ?>assets/images/<?php echo $this->session->userdata('site_logo'); ?>" alt="Site Logo" class="img-fluid" style="width: auto; height: 30px;" >
+                        <img src="" alt="Site Logo" class="img-fluid" style="width: auto; height: 30px;" >
                     <?php }else{ ?>
-                         <img class="img-fluid" src="<?php echo base_url(); ?>admintemplate/assets/images/logo.png" alt="Theme-Logo" />
+                         <img class="img-fluid" src="" />
                     <?php } ?>
 
                    

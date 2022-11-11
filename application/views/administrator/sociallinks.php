@@ -45,7 +45,7 @@ $(document).ready(function(){
 
 
 
-            <div class="page-header">
+            <!-- <div class="page-header">
                 <div class="page-header-title">
                     <h4><?php echo $title; ?></h4>
                 </div>
@@ -62,14 +62,14 @@ $(document).ready(function(){
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
            
             <!-- Page-header end -->
             <!-- Page-body start -->
             <div class="page-body">
                 <!-- DOM/Jquery table start -->
 
-                <div class="card">
+                <!-- <div class="card">
                     <div class="card-block">
                         <div class="table-responsive dt-responsive">
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">
@@ -81,8 +81,8 @@ $(document).ready(function(){
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                <?php foreach($sociallinks as $posts) : ?>
+                                <tbody> -->
+                                <!-- <?php foreach($sociallinks as $posts) : ?>
                                  <tr>
                                         <td><?php echo $posts['id']; ?></td>
                                         <td><a href="<?php echo base_url(); ?>administrator/sociallinks/update/<?php echo $posts['id']; ?>"><?php echo $posts['social_name']; ?></a></td>
@@ -91,17 +91,17 @@ $(document).ready(function(){
                                             <a class="label label-inverse-info" href='<?php echo base_url(); ?>administrator/sociallinks/update/<?php echo $posts['id']; ?>'>Edit</a>
                                         </td>
                                     </tr>
-                                <?php endforeach; ?>
+                                <?php endforeach; ?> -->
 
                                 <!-- <div class="paginate-link">
                                     <?php //echo $this->pagination->create_links(); ?>
                                 </div>  -->
 
-                                 </tbody>
+                                 <!-- </tbody>
                             </table>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- DOM/Jquery table end -->
             </div>
 

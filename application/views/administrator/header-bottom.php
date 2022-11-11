@@ -6,31 +6,7 @@
 
      <!-- Menu aside start -->
     <div class="main-menu">
-        <div class="main-menu-header">
-           <ul class="nav-left-new">
-                        <li>
-                            <a id="collapse-menu" href="#">
-                                <i class="ti-home"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="main-search morphsearch-search" href="#">
-                                <i class="ti-user   "></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="main-search morphsearch-search" href="#">
-                                <i class="ti-settings"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="main-search morphsearch-search" href="#">
-                                <i class="ti-email"></i>
-                            </a>
-                        </li>
-                   
-                    </ul>
-        </div>
+       
         <div class="main-menu-content">
             <ul class="main-navigation">
              <li class="nav-item has-class">
@@ -58,12 +34,6 @@
                             <span>FAQ</span>
                         </a>
                         <ul class="tree-1">
-                            <li class="nav-sub-item"><a href="#">FAQ Category</a>
-                                <ul class="tree-2">
-                                    <li><a href="<?php echo base_url(); ?>administrator/faq-categories/create">Add FAQ Category</a></li>
-                                    <li><a href="<?php echo base_url(); ?>administrator/faq-categories">List FAQ Category </a></li>
-                                </ul>
-                            </li>
                             <li class="nav-sub-item"><a href="#">FAQ</a>
                                 <ul class="tree-2">
                                     <li><a href="<?php echo base_url(); ?>administrator/faq/create">Add FAQ</a></li>
@@ -80,16 +50,12 @@
                         </a>
                         <ul class="tree-1">
                             <li><a href="<?php echo base_url(); ?>administrator/site-configuration/update/1">Site Configuration</a></li>
-                            <li><a href="<?php echo base_url(); ?>administrator/scopages">SCO</a></li>
-                            <li> <a href="<?php echo base_url(); ?>administrator/sociallinks">Social Links</a></li>
-                            <li> <a href="<?php echo base_url(); ?>administrator/page-contents">Page Contents</a></li>
+                            <li><a href="<?php echo base_url(); ?>administrator/site-configuration/payment-gateway-integration">Payment Gateway Integration</a></li>
                         </ul>
-                    </li>
-                    
-                     
-                    
+                    </li>                    
             </ul>
         </div>
+        
     </div>
     <!-- Menu aside end -->
      <!-- Main-body start -->
