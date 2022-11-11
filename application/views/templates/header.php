@@ -37,6 +37,16 @@
     <!-- End custom js for this page-->
 
     <!-- endinject -->
+    <style>
+      .brand-logo img
+      {
+        margin: 10px 10px;
+        width: 20%;
+      }
+      .nav {
+        flex-wrap: nowrap !important;
+      }
+      </style>
 </head>
 
 <body>
@@ -49,100 +59,48 @@
                         <li class="nav-item">
 
                             <a class="navbar-brand brand-logo" href="<?php echo base_url(); ?>"><img
-                                    src="<?php echo base_url(); ?>assets/frontend/images/logo.svg" alt="logo" /></a>
-                            <a class="navbar-brand brand-logo-mini" href="<?php echo base_url(); ?>"><img
-                                    src="<?php echo base_url(); ?>assets/frontend/images/logo-mini.svg"
-                                    alt="logo" /></a>
-
+                                    src="<?php echo base_url(); ?>assets/frontend/images/logo.png" alt="logo" /></a>
                         </li>
+                        <?php if($this->session->userdata('login')): ?>
+
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url(); ?>">
                                 <i class="mdi mdi-file-document-box menu-icon"></i>
                                 <span class="menu-title">Dashboard</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="mdi mdi-cube-outline menu-icon"></i>
-                                <span class="menu-title">UI Elements</span>
-                                <i class="menu-arrow"></i>
-                            </a>
-                            <div class="submenu">
-                                <ul>
-                                    <li class="nav-item"><a class="nav-link"
-                                            href="../../pages/ui-features/buttons.html">Buttons</a></li>
-                                    <li class="nav-item"><a class="nav-link"
-                                            href="../../pages/ui-features/typography.html">Typography</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../../pages/forms/basic_elements.html" class="nav-link">
-                                <i class="mdi mdi-chart-areaspline menu-icon"></i>
-                                <span class="menu-title">Form Elements</span>
-                                <i class="menu-arrow"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../../pages/charts/chartjs.html" class="nav-link">
-                                <i class="mdi mdi-finance menu-icon"></i>
-                                <span class="menu-title">Charts</span>
-                                <i class="menu-arrow"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../../pages/tables/basic-table.html" class="nav-link">
-                                <i class="mdi mdi-grid menu-icon"></i>
-                                <span class="menu-title">Tables</span>
-                                <i class="menu-arrow"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../../pages/icons/mdi.html" class="nav-link">
-                                <i class="mdi mdi-emoticon menu-icon"></i>
-                                <span class="menu-title">Icons</span>
-                                <i class="menu-arrow"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="mdi mdi-codepen menu-icon"></i>
-                                <span class="menu-title">Sample Pages</span>
-                                <i class="menu-arrow"></i>
-                            </a>
-                            <div class="submenu">
-                                <ul class="submenu-item">
-                                    <li class="nav-item"><a class="nav-link"
-                                            href="../../pages/samples/login.html">Login</a></li>
-                                    <li class="nav-item"><a class="nav-link"
-                                            href="../../pages/samples/login-2.html">Login 2</a></li>
-                                    <li class="nav-item"><a class="nav-link"
-                                            href="../../pages/samples/register.html">Register</a></li>
-                                    <li class="nav-item"><a class="nav-link"
-                                            href="../../pages/samples/register-2.html">Register 2</a></li>
-                                    <li class="nav-item"><a class="nav-link"
-                                            href="../../pages/samples/lock-screen.html">Lockscreen</a></li>
-                                </ul>
-                            </div>
-                        </li>
+                        <?php endif; ?>
+                        
+                        <?php if(!$this->session->userdata('login')): ?>
+                          <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>users/login" class="nav-link">
+                                  <i class="mdi mdi-account menu-icon"></i>
+                                  <span class="menu-title">Sign up / Sign in</span>
+                                  <i class="menu-arrow"></i>
+                              </a>
+                          </li>
+                        <?php endif; ?>
+
+                        <?php if($this->session->userdata('login')): ?>
                         <li class="nav-item nav-profile dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-                                <span class="nav-profile-name">Johnson</span>
+                                <span class="nav-profile-name"><?php echo $this->session->userdata('username'); ?></span>
                                 <span class="online-status"></span>
-                                <img src="<?php echo base_url(); ?>assets/frontend/images/faces/face28.png" alt="profile" />
+                                <img src="<?php echo base_url(); ?>assets/frontend/images/faces/user_icon.png" alt="profile" />
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                                 aria-labelledby="profileDropdown">
-                                <a class="dropdown-item">
+                                <a class="dropdown-item" href="<?php echo base_url(); ?>users/myaccount">
                                     <i class="mdi mdi-settings text-primary"></i>
                                     Settings
                                 </a>
-                                <a class="dropdown-item">
+                                <a class="dropdown-item" href="<?php echo base_url(); ?>users/logout">
                                     <i class="mdi mdi-logout text-primary"></i>
                                     Logout
                                 </a>
                             </div>
                         </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </nav>

@@ -1,3 +1,6 @@
+<?php if(!$this->session->userdata('login')):
+    redirect('users/login');
+endif; ?>    
 <div class="container-fluid page-body-wrapper">
       <div class="main-panel">
         <div class="content-wrapper">
@@ -6,7 +9,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Striped Table</h4>
+                  <h4 class="card-title">Manage your campaign</h4>
                   <p class="card-description">
                     Add class <code>.table-striped</code>
                   </p>

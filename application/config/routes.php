@@ -85,7 +85,7 @@ $route['administrator/testimonials/add'] = 'administrator/add_testimonial';
 $route['administrator/testimonials/list'] = 'administrator/list_testimonial';
 $route['administrator/testimonials/update/(:any)'] = 'administrator/update_testimonial/(:any)';
 
-$route['(:any)'] = 'pages/view/$1';
+//$route['(:any)'] = 'pages/view/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
