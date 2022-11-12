@@ -89,7 +89,7 @@
 				$this->db->order_by('users.id', 'DESC');
 				
 				//$this->db->join('categories', 'categories.id = posts.category_id');
-				$query =$this->db->get_where('users', array('id !=' => 1));
+				$query =$this->db->get_where('users', array('role_id !=' => 1));
 				return $query->result_array(); 
 			}
 
