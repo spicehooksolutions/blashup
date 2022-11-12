@@ -9,7 +9,7 @@
                 <a href="#" class="list-group-item active text-center">
                   <h4 class="glyphicon glyphicon-plane"></h4><br/>1. Campaign
                 </a>
-                <a href="#" class="list-group-item text-center">
+                <a href="#" class="list-group-item  text-center">
                   <h4 class="glyphicon glyphicon-road"></h4><br/>2. Add Settings
                 </a>
               </div>
@@ -51,9 +51,9 @@
                 <div class="form-group">
                   <label>Ad Type</label>
                   <div class="input-group">
-                    <select class="form-control form-control-lg border-left-0" name="media_type" id="media_type">
-                    <option  class="form-control form-control-lg border-left-0" value="Image">In Between Video</option>
-                    <option  class="form-control form-control-lg border-left-0" value="Video">Full Screen Video</option>
+                    <select class="form-control form-control-lg border-left-0" name="ad_type" id="ad_type">
+                    <option  class="form-control form-control-lg border-left-0" value="In Between Video">In Between Video</option>
+                    <option  class="form-control form-control-lg border-left-0" value="Full Screen Video">Full Screen Video</option>
                   </select>
                   </div>
                 </div> 
