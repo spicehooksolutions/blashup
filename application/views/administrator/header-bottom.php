@@ -49,7 +49,16 @@
                         <ul class="tree-1">
                             <li><a href="<?php echo base_url(); ?>administrator/campaign-listing">Campaign List</a></li>
                         </ul>
-                    </li>                    
+                    </li>     
+                    <li class="nav-item">
+                        <a href="#!">
+                            <i class="ti-settings"></i>
+                            <span>Reports</span>
+                        </a>
+                        <ul class="tree-1">
+                        <li><a href="#">Reports</a></li>
+                        </ul>
+                    </li>                 
             </ul>
         </div>
         

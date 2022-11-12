@@ -3,7 +3,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>admintemplate/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>admintemplate/bower_components/ekko-lightbox/dist/ekko-lightbox.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>admintemplate/bower_components/lightbox2/dist/css/lightbox.css">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
  $(document).ready(function(){
         $(".delete").click(function(e){ alert('as');
@@ -41,6 +41,30 @@ $(document).ready(function(){
             })
         });
     });
+
+
+                    $.ajax({
+                                type: 'post',
+                                url: 'campaign-listing.php',
+                                data: {
+                                    txt: txtbox,
+                                   
+                                },
+                                cache: false,
+                                success: function(returndata) {
+                                    if (returndata[4] === 1) {
+
+                                    $("#btn_id").modal('show');
+
+                                    } else {
+                                    // other code
+                                    }
+                                },
+                                error: function() {
+                                    console.error('Failed to process ajax !');
+                                }
+                                });
+              
 </script>
 
 
@@ -80,6 +104,7 @@ $(document).ready(function(){
                                         <th>Campaign Start Date</th>
                                         <th>Campaign End Date</th>
                                         <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -99,9 +124,13 @@ $(document).ready(function(){
                                                 
                                         <?php echo $post['campaign_status']; ?>
                                         </td>
+                                        <td>
+                                            <span><a href="#"><button class="btn btn-primary waves-effect waves-light" id="btn_id" data-toggle="modal" data-target="#exampleModalCenter">View</button></a></span>    
+                                            <span><a href="#"><button class="btn btn-primary waves-effect waves-light">Edit</button></a></span>    
+                                        
+                                        </td>
                                     </tr>
-                                <?php endforeach; ?>
-
+                             
                                
 
                                  </tbody>
@@ -109,6 +138,33 @@ $(document).ready(function(){
                         </div>
                     </div>
                 </div>
+
+                    <!--Modal-->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Campaign Detail</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                <p><strong>Campaign Title :</strong> <?php echo $post['campaign_title']; ?></p>
+                <p><strong>Campaign Description :</strong> <?php echo $post['campaign_description']; ?></p>  
+                <p><strong>Ad Type :</strong> <?php echo $post['ad_type']; ?></p>   
+                <p><strong>Budget Per Day :</strong> <?php echo $post['budget_per_day']; ?></p>  
+                <p><strong>Campaign Duration :</strong> <?php echo $post['campaign_pack']; ?></p>                            
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <?php endforeach; ?>
+
+              
                 <!-- DOM/Jquery table end -->
             </div>
 
