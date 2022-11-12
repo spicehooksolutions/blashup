@@ -425,11 +425,11 @@
 			
 		}
 
-		public function campaign_listing_data($id = FALSE, $limit = FALSE, $offset = FALSE)
+		public function campaign_listing_data($id = FALSE)
 		{
-			if ($limit) {
-				$this->db->limit($limit, $offset);
-			 }
+			// if ($limit) {
+			// 	$this->db->limit($limit, $offset);
+			//  }
 
 			 if($id === FALSE){
 			 	$this->db->order_by('vendor_campaigns.id', 'DESC');
@@ -441,7 +441,7 @@
 			 $query = $this->db->get_where('vendor_campaigns', array('id' => 1));
 			 return $query->row_array();
 
-			//return view('administrator/footer');
+			
 		}
 
 

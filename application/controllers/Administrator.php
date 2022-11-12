@@ -513,20 +513,11 @@
 
 		}
 
-		public function campaign_listing($offset = 0)
+		public function campaign_listing()
 		{	
 
-				// Pagination Config
-				$config['base_url'] = base_url(). 'administrator/campaign-listing/';
-				$config['total_rows'] = $this->db->get('vendor_campaigns');
-				$config['per_page'] = 3;
-				$config['uri_segment'] = 3;
-				$config['attributes'] = array('class' => 'paginate-link');
-	
-				// Init Pagination
-				$this->pagination->initialize($config);
-	
-			$data['campaign-listing'] = $this->Administrator_Model->campaign_listing_data(1);
+					
+			$data['campaign_listing'] = $this->Administrator_Model->campaign_listing_data();
 			$data['title'] = 'Campaign Listing';
 
 			 	$this->load->view('administrator/header-script');
