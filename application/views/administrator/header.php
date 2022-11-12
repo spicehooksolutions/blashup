@@ -16,13 +16,14 @@
                     <i class="ti-search"></i>
                 </a>
                 <a href="<?php echo base_url(); ?>administrator/dashboard">
-                 <?php if($this->session->userdata('image') != ""){ ?>
-                        <img src="" alt="Site Logo" class="img-fluid" style="width: auto; height: 30px;" >
-                    <?php }else{ ?>
-                         <img class="img-fluid" src="" />
-                    <?php } ?>
 
-                   
+                <?php
+                $query = $this->db->get_where('site_config', array('id' => 1));
+                $sitconfig=$query->row_array();
+                
+                ?>
+                   <img src="<?php echo base_url().'assets/images/'.$sitconfig['logo_img'];?>" alt="Site Logo" style="width: 60%;" >
+                                    
                 </a>
                 <a class="mobile-options">
                     <i class="ti-more"></i>
