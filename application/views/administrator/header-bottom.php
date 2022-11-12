@@ -28,20 +28,7 @@
                 </li>
                     
                     
-                    <li class="nav-item">
-                        <a href="#!">
-                            <i class="ti-write"></i>
-                            <span>FAQ</span>
-                        </a>
-                        <ul class="tree-1">
-                            <li class="nav-sub-item"><a href="#">FAQ</a>
-                                <ul class="tree-2">
-                                    <li><a href="<?php echo base_url(); ?>administrator/faq/create">Add FAQ</a></li>
-                                    <li><a href="<?php echo base_url(); ?>administrator/faq">List FAQ</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+                  
                 
                     <li class="nav-item">
                         <a href="#!">
