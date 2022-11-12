@@ -39,6 +39,16 @@
                             <li><a href="<?php echo base_url(); ?>administrator/site-configuration/update/1">Site Configuration</a></li>
                             <li><a href="<?php echo base_url(); ?>administrator/site-configuration/payment-gateway-integration">Payment Gateway Integration</a></li>
                         </ul>
+                    </li>    
+
+                     <li class="nav-item">
+                        <a href="#!">
+                            <i class="ti-settings"></i>
+                            <span>Campaign</span>
+                        </a>
+                        <ul class="tree-1">
+                            <li><a href="<?php echo base_url(); ?>administrator/campaign-listing">Campaign List</a></li>
+                        </ul>
                     </li>                    
             </ul>
         </div>

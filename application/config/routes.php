@@ -27,6 +27,8 @@ $route['administrator/users/update-user/(:any)'] = 'administrator/update_user/$1
 $route['administrator/site-configuration/payment-gateway-integration'] = 'administrator/payment_gateway_integration';
 $route['administrator/site-configuration/payment-gateway-integration/update'] = 'administrator/payment_gateway_integration_update';
 
+$route['administrator/campaign-listing'] = 'administrator/campaign_listing';
+
 $route['administrator/site-configuration'] = 'administrator/get_siteconfiguration';
 $route['administrator/site-configuration/update/(:any)'] = 'administrator/update_siteconfiguration/$1';
 $route['/home'] = 'home/index';

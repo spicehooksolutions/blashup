@@ -425,6 +425,26 @@
 			
 		}
 
+		public function campaign_listing_data($id = FALSE, $limit = FALSE, $offset = FALSE)
+		{
+			if ($limit) {
+				$this->db->limit($limit, $offset);
+			 }
+
+			 if($id === FALSE){
+			 	$this->db->order_by('vendor_campaigns.id', 'DESC');
+
+			 	$query =$this->db->get('vendor_campaigns');
+				return $query->result_array(); 
+			 }
+
+			 $query = $this->db->get_where('vendor_campaigns', array('id' => 1));
+			 return $query->row_array();
+
+			//return view('administrator/footer');
+		}
+
+
 
 		//Page Content pages details start
 		public function get_pagecontents($id = FALSE)
