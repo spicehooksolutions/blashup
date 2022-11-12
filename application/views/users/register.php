@@ -5,7 +5,27 @@
           <div class="col-lg-6 d-flex align-items-center justify-content-center">
             <div class="auth-form-transparent text-left p-3">
               <div class="brand-logo">
-                <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/frontend/images/logo.png" alt="logo"></a>
+                <a href="<?php echo base_url(); ?>">
+              
+                <?php
+                            $query = $this->db->get_where('site_config', array('id' => 1));
+                            $sitconfig=$query->row_array();
+                            
+                            ?>
+                            
+                <?php if(isset($sitconfig['logo_img']) && $sitconfig['logo_img']!='') { ?>
+
+                <img
+                  src="<?php echo base_url().'assets/images/'.$sitconfig['logo_img'];?>" alt="logo" />
+
+                <?php } else { ?>
+
+                <img
+                  src="<?php echo base_url(); ?>assets/frontend/images/logo.png" alt="logo" />
+
+                  <?php } ?>
+              
+              </a>
               </div>
               <h4>New here?</h4>
               <h6 class="font-weight-light">Join us today! It takes only few steps</h6>

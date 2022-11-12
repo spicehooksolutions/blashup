@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<?php
+                            $query = $this->db->get_where('site_config', array('id' => 1));
+                            $sitconfig=$query->row_array();
+                            
+                            ?>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <?php if(isset($sitconfig['site_name']) && $sitconfig['site_name']!='') { ?>
+    <title><?php echo $sitconfig['site_name'];?></title>
+    <?php } else { ?>        
     <title>Blashup Audiencemanager</title>
+    <?php }?>
     <!-- base:css -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/frontend/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/frontend/vendors/base/vendor.bundle.base.css">
@@ -41,7 +50,7 @@
       .brand-logo img
       {
         margin: 10px 10px;
-        width: 20%;
+        width: 15%;
       }
       .nav {
         flex-wrap: nowrap !important;
@@ -58,8 +67,21 @@
                     <ul class="nav page-navigation">
                         <li class="nav-item">
 
-                            <a class="navbar-brand brand-logo" href="<?php echo base_url(); ?>"><img
-                                    src="<?php echo base_url(); ?>assets/frontend/images/logo.png" alt="logo" /></a>
+                            <a class="navbar-brand brand-logo" href="<?php echo base_url(); ?>">
+                            
+                            
+                            <?php if(isset($sitconfig['logo_img']) && $sitconfig['logo_img']!='') { ?>
+
+                                 <img
+                                    src="<?php echo base_url().'assets/images/'.$sitconfig['logo_img'];?>" alt="logo" />
+
+                          <?php } else { ?>
+
+                            <img
+                                    src="<?php echo base_url(); ?>assets/frontend/images/logo.png" alt="logo" />
+
+                        <?php } ?>     
+                        </a>   
                         </li>
                         <?php if($this->session->userdata('login')): ?>
 
