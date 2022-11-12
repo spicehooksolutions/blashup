@@ -43,6 +43,7 @@
     <script src="<?php echo base_url(); ?>assets/frontend/js/jquery.cookie.js" type="text/javascript"></script>
     <!-- Custom js for this page-->
     <script src="<?php echo base_url(); ?>assets/frontend/js/dashboard.js"></script>
+    <script src="<?php echo base_url(); ?>assets/frontend/js/sweetalert.min.js"></script>
     <!-- End custom js for this page-->
 
     <!-- endinject -->

@@ -42,3 +42,9 @@ CREATE TABLE `campaign_transactions` (
 
 
 DROP TABLE `comments`, `faqs`, `galleries`, `page_content`, `posts`, `products`, `product_images`, `sco`, `sliders_img`, `sociallinks`, `teams`, `testimonials`;
+
+
+ALTER TABLE `vendor_campaigns` CHANGE `campaign_status` `campaign_status` ENUM('active','inactive','pending','approved','suspend','paused','completed','draft') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'draft';
+
+ALTER TABLE `vendor_campaigns` CHANGE `ad_type` `ad_type` ENUM('in_between_video','full_screen_video') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL;
+
