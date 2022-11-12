@@ -503,14 +503,22 @@
 		   		 $this->load->view('administrator/payment-gateway-integration', $data);
 		  		$this->load->view('administrator/footer');
 
+
 		}
 
 		public function payment_gateway_integration_update()
 		{
 			 
 			$data['paymentgateway'] = $this->Administrator_Model->payment_gateway_integration_update();
+
+			$this->session->set_flashdata('paymentgatewayupdate', 'Payment Settings Updated');
+
 			redirect('administrator/site-configuration/payment-gateway-integration');
 
+			
+			$this->session->set_flashdata('paymentgatewayupdate', 'Updated');
+			
+		
 		}
 
 		public function campaign_listing()

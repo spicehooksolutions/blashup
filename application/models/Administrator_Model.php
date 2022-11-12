@@ -384,16 +384,7 @@
 		}
 
 
-		public function get_paymentconfiguration($id = FALSE)
-		{
-			if($id === FALSE){
-				$query = $this->db->get('paymentgateways');
-				return $query->result_array(); 
-			}
-
-			$query = $this->db->get_where('paymentgateways', array('id' => $id));
-			return $query->row_array();
-		}
+		
 
 		public function update_siteconfiguration_data($post_image)
 		{
@@ -408,11 +399,23 @@
 
 		//Save payment settings
 
+		public function get_paymentconfiguration($id = FALSE)
+		{
+			if($id === FALSE){
+				$query = $this->db->get('paymentgateways');
+				return $query->result_array(); 
+			}
+
+			$query = $this->db->get_where('paymentgateways', array('id' => $id));
+			return $query->row_array();
+		}
+
 		public function payment_gateway_integration_update()
 		{
 			$data = array('payment_gateway_key_id' => $this->input->post('razorpay_key_id'), 
 							'payment_gateway_key_secret' => $this->input->post('razorpay_key_secret'),
-							'gatewaytag' =>'razorpay'
+							'gatewaytag' =>'razorpay',
+							'payment_gateway_api_path' => $this->input->post('razorpay_api_path')
 						  );
 
 			if($this->input->post('id')==0)

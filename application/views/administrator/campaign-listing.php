@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css"
     href="<?php echo base_url(); ?>admintemplate/bower_components/lightbox2/dist/css/lightbox.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/bc4d6d3f18.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $(".delete").click(function(e) {
@@ -132,12 +133,13 @@ $.ajax({
                                 <?php echo $post['campaign_status']; ?>
                             </td>
                             <td>
-                                <span><a href="javascript:;"><button class="btn btn-primary waves-effect waves-light"
+                                <span><a href="javascript:;"><i class="fa fa-eye" aria-hidden="true" 
                                             id="btn_id" data-toggle="modal"
-                                            data-target="#campaigndetails_<?php echo $post['id']; ?>">View</button></a></span>
-                                <span><a href="javascript:;"><button
-                                            class="btn btn-primary waves-effect waves-light">Edit</button></a></span>
-
+                                            data-target="#campaigndetails_<?php echo $post['id']; ?>"></i></a></span>
+                                      
+                                <span><a href="javascript:;"><i
+                                            class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span>
+                                         
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -164,8 +166,12 @@ $.ajax({
                     <p><strong>Campaign Title :</strong> <?php echo $post['campaign_title']; ?></p>
                     <p><strong>Campaign Description :</strong> <?php echo $post['campaign_description']; ?></p>
                     <p><strong>Ad Type :</strong> <?php echo $post['ad_type']; ?></p>
+                    <p><strong>Banner Image :</strong> <?php echo $post['video_or_image_file']; ?></p>
+                    <p><strong>Campaign Start Date :</strong> <?php echo $post['campaign_start_date']; ?></p>
+                    <p><strong>Campaign End Date :</strong> <?php echo $post['campaign_end_date']; ?></p>
                     <p><strong>Budget Per Day :</strong> <?php echo $post['budget_per_day']; ?></p>
                     <p><strong>Campaign Duration :</strong> <?php echo $post['campaign_pack']; ?></p>
+                    <p><strong>Campaign Status :</strong> <?php echo $post['campaign_status']; ?></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
