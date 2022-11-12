@@ -3,10 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 //user routes
 $route['users/register'] = 'users/register';
-$route['posts'] = 'posts/index';
 $route['default_controller'] = 'home/index';
-
-
 
 //admin routs
 $route['administrator'] = 'administrator/view';
@@ -32,17 +29,8 @@ $route['administrator/campaign-listing'] = 'administrator/campaign_listing';
 $route['administrator/site-configuration'] = 'administrator/get_siteconfiguration';
 $route['administrator/site-configuration/update/(:any)'] = 'administrator/update_siteconfiguration/$1';
 $route['/home'] = 'home/index';
+$route['/campaign/add'] = 'campaign/add';
 $route['/'] = 'home/index';
 $route['(:any)'] = 'home/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
-
-
-
-
-
-
-
-
-
