@@ -91,6 +91,14 @@
                                 <span class="menu-title">Dashboard</span>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url(); ?>campaign/add">
+                                <i class="mdi mdi-file-video menu-icon"></i>
+                                <span class="menu-title">Campaign</span>
+                            </a>
+                        </li>
+
                         <?php endif; ?>
                         
                         <?php if(!$this->session->userdata('login')): ?>
