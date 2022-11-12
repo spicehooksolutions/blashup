@@ -102,9 +102,7 @@ $(document).ready(function(){
                                     </tr>
                                 <?php endforeach; ?>
 
-                                <div class="paginate-link">
-                                    <?php echo $this->pagination->create_links(); ?>
-                                </div> 
+                               
 
                                  </tbody>
                             </table>
