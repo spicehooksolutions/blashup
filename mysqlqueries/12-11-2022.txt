@@ -22,7 +22,7 @@ CREATE TABLE `vendor_campaigns` (
  `campaign_restart_by` int(11) NOT NULL,
  `campaign_status` enum('active','inactive','pending','approved','suspend','paused','completed') NOT NULL DEFAULT 'pending',
  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 
@@ -38,4 +38,7 @@ CREATE TABLE `campaign_transactions` (
  `response_update_time` datetime NOT NULL,
  `transaction_amount` double(10,2) NOT NULL,
  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE `comments`, `faqs`, `galleries`, `page_content`, `posts`, `products`, `product_images`, `sco`, `sliders_img`, `sociallinks`, `teams`, `testimonials`;
