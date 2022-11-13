@@ -31,9 +31,7 @@
 
  <div class="page-body"> 
     <div class="row">
-    <?php if($this->session->flashdata('paymentgatewayupdate')): ?>
-        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('paymentgatewayupdate').'</p>'; ?>
-        <?php endif; ?>
+    
          <div class="col-sm-12" >
          <?php echo form_open_multipart('administrator/payment_gateway_integration_update', array('id'=>'validation')); ?>
                  <div class="tab-content">

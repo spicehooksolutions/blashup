@@ -29,7 +29,7 @@
                                         'campaign_pack' => $this->input->post('campaign_pack'),
                                         'budget_per_day' => $this->input->post('budget_per_day'),
                                         'total_campaign_value' =>($this->input->post('budget_per_day') *$this->input->post('campaign_pack')),
-                                        'campaign_status' => 'pending'
+                                        'campaign_status' => 'Pending'
                                       );
                         $this->db->where('id', $this->input->post('step2_id'));              
                         $return=$this->db->update('vendor_campaigns', $data);

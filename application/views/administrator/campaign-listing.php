@@ -123,23 +123,23 @@ $.ajax({
                             <td>
                                 <?php echo $post['campaign_title']; ?>
                             </td>
-                            <td><?php echo $post['ad_type']; ?>
+                            <td><?php echo (($post['ad_type']=='full_screen_video')? 'Full screen Video':'In Between Video'); ?>
                             </td>
                             <td><?php echo $post['budget_per_day']; ?></td>
                             <td><?php echo $post['campaign_start_date']; ?></td>
                             <td><?php echo $post['campaign_end_date']; ?></td>
                             <td>
 
-                                <?php echo $post['campaign_status']; ?>
+                                <?php echo statusconversion($post['campaign_status']); ?>
                             </td>
                             <td>
-                                <span><a href="javascript:;"><i class="fa fa-eye" aria-hidden="true" 
-                                            id="btn_id" data-toggle="modal"
+                                <span><a href="javascript:;"><i class="fa fa-eye" aria-hidden="true" id="btn_id"
+                                            data-toggle="modal"
                                             data-target="#campaigndetails_<?php echo $post['id']; ?>"></i></a></span>
-                                      
-                                <span><a href="javascript:;"><i
-                                            class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span>
-                                         
+
+                                <span><a href="javascript:;"><i class="fa fa-pencil-square-o"
+                                            aria-hidden="true"></i></a></span>
+
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -171,7 +171,7 @@ $.ajax({
                     <p><strong>Campaign End Date :</strong> <?php echo $post['campaign_end_date']; ?></p>
                     <p><strong>Budget Per Day :</strong> <?php echo $post['budget_per_day']; ?></p>
                     <p><strong>Campaign Duration :</strong> <?php echo $post['campaign_pack']; ?></p>
-                    <p><strong>Campaign Status :</strong> <?php echo $post['campaign_status']; ?></p>
+                    <p><strong>Campaign Status :</strong> <?php echo statusconversion($post['campaign_status']); ?></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -184,3 +184,39 @@ $.ajax({
 
     <!-- DOM/Jquery table end -->
 </div>
+<?php 
+//'Active','Inactive','Pending','Approved','Suspend','Paused','Completed','Draft'
+    function statusconversion($status)
+    {
+        $returnval="";
+        switch($status)
+        {
+            case 'Active':
+                $returnval="<a href='javascript:;' class='btn btn-success'>".$status."</a>";
+                break;
+            case 'Inactive':
+                $returnval="<a href='javascript:;' class='btn btn-inverse'>".$status."</a>";
+                break;
+            case 'Pending':
+                $returnval="<a href='javascript:;' class='btn btn-info'>".$status."</a>";
+                break;
+            case 'Approved':
+                $returnval="<a href='javascript:;' class='btn btn-success'>".$status."</a>";
+                break;
+            case 'Paused':
+                $returnval="<a href='javascript:;' class='btn btn-warning'>".$status."</a>";
+                break;
+            case 'Completed':
+                $returnval="<a href='javascript:;' class='btn btn-disabled'>".$status."</a>";
+                break;
+            case 'Draft':
+                $returnval="<a href='javascript:;' class='btn btn-warning'>".$status."</a>";
+                break;
+            case 'Suspend':
+                $returnval="<a href='javascript:;' class='btn btn-danger'>".$status."</a>";
+                break;   
+        }
+
+        return $returnval;
+    }
+?>

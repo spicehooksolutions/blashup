@@ -511,13 +511,12 @@
 			 
 			$data['paymentgateway'] = $this->Administrator_Model->payment_gateway_integration_update();
 
-			$this->session->set_flashdata('paymentgatewayupdate', 'Payment Settings Updated');
+			$this->session->set_flashdata('success', 'Payment gateway settings updated');
 
 			redirect('administrator/site-configuration/payment-gateway-integration');
 
 			
-			$this->session->set_flashdata('paymentgatewayupdate', 'Updated');
-			
+						
 		
 		}
 
