@@ -1,101 +1,163 @@
-<body class="horizontal-static">
-    <!-- Pre-loader start -->
-    <div class="theme-loader">
-        <div class="ball-scale">
-            <div></div>
-        </div>
-    </div>
+<div class="horizontal-menu">
 
-    <nav class="navbar header-navbar">
-        <div class="navbar-wrapper">
-            <div class="navbar-logo">
-                <a class="mobile-menu" id="mobile-collapse" href="#!">
-                    <i class="ti-menu"></i>
-                </a>
-                <a class="mobile-search morphsearch-search" href="#">
-                    <i class="ti-search"></i>
-                </a>
-                <a href="<?php echo base_url(); ?>administrator/dashboard">
+            <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+                <div class="container-fluid">
+                    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
+                        <ul class="navbar-nav navbar-nav-left">
+                            <li class="nav-item ms-0 me-5 d-lg-flex d-none">
+                                <a href="#" class="nav-link horizontal-nav-left-menu"><i
+                                        class="mdi mdi-format-list-bulleted"></i></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center"
+                                    id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                                    <i class="mdi mdi-bell mx-0"></i>
+                                    <span class="count bg-success">2</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                                    aria-labelledby="notificationDropdown">
+                                    <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-success">
+                                                <i class="mdi mdi-information mx-0"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <h6 class="preview-subject font-weight-normal">Application Error</h6>
+                                            <p class="font-weight-light small-text mb-0 text-muted">
+                                                Just now
+                                            </p>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-warning">
+                                                <i class="mdi mdi-settings mx-0"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <h6 class="preview-subject font-weight-normal">Settings</h6>
+                                            <p class="font-weight-light small-text mb-0 text-muted">
+                                                Private message
+                                            </p>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-info">
+                                                <i class="mdi mdi-account-box mx-0"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <h6 class="preview-subject font-weight-normal">New user registration</h6>
+                                            <p class="font-weight-light small-text mb-0 text-muted">
+                                                2 days ago
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
 
-                <?php
-                $query = $this->db->get_where('site_config', array('id' => 1));
-                $sitconfig=$query->row_array();
-                
-                ?>
-                   <img src="<?php echo base_url().'assets/images/'.$sitconfig['logo_img'];?>" alt="Site Logo" style="width: 60%;" >
+
+                        </ul>
+                        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                            <a class="navbar-brand brand-logo" href="<?php echo base_url(); ?>">
+
+
+                                <?php if(isset($sitconfig['logo_img']) && $sitconfig['logo_img']!='') { ?>
+
+                                <img src="<?php echo base_url().'assets/images/'.$sitconfig['logo_img'];?>"
+                                    alt="logo" />
+
+                                <?php } else { ?>
+
+                                <img src="<?php echo base_url(); ?>assets/frontend/images/logo.png" alt="logo" />
+
+                                <?php } ?>
+                            </a>
+                            <a class="navbar-brand brand-logo-mini" href="<?php echo base_url(); ?>">
+                                <?php if(isset($sitconfig['logo_img']) && $sitconfig['logo_img']!='') { ?>
+
+                                <img src="<?php echo base_url().'assets/images/'.$sitconfig['logo_img'];?>"
+                                    alt="logo" />
+
+                                <?php } else { ?>
+
+                                <img src="<?php echo base_url(); ?>assets/frontend/images/logo.png" alt="logo" />
+
+                                <?php } ?>
+                            </a>
+                        </div>
+                        <ul class="navbar-nav navbar-nav-right">
+
+                            <li class="nav-item dropdown d-lg-flex d-none">
+                                <a class="dropdown-toggle show-dropdown-arrow btn btn-inverse-primary btn-sm"
+                                    id="nreportDropdown" href="#" data-bs-toggle="dropdown">
+                                    Reports
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                                    aria-labelledby="nreportDropdown">
+                                    <p class="mb-0 font-weight-medium float-left dropdown-header">Reports</p>
+                                    <a class="dropdown-item">
+                                        <i class="mdi mdi-file-pdf text-primary"></i>
+                                        Pdf
+                                    </a>
+                                    <a class="dropdown-item">
+                                        <i class="mdi mdi-file-excel text-primary"></i>
+                                        Exel
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown d-lg-flex d-none">
+                                <button type="button" class="btn btn-inverse-primary btn-sm" onclick="javascript: location.href='<?php echo base_url(); ?>administrator/site-configuration/update/1';">Settings</button>
+                            </li>
+
+                            <?php if(!$this->session->userdata('login')): ?>
+                            <li class="nav-item dropdown d-lg-flex d-none">
+                                <a href="<?php echo base_url(); ?>users/login" class="nav-link">
+                                    <i class="mdi mdi-account menu-icon"></i>
+                                    <span class="menu-title">Sign up / Sign in</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+
+                            <?php if($this->session->userdata('login')): ?>
+                            <li class="nav-item nav-profile dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                                    id="profileDropdown">
+                                    <span
+                                        class="nav-profile-name"><?php echo $this->session->userdata('username'); ?></span>
+                                    <span class="online-status"></span>
+                                    <img src="<?php echo base_url(); ?>assets/frontend/images/faces/user_icon.png"
+                                        alt="profile" />
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                    aria-labelledby="profileDropdown">
+                                    <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/update-profile">
+                                        <i class="mdi mdi-settings text-primary"></i>
+                                        Profile
+                                    </a>
+                                    <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/change-password">
+                                        <i class="mdi mdi-grease-pencil text-primary"></i>
+                                        Change password
+                                    </a>
                                     
-                </a>
-                <a class="mobile-options">
-                    <i class="ti-more"></i>
-                </a>
-            </div>
-            <div class="navbar-container container-fluid">
-                <div>
-                    <ul class="nav-left">
-                        <li>
-                            <a id="collapse-menu" href="#">
-                                <i class="ti-menu"></i>
-                            </a>
-                        </li>
-                       
-                        <li>
-                            <a href="#!" onclick="javascript:toggleFullScreen()">
-                                <i class="ti-fullscreen"></i>
-                            </a>
-                        </li>
-                        
-                    </ul>
-                    <ul class="nav-right">
-                       
-                         
-                        <li class="user-profile header-notification">
-                            <a href="#!">
-                            
-                                <img src="<?php echo base_url(); ?>admintemplate/assets/images/user.png" alt="User-Profile-Image">
-                           
-                                <span><?php echo $this->session->userdata('username'); ?></span>
-                                <i class="ti-angle-down"></i>
-                            </a>
-                            <ul class="show-notification profile-notification">
-                                
-                                <li>
-                                    <a href="<?php echo base_url(); ?>administrator/update-profile">
-                                        <i class="ti-user"></i> Profile
+                                    <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/logout">
+                                        <i class="mdi mdi-logout text-primary"></i>
+                                        Logout
                                     </a>
-                                </li>
-                                
-                                <li>
-                                    <a href="<?php echo base_url(); ?>administrator/change-password">
-                                        <i class="ti-lock"></i> Change Password
-                                    </a>
-                                </li>
-                               
-                                <li>
-                                    <a href="<?php echo base_url(); ?>administrator/logout">
-                                        <i class="ti-layout-sidebar-left"></i> Logout
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                  
+                                </div>
+                            </li>
+                            <?php endif; ?>
+                        </ul>
+                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                            data-toggle="horizontal-menu-toggle">
+                            <span class="mdi mdi-menu"></span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </nav>
-    <!-- Menu header end -->
-<style type="text/css">
-    .nav-left-new {
-    display: flex;
-    float: left;
-}
-.nav-left-new > li {
-    padding: 0 45px 0 0;
-}
-.nav-left-new a {
-    color: #ffffff;
-}
-.nav-left-new a:hover {
-    color: rgb(26,188,156);
-}
-</style>
+            </nav>
+
+           

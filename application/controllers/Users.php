@@ -66,13 +66,17 @@
 								'user_id' => $user_id->id,
 				 				'username' => $username,
 				 				'email' => $user_id->email,
-				 				'login' => true
+				 				'login' => true,
+								'role'=>$user_id->role_id
 				 	);
 
 				 	$this->session->set_userdata($user_data);
 
 					//Set Message
 					$this->session->set_flashdata('user_loggedin', 'You are now logged in.');
+					if($user_id->role_id==1)
+					redirect('/administrator/dashboard');
+					else
 					redirect('/');
 				}else{
 					$this->session->set_flashdata('login_failed', 'Login is invalid.');

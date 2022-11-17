@@ -16,7 +16,7 @@
 			//$this->load->view('administrator/header');
 			//$this->load->view('administrator/index');
 			$this->load->view('administrator/'.$page, $data);
-			$this->load->view('administrator/footer');
+			//$this->load->view('administrator/footer');
 		}
 
 		public function home($page = 'home'){
@@ -58,7 +58,7 @@
 				//$this->load->view('administrator/header');
 				//$this->load->view('administrator/header-bottom');
 				$this->load->view('administrator/index', $data);
-				$this->load->view('administrator/footer');
+				//$this->load->view('administrator/footer');
 			}else{
 				// get email and Encrypt Password
 				$email = $this->input->post('email');

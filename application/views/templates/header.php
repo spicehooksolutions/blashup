@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<?php
+    <?php
                             $query = $this->db->get_where('site_config', array('id' => 1));
                             $sitconfig=$query->row_array();
                             
@@ -12,7 +13,7 @@
 
     <?php if(isset($sitconfig['site_name']) && $sitconfig['site_name']!='') { ?>
     <title><?php echo $sitconfig['site_name'];?></title>
-    <?php } else { ?>        
+    <?php } else { ?>
     <title>Blashup Audiencemanager</title>
     <?php }?>
     <!-- base:css -->
@@ -48,42 +49,180 @@
 
     <!-- endinject -->
     <style>
-      .brand-logo img
+    /* .brand-logo img
       {
         margin: 10px 10px;
         width: 15%;
       }
       .nav {
         flex-wrap: nowrap !important;
-      }
-      </style>
+      } */
+    </style>
 </head>
 
 <body>
     <div class="container-scroller">
         <div class="horizontal-menu">
 
+            <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+                <div class="container-fluid">
+                    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
+                        <ul class="navbar-nav navbar-nav-left">
+                            <li class="nav-item ms-0 me-5 d-lg-flex d-none">
+                                <a href="#" class="nav-link horizontal-nav-left-menu"><i
+                                        class="mdi mdi-format-list-bulleted"></i></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center"
+                                    id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                                    <i class="mdi mdi-bell mx-0"></i>
+                                    <span class="count bg-success">2</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                                    aria-labelledby="notificationDropdown">
+                                    <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-success">
+                                                <i class="mdi mdi-information mx-0"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <h6 class="preview-subject font-weight-normal">Application Error</h6>
+                                            <p class="font-weight-light small-text mb-0 text-muted">
+                                                Just now
+                                            </p>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-warning">
+                                                <i class="mdi mdi-settings mx-0"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <h6 class="preview-subject font-weight-normal">Settings</h6>
+                                            <p class="font-weight-light small-text mb-0 text-muted">
+                                                Private message
+                                            </p>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-info">
+                                                <i class="mdi mdi-account-box mx-0"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <h6 class="preview-subject font-weight-normal">New user registration</h6>
+                                            <p class="font-weight-light small-text mb-0 text-muted">
+                                                2 days ago
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+
+
+                        </ul>
+                        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                            <a class="navbar-brand brand-logo" href="<?php echo base_url(); ?>">
+
+
+                                <?php if(isset($sitconfig['logo_img']) && $sitconfig['logo_img']!='') { ?>
+
+                                <img src="<?php echo base_url().'assets/images/'.$sitconfig['logo_img'];?>"
+                                    alt="logo" />
+
+                                <?php } else { ?>
+
+                                <img src="<?php echo base_url(); ?>assets/frontend/images/logo.png" alt="logo" />
+
+                                <?php } ?>
+                            </a>
+                            <a class="navbar-brand brand-logo-mini" href="<?php echo base_url(); ?>">
+                                <?php if(isset($sitconfig['logo_img']) && $sitconfig['logo_img']!='') { ?>
+
+                                <img src="<?php echo base_url().'assets/images/'.$sitconfig['logo_img'];?>"
+                                    alt="logo" />
+
+                                <?php } else { ?>
+
+                                <img src="<?php echo base_url(); ?>assets/frontend/images/logo.png" alt="logo" />
+
+                                <?php } ?>
+                            </a>
+                        </div>
+                        <ul class="navbar-nav navbar-nav-right">
+
+                            <li class="nav-item dropdown d-lg-flex d-none">
+                                <a class="dropdown-toggle show-dropdown-arrow btn btn-inverse-primary btn-sm"
+                                    id="nreportDropdown" href="#" data-bs-toggle="dropdown">
+                                    Reports
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                                    aria-labelledby="nreportDropdown">
+                                    <p class="mb-0 font-weight-medium float-left dropdown-header">Reports</p>
+                                    <a class="dropdown-item">
+                                        <i class="mdi mdi-file-pdf text-primary"></i>
+                                        Pdf
+                                    </a>
+                                    <a class="dropdown-item">
+                                        <i class="mdi mdi-file-excel text-primary"></i>
+                                        Exel
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown d-lg-flex d-none">
+                                <button type="button" class="btn btn-inverse-primary btn-sm">Settings</button>
+                            </li>
+
+                            <?php if(!$this->session->userdata('login')): ?>
+                            <li class="nav-item dropdown d-lg-flex d-none">
+                                <a href="<?php echo base_url(); ?>users/login" class="nav-link">
+                                    <i class="mdi mdi-account menu-icon"></i>
+                                    <span class="menu-title">Sign up / Sign in</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+
+                            <?php if($this->session->userdata('login')): ?>
+                            <li class="nav-item nav-profile dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                                    id="profileDropdown">
+                                    <span
+                                        class="nav-profile-name"><?php echo $this->session->userdata('username'); ?></span>
+                                    <span class="online-status"></span>
+                                    <img src="<?php echo base_url(); ?>assets/frontend/images/faces/user_icon.png"
+                                        alt="profile" />
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                    aria-labelledby="profileDropdown">
+                                    <a class="dropdown-item" href="<?php echo base_url(); ?>users/myaccount">
+                                        <i class="mdi mdi-settings text-primary"></i>
+                                        Myaccount
+                                    </a>
+                                    <a class="dropdown-item" href="<?php echo base_url(); ?>users/logout">
+                                        <i class="mdi mdi-logout text-primary"></i>
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
+                            <?php endif; ?>
+                        </ul>
+                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                            data-toggle="horizontal-menu-toggle">
+                            <span class="mdi mdi-menu"></span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
             <nav class="bottom-navbar">
                 <div class="container">
                     <ul class="nav page-navigation">
-                        <li class="nav-item">
 
-                            <a class="navbar-brand brand-logo" href="<?php echo base_url(); ?>">
-                            
-                            
-                            <?php if(isset($sitconfig['logo_img']) && $sitconfig['logo_img']!='') { ?>
-
-                                 <img
-                                    src="<?php echo base_url().'assets/images/'.$sitconfig['logo_img'];?>" alt="logo" />
-
-                          <?php } else { ?>
-
-                            <img
-                                    src="<?php echo base_url(); ?>assets/frontend/images/logo.png" alt="logo" />
-
-                        <?php } ?>     
-                        </a>   
-                        </li>
                         <?php if($this->session->userdata('login')): ?>
 
                         <li class="nav-item">
@@ -99,108 +238,140 @@
                                 <span class="menu-title">Campaign</span>
                             </a>
                         </li>
-
-                        <?php endif; ?>
-                        
-                        <?php if(!$this->session->userdata('login')): ?>
-                          <li class="nav-item">
-                              <a href="<?php echo base_url(); ?>users/login" class="nav-link">
-                                  <i class="mdi mdi-account menu-icon"></i>
-                                  <span class="menu-title">Sign up / Sign in</span>
-                                  <i class="menu-arrow"></i>
-                              </a>
-                          </li>
-                        <?php endif; ?>
-
-                        <?php if($this->session->userdata('login')): ?>
-                        <li class="nav-item nav-profile dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-                                <span class="nav-profile-name"><?php echo $this->session->userdata('username'); ?></span>
-                                <span class="online-status"></span>
-                                <img src="<?php echo base_url(); ?>assets/frontend/images/faces/user_icon.png" alt="profile" />
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link">
+                                <i class="mdi mdi-format-list-bulleted-type menu-icon"></i>
+                                <span class="menu-title">Transactions</span>
+                                <i class="menu-arrow"></i>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                                aria-labelledby="profileDropdown">
-                                <a class="dropdown-item" href="<?php echo base_url(); ?>users/myaccount">
-                                    <i class="mdi mdi-settings text-primary"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="<?php echo base_url(); ?>users/logout">
-                                    <i class="mdi mdi-logout text-primary"></i>
-                                    Logout
-                                </a>
-                            </div>
                         </li>
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link">
+                                <i class="mdi mdi-currency-inr menu-icon"></i>
+                                <span class="menu-title">Wallet</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link">
+                                <i class="mdi mdi-table menu-icon"></i>
+                                <span class="menu-title">Reports</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                        </li>
+
                         <?php endif; ?>
+
+
                     </ul>
                 </div>
             </nav>
         </div>
 
 
-        <!-- <nav class="navbar navbar-inverse">
-  	<div class="container">
-  		<div class="navbar-header">
-  		<a class="navbar-brand" href="<?php echo base_url(); ?>">CI Blogs</a>	
-  		</div>
-  		<div id="navbar">
-  		 <ul class="nav navbar-nav">
-  		 	<li><a href="<?php echo base_url(); ?>">Home</a></li>
-  		 	<li><a href="<?php echo base_url(); ?>about">About</a></li>
-        <li><a href="<?php echo base_url(); ?>posts">Blog</a></li>
-         <li><a href="<?php echo base_url(); ?>categories">Category</a></li>
-  		 </ul>	
-       <ul class="nav navbar-nav navbar-right">
-         <?php if(!$this->session->userdata('login')): ?>
-            <li><a href="<?php echo base_url(); ?>users/register">Register</a></li>
-            <li><a href="<?php echo base_url(); ?>users/login">Login</a></li>
-         <?php endif; ?>
-         <?php if($this->session->userdata('login')): ?>
-            <li><a href="<?php echo base_url(); ?>users/dashboard"><?php echo $this->session->userdata('username'); ?></a></li>
-            <li><a href="<?php echo base_url(); ?>users/logout">Logout</a></li>
-         <?php endif; ?>
-       </ul>  
-  		</div>
-  	</div>
-  </nav> -->
-
 
 
         <!-- Flash Messages -->
         <?php if($this->session->flashdata('user_registered')): ?>
-        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_registered').'</p>'; ?>
+        <?php echo '<div class="col-lg-12 d-flex grid-margin stretch-card">
+									<div class="card sale-visit-statistics-border-success">
+										<div class="card-body">
+											
+											<h4 class="card-title mb-2">'.$this->session->flashdata('user_registered').'</h4>
+											
+										</div>
+									</div>
+								</div>'; ?>
         <?php endif; ?>
 
         <?php if($this->session->flashdata('post_created')): ?>
-        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('post_created').'</p>'; ?>
+        <?php echo '<div class="col-lg-12 d-flex grid-margin stretch-card">
+									<div class="card sale-visit-statistics-border-success">
+										<div class="card-body">
+											
+											<h4 class="card-title mb-2">'.$this->session->flashdata('post_created').'</h4>
+											
+										</div>
+									</div>
+								</div>'; ?>
         <?php endif; ?>
 
         <?php if($this->session->flashdata('post_updated')): ?>
-        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('post_updated').'</p>'; ?>
+        <?php echo '<div class="col-lg-12 d-flex grid-margin stretch-card">
+									<div class="card sale-visit-statistics-border-success">
+										<div class="card-body">
+											
+											<h4 class="card-title mb-2">'.$this->session->flashdata('post_updated').'</h4>
+											
+										</div>
+									</div>
+								</div>'; ?>
         <?php endif; ?>
 
         <?php if($this->session->flashdata('category_created')): ?>
-        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('category_created').'</p>'; ?>
+        <?php echo '<div class="col-lg-12 d-flex grid-margin stretch-card">
+									<div class="card sale-visit-statistics-border-success">
+										<div class="card-body">
+											
+											<h4 class="card-title mb-2">'.$this->session->flashdata('category_created').'</h4>
+											
+										</div>
+									</div>
+								</div>'; ?>
         <?php endif; ?>
 
         <?php if($this->session->flashdata('post_deleted')): ?>
-        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('post_deleted').'</p>'; ?>
+        <?php echo '<div class="col-lg-12 d-flex grid-margin stretch-card">
+									<div class="card sale-visit-statistics-border-success">
+										<div class="card-body">
+											
+											<h4 class="card-title mb-2">'.$this->session->flashdata('post_deleted').'</h4>
+											
+										</div>
+									</div>
+								</div>'; ?>
         <?php endif; ?>
 
         <?php if($this->session->flashdata('login_failed')): ?>
-        <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('login_failed').'</p>'; ?>
+        <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('login_failed').'</h4>
+											
+										</div>
+									</div>
+								</div>'; ?>
         <?php endif; ?>
 
         <?php if($this->session->flashdata('user_loggedin')): ?>
-        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_loggedin').'</p>'; ?>
+        <?php echo '<div class="col-lg-12 d-flex grid-margin stretch-card">
+									<div class="card sale-visit-statistics-border-success">
+										<div class="card-body">
+											
+											<h4 class="card-title mb-2">'.$this->session->flashdata('user_loggedin').'</h4>
+											
+										</div>
+									</div>
+								</div>'; ?>
         <?php endif; ?>
 
         <?php if($this->session->flashdata('user_loggedout')): ?>
-        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_loggedout').'</p>'; ?>
+        <?php echo '<div class="col-lg-12 d-flex grid-margin stretch-card">
+									<div class="card sale-visit-statistics-border-success">
+										<div class="card-body">
+											
+											<h4 class="card-title mb-2">'.$this->session->flashdata('user_loggedout').'</h4>
+											
+										</div>
+									</div>
+								</div>'; ?>
         <?php endif; ?>
 
         <?php if($this->session->flashdata('category_deleted')): ?>
-        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('category_deleted').'</p>'; ?>
+        <?php echo '<div class="col-lg-12 d-flex grid-margin stretch-card">
+									<div class="card sale-visit-statistics-border-success">
+										<div class="card-body">
+											
+											<h4 class="card-title mb-2">'.$this->session->flashdata('category_deleted').'</h4>
+											
+										</div>
+									</div>
+								</div>'; ?>
         <?php endif; ?>
-
-        

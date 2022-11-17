@@ -16,108 +16,115 @@
                 $sitconfig=$query->row_array();
                 
                 ?>
-<section class="login p-fixed d-flex text-center bg-primary common-img-bg">
-    <!-- Container-fluid starts -->
-    <div class="container-fluid">
-        <div class="row">
-        <div class="col-sm-3 col-lg-3 col-md-3"></div>
-            <div class="col-sm-6 col-lg-6 col-md-6">
 
-                <!-- Authentication card start -->
-                <div class="login-card card-block auth-body">
+<div class="container-fluid page-body-wrapper full-page-wrapper">
+    <div class="main-panel">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0">
+                <div class="col-lg-4 mx-auto">
+                    <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                        <div class="brand-logo">
+                            <?php if(isset($sitconfig['logo_img']) && $sitconfig['logo_img']!='') { ?>
 
-                    <div class="text-center">
-                        <?php if(isset($sitconfig['logo_img']) && $sitconfig['logo_img']!='') { ?>
+                            <img src="<?php echo base_url().'assets/images/'.$sitconfig['logo_img'];?>" alt="logo"
+                                style="width:75%;" />
 
-                        <img src="<?php echo base_url().'assets/images/'.$sitconfig['logo_img'];?>" alt="logo"
-                            style="width:15%;" />
+                            <?php } else { ?>
 
-                        <?php } else { ?>
+                            <img src="<?php echo base_url(); ?>assets/frontend/images/logo.png" alt="logo"
+                                style="width:75%;" />
 
-                        <img src="<?php echo base_url(); ?>assets/frontend/images/logo.png" alt="logo"
-                            style="width:15%;" />
+                            <?php } ?>
+                        </div>
+                        <h4>Hello! let's get started</h4>
+                        <h6 class="font-weight-light">Sign in to continue.</h6>
 
-                        <?php } ?>
-                    </div>
 
-                    <div class="auth-box">
 
-                        <div class="row m-b-20">
-                            <div class="col-md-12">
-                                <h3 class="text-left txt-primary">Sign In</h3>
-                            </div>
 
-                            <div class="col-md-12" style="margin-bottom: -40px;">
-                                <?php if($this->session->flashdata('success')): ?>
-                                <?php echo '<div class="alert alert-success icons-alert">
+                        <?php if($this->session->flashdata('success')): ?>
+                        <div class="col-sm-8 flex-column d-flex stretch-card">
+                            <div class="card sale-visit-statistics-border">
+                                <div class="card-body">
+
+                                    <?php echo '<div class="alert alert-success icons-alert">
                                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                             <i class="icofont icofont-close-line-circled"></i>
                                                         </button>
                                                         <p><strong>Success! &nbsp;&nbsp;</strong>'.$this->session->flashdata('success').'</p></div>'; ?>
-                                <?php endif; ?>
-                                <?php if($this->session->flashdata('danger')): ?>
-                                <?php echo '<div class="alert alert-danger icons-alert">
+
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+
+
+                        <?php if($this->session->flashdata('danger')): ?>
+
+                        <div class="col-sm-8 flex-column d-flex stretch-card">
+                            <div class="card sale-visit-statistics-border">
+                                <div class="card-body">
+
+                                    <?php echo '<div class="alert alert-danger icons-alert">
                                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                             <i class="icofont icofont-close-line-circled"></i>
                                                         </button>
                                                         <p><strong>Error! &nbsp;&nbsp;</strong>'.$this->session->flashdata('danger').'</p></div>'; ?>
-                                <?php endif; ?>
 
-                                <?php if(validation_errors() != null): ?>
-                                <?php echo '<div class="alert alert-warning icons-alert">
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+
+                        <?php if(validation_errors() != null): ?>
+
+                        <div class="col-sm-8 flex-column d-flex stretch-card">
+                            <div class="card sale-visit-statistics-border">
+                                <div class="card-body">
+
+                                    <?php echo '<div class="alert alert-warning icons-alert">
                                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                             <i class="icofont icofont-close-line-circled"></i>
                                                         </button>
                                                         <p><strong>Alert! &nbsp;&nbsp;</strong>'.validation_errors().'</p></div>'; ?>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        <hr />
-                        <?php echo form_open('administrator/adminLogin'); ?>
-                        <div class="input-group">
-                            <input type="text" name="email" class="form-control" placeholder="Your Email">
-                            <span class="md-line"></span>
-                        </div>
-                        <div class="input-group">
-                            <input type="password" name="password" class="form-control" placeholder="Password">
-                            <span class="md-line"></span>
-                        </div>
-                        <div class="row m-t-25 text-left">
-                            <div class="col-sm-7 col-xs-12">
-                                <div class="checkbox-fade fade-in-primary">
-                                    <label>
-                                        <input type="checkbox" value="">
-                                        <span class="cr"><i
-                                                class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                        <span class="text-inverse">Remember me</span>
-                                    </label>
+
                                 </div>
                             </div>
-                            <div class="col-sm-5 col-xs-12 forgot-phone text-right">
-                                <a href="<?php echo base_url(); ?>administrator/forget-password"
-                                    class="text-right f-w-600 text-inverse"> Forgot Your Password?</a>
-                            </div>
                         </div>
-                        <div class="row m-t-30">
-                            <div class="col-md-12">
-                                <button type="submit"
-                                    class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign
-                                    in</button>
-                            </div>
+                        <?php endif; ?>
+
+                        <?php echo form_open('administrator/adminLogin',array('class'=>'pt-3')); ?>
+
+                        <div class="form-group">
+                            <input type="email" class="form-control form-control-lg" id="email" name="email"
+                                placeholder="Username/email">
                         </div>
-                        <hr />
-                        
+                        <div class="form-group">
+                            <input type="password" class="form-control form-control-lg" id="password" name="password"
+                                placeholder="Password">
+                        </div>
+                        <div class="mt-3">
+                            <button type="submit"
+                                class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN
+                                IN</button>
+                        </div>
+                        <div class="my-2 d-flex justify-content-between align-items-center">
+
+                            <a href="<?php echo base_url(); ?>administrator/forget-password"
+                                class="auth-link text-black">Forgot password?</a>
+                        </div>
+
                         </form>
                     </div>
-
-                    <!-- end of form -->
                 </div>
-                <!-- Authentication card end -->
             </div>
-            <!-- end of col-sm-12 -->
-            <div class="col-sm-3 col-lg-3 col-md-3"></div>
         </div>
-        <!-- end of row -->
+    </div>
+    <!-- content-wrapper ends -->
+</div>
 
-        <!-- end of container-fluid -->
-</section>
+</div>
+<!-- container-scroller -->
+</body>
+
+</html>

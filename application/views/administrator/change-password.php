@@ -4,38 +4,18 @@
     
 
     
-            <div class="page-header">
-                <div class="page-header-title">
-                    <h4>Admin</h4>
-                </div>
-                <div class="page-header-breadcrumb">
-                    <ul class="breadcrumb-title">
-                        <li class="breadcrumb-item">
-                            <a href="index-2.html">
-                                <i class="icofont icofont-home"></i>
-                            </a>
-                        </li>
-                        <li class="breadcrumb-item"><a href="#!">Admin</a>
-                        </li>
-                        <li class="breadcrumb-item"><a href="#!"><?php echo $title; ?></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Page header end -->
-            <!-- Page body start -->
-            <div class="page-body">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <!-- Product edit card start -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h5><?php echo $title; ?></h5>
-                            </div>
-                            <div class="card-block">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                            <div class="col-sm-8">
+    <div class="container-fluid page-body-wrapper">
+       <div class="main-panel">
+           <div class="content-wrapper">
+               <div class="row">
+
+                   <<div class="col-lg-12 grid-margin stretch-card">
+                       <div class="card">
+                           <div class="card-body">
+                               <h4 class="card-title"><?php echo $title;?></h4>
+                               <p class="card-description">
+
+                               </p>
                                <?php echo form_open_multipart('administrator/change_password'); ?>
                                     
                                     <div class="form-group row">
@@ -76,15 +56,18 @@
                                     <textarea id="description" style="visibility: hidden;"></textarea>
                                     
                                 </form>
-                               </div>
-                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- Product edit card end -->
-                    
-                </div>
-                        <!-- Basic Form Inputs card end -->
+                       </div>
+               </div>
+
+
+           </div>
+       </div>
+       <!-- content-wrapper ends -->
+
+   </div>
+   <!-- main-panel ends -->
+   </div>
 
 <script type="text/javascript">
 function checkPass()
