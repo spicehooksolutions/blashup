@@ -10,7 +10,47 @@
 
 			return $this->db->insert('users', $data);
 		}
+		
+		public function get_profile_data($userid){
+			//Validate
+			$this->db->where('id', $userid);
+		
 
+			$result = $this->db->get('users');
+
+			if ($result->num_rows() == 1) {
+				return $result->result_array();
+			}else{
+				return false;
+			}
+		}
+
+		public function update_profile_data($post_image)
+		{ 
+			$data = array('name' => $this->input->post('name'),
+							'zipcode' => $this->input->post('zipcode'),
+							'contact' => $this->input->post('contact'),
+							'address' => $this->input->post('address'),
+							'gender' => $this->input->post('gender'),
+							'status' => $this->input->post('status'),
+							'dob' => $this->input->post('dob'),
+							'image' => $post_image,
+							'register_date' => date("Y-m-d H:i:s")
+						  );
+
+			$this->db->where('id', $this->input->post('id'));
+			$d = $this->db->update('users', $data);
+		}
+
+		public function change_password($new_password){
+
+			$data = array(
+				'password' => md5($new_password)
+			    );
+			$this->db->where('id', $this->session->userdata('user_id'));
+			return $this->db->update('users', $data);
+		}
+		
 		public function login($username, $encrypt_password){
 			//Validate
 			$this->db->where('username', $username);

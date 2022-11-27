@@ -91,8 +91,4 @@ function checkPass()
     }
 } 
  
-</script>  
-             
-
-   
-
+</script>

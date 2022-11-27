@@ -46,7 +46,8 @@
     <script src="<?php echo base_url(); ?>assets/frontend/js/dashboard.js"></script>
     <script src="<?php echo base_url(); ?>assets/frontend/js/sweetalert.min.js"></script>
     <!-- End custom js for this page-->
-
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/frontend/css/jquery.datetimepicker.css">
+    <script src="<?php echo base_url(); ?>assets/frontend/js/jquery.datetimepicker.full.min.js"></script>
     <!-- endinject -->
     <style>
     /* .brand-logo img
@@ -202,6 +203,10 @@
                                     <a class="dropdown-item" href="<?php echo base_url(); ?>users/myaccount">
                                         <i class="mdi mdi-settings text-primary"></i>
                                         Myaccount
+                                    </a>
+                                    <a class="dropdown-item" href="<?php echo base_url(); ?>users/updatepassword">
+                                        <i class="mdi mdi-key-variant text-primary"></i>
+                                        Change password
                                     </a>
                                     <a class="dropdown-item" href="<?php echo base_url(); ?>users/logout">
                                         <i class="mdi mdi-logout text-primary"></i>

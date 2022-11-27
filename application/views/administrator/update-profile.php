@@ -99,13 +99,7 @@
                                        <input type="file" name="userfile" class="form-control">
                                    </div>
                                </div>
-                               <div class="form-group row">
-                                   <label class="col-sm-2 col-form-label">Date of Birth</label>
-                                   <div class="col-sm-6">
-                                       <input type="text" id="dropper-default" value="<?php echo $user['dob']; ?>"
-                                           name="dob" class="form-control" placeholder="Select Your Birth Date">
-                                   </div>
-                               </div>
+                              
 
                                <input type="hidden" value="<?php echo $user['status']; ?>" name="status"
                                    class="js-single" />
