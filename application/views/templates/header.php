@@ -175,7 +175,7 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown d-lg-flex d-none">
-                                <button type="button" class="btn btn-inverse-primary btn-sm">Settings</button>
+                                <button type="button" class="btn btn-inverse-primary btn-sm" onclick="<?php echo base_url(); ?>users/myaccount">Settings</button>
                             </li>
 
                             <?php if(!$this->session->userdata('login')): ?>
