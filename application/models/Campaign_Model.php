@@ -6,7 +6,7 @@
 			$this->load->database();
 		}
 
-        public function campiagn_add($step=1,$banner=NULL)
+        public function campiagn_add($step=1,$banner=NULL,$video_or_image_file=NULL)
         {
 
             if($step==1)
@@ -25,14 +25,17 @@
 
                         if($step==2)
                         {
-                        $data = array('video_or_image_file' => $banner, 
+                        $data = array('banner_add' => $banner, 
+                                        'video_or_image_file' => $video_or_image_file,
                                         'campaign_pack' => $this->input->post('campaign_pack'),
                                         'budget_per_day' => $this->input->post('budget_per_day'),
                                         'total_campaign_value' =>($this->input->post('budget_per_day') *$this->input->post('campaign_pack')),
                                         'campaign_status' => 'Pending'
                                       );
                         $this->db->where('id', $this->input->post('step2_id'));              
-                        $return=$this->db->update('vendor_campaigns', $data);
+                        $this->db->update('vendor_campaigns', $data);
+
+                        return $this->input->post('step2_id');
 
 
                         

@@ -24163,3 +24163,18 @@ dl li {
 }
 
 /*# sourceMappingURL=maps/style.css.map */
+.form-group label
+{
+  color:#19214f !important;
+  font-weight: 500;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 1.5rem 1.5rem;
+  color: #212529;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}

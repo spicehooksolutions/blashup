@@ -36,17 +36,34 @@
 
 				$this->load->library('upload', $config);
 
-				if(!$this->upload->do_upload('video_or_image_file')){
+				if(!$this->upload->do_upload('banner_add_file')){
 					$errors =  array('error' => $this->upload->display_errors());
-					var_dump($errors);
+					
 					$post_image = 'noimage.jpg';
 				}else{
 					$data =  array('upload_data' => $this->upload->data());
-					$post_image = $_FILES['video_or_image_file']['name'];
+					$post_image = $_FILES['banner_add_file']['name'];
 				}
 
-				$returnvalue=$this->Campaign_Model->campiagn_add($id,$post_image);
-				redirect('/');
+
+				$config['upload_path'] = './assets/images/campaigns/ads';
+				$config['allowed_types'] = 'gif|jpg|png|jpeg|mp4|flv|mpeg|wmv';
+				$config['max_size'] = '204800000';
+
+				$this->load->library('upload', $config);
+
+				if(!$this->upload->do_upload('video_or_image_file_file')){
+					$errors =  array('error' => $this->upload->display_errors());
+					
+					$video_or_image_file = 'noimage.jpg';
+				}else{
+					$data =  array('upload_data' => $this->upload->data());
+					$video_or_image_file = $_FILES['video_or_image_file_file']['name'];
+				}
+
+				$returnvalue=$this->Campaign_Model->campiagn_add($id,$post_image,$video_or_image_file);
+				echo $returnvalue;
+				exit;
 				
 			}
 		}

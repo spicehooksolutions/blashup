@@ -47,7 +47,8 @@
     <script src="<?php echo base_url(); ?>assets/frontend/js/sweetalert.min.js"></script>
     <!-- End custom js for this page-->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/frontend/css/jquery.datetimepicker.css">
-    <script src="<?php echo base_url(); ?>assets/frontend/js/jquery.datetimepicker.full.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/frontend/js/jquery.datetimepicker.js"></script>
+    <script src="<?php echo base_url(); ?>assets/frontend/js/jquery.number.js"></script>
     <!-- endinject -->
     <style>
     /* .brand-logo img

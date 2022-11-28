@@ -86,4 +86,11 @@
 				return false;
 			}
 		}
+
+
+
+		public function wallet($userid)
+		{
+			return 0;
+		}
 	}

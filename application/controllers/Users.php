@@ -214,4 +214,18 @@
 				return false;
 			}
 		}
+
+
+		public function wallet($user=NULL)
+		{
+			if($user==NULL)
+			{
+				$user=$this->session->userdata('user_id');
+			}
+
+			$wallaetbalance=$this->User_Model->wallet($user);
+			echo $wallaetbalance;
+			exit;
+
+		}
 	}
