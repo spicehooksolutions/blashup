@@ -106,12 +106,12 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
 
                             <?php echo form_open_multipart('campaign/step/1',array('class'=>'pt-3','id'=>'campaign_step1')); ?>
 
-                            <input type="hidden" name="step1_id" id="step1_id" value="" />
+                            <input type="hidden" name="step1_id" id="step1_id" value="<?php echo (isset($campaign['id'])? $campaign['id']:"");?>" />
                             <div class="form-group">
                                 <label>Campaign Title</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control form-control-lg border-left-0"
-                                        name="campaign_title" placeholder="Campaign Title" id="campaign_title">
+                                        name="campaign_title" placeholder="Campaign Title" id="campaign_title" value="<?php echo (isset($campaign['campaign_title'])? $campaign['campaign_title']:"");?>">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -119,7 +119,7 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
                                 <div class="input-group">
                                     <textarea class="form-control form-control-lg border-left-0"
                                         placeholder="Campaign Description" name="campaign_description"
-                                        id="campaign_description"></textarea>
+                                        id="campaign_description"><?php echo (isset($campaign['campaign_description'])? $campaign['campaign_description']:"");?></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -128,8 +128,8 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
                                     <select class="form-control form-control-lg border-left-0"
                                         name="campaign_media_type" id="campaign_media_type">
                                         <option value="">-- select --</option>
-                                        <option value="image">Image</option>
-                                        <option value="video">Video</option>
+                                        <option value="image" <?php echo ((isset($campaign['campaign_media_type']) && $campaign['campaign_media_type']=='image')? "selected":"");?>>Image</option>
+                                        <option value="video" <?php echo ((isset($campaign['campaign_media_type']) && $campaign['campaign_media_type']=='video')? "selected":"");?>>Video</option>
                                     </select>
                                 </div>
                             </div>
@@ -137,7 +137,7 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
                                 <label>Product Link</label>
                                 <div class="input-group">
                                     <input type="url" class="form-control form-control-lg border-left-0"
-                                        placeholder="URL" name="link_of_product" id="link_of_product">
+                                        placeholder="URL" name="link_of_product" id="link_of_product" value="<?php echo (isset($campaign['link_of_product'])? $campaign['link_of_product']:"");?>">
                                 </div>
                             </div>
 
@@ -146,8 +146,8 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
                                 <div class="input-group">
                                     <select class="form-control form-control-lg border-left-0" name="ad_type"
                                         id="ad_type">
-                                        <option value="in_between_video">In Between Video</option>
-                                        <option value="full_screen_video">Full Screen Video</option>
+                                        <option value="in_between_video" <?php echo ((isset($campaign['ad_type']) && $campaign['ad_type']=='in_between_video')? "selected":"");?>>In Between Video</option>
+                                        <option value="full_screen_video" <?php echo ((isset($campaign['ad_type']) && $campaign['ad_type']=='full_screen_video')? "selected":"");?>>Full Screen Video</option>
                                     </select>
                                 </div>
                             </div>
@@ -174,7 +174,7 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
 
 
                             <?php echo form_open_multipart('campaign/step/2',array('class'=>'pt-3','id'=>'campaign_step2','name'=>'campaign_step2')); ?>
-                            <input type="hidden" name="step2_id" id="step2_id" value="" />
+                            <input type="hidden" name="step2_id" id="step2_id" value="<?php echo (isset($campaign['id'])? $campaign['id']:"");?>" />
                             <div class="form-group">
                                 <label>Banner ads bewteeen Discover</label>
                                 <div class="input-group">
@@ -194,10 +194,10 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
                                 <div class="input-group">
                                     <select class="form-control form-control-lg border-left-0" name="campaign_pack"
                                         id="campaign_pack">
-                                        <option value="7">1 Week</option>
-                                        <option value="30">1 Month</option>
-                                        <option value="90">3 Months</option>
-                                        <option value="365">1 Year</option>
+                                        <option value="7" <?php echo ((isset($campaign['campaign_pack']) && $campaign['campaign_pack']=='7')? "selected":"");?> >1 Week</option>
+                                        <option value="30" <?php echo ((isset($campaign['campaign_pack']) && $campaign['campaign_pack']=='30')? "selected":"");?> >1 Month</option>
+                                        <option value="90" <?php echo ((isset($campaign['campaign_pack']) && $campaign['campaign_pack']=='90')? "selected":"");?> >3 Months</option>
+                                        <option value="365" <?php echo ((isset($campaign['campaign_pack']) && $campaign['campaign_pack']=='365')? "selected":"");?>>1 Year</option>
                                     </select>
                                 </div>
                             </div>
@@ -205,11 +205,11 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
                                 <label>Budget/Day ( minimum Rs.50)</label>
                                 <div class="input-group">
                                     <input type="number" class="form-control form-control-lg border-left-0"
-                                        placeholder="" name="budget_per_day" id="budget_per_day" min="50">
+                                        placeholder="" name="budget_per_day" id="budget_per_day" min="50" value="<?php echo (isset($campaign['budget_per_day'])? $campaign['budget_per_day']:"");?>">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="campaign_charges"></label>
+                                <label class="campaign_charges"><?php echo (isset($campaign['budget_per_day'])? 'Rs. '.($campaign['budget_per_day']*$campaign['campaign_pack']):"");?></label>
                                 
                             </div>
 
@@ -295,7 +295,7 @@ $(function() {
 });
 
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function(e) {
 
     jQuery('.bhoechie-tab-menu .step_menu3').on('click',function(){
                     $.ajax({
@@ -360,8 +360,8 @@ jQuery(document).ready(function() {
         }
     });
 
-    jQuery('#campaign_step2 .btn-primary').on('click', function() {
-
+    jQuery('#campaign_step2 .btn-primary').on('click', function(e) {
+       
         if (jQuery('#campaign_step1 #step1_id').val() == '' || jQuery('#campaign_step1 #step1_id')
             .val() == 0) {
             swal("Opps!", "Something went wrong, please try again", "error");
@@ -384,53 +384,61 @@ jQuery(document).ready(function() {
             jQuery('#budget_per_day').focus();
             return false;
         } else {
-            
-            var fd = new FormData($('#campaign_step2')[0]);    
-            fd.append( 'banner_add_file',  $('#banner_add')[0].files[0]);
-            fd.append( 'video_or_image_file_file', $('#video_or_image_file')[0].files[0]);
+
+            // var fd = new FormData($('#campaign_step2')[0]);    
+            // fd.append( 'banner_add',  $('#banner_add')[0].files[0]);
+            // fd.append( 'video_or_image_file', $('#video_or_image_file')[0].files[0]);
 
             
-            $.ajax({
-                url: '<?php echo base_url('campaign/step/2'); ?>',
-                type: 'post',
-                dataType: 'json',
-                data: fd,
-                cache: false,
-                success: function(data) {
-                    //var result = JSON.parse(data);
-                    console.log(data);
-                    if (parseInt(data) > 0) {
-                        jQuery('.bhoechie-tab-menu .step_menu3').click();
-                        jQuery('#campaign_step3 #step3_id').val(data);
-                        //current_wallet_balance
-                        $.ajax({
-                            url: '<?php echo base_url('users/wallet'); ?>',
-                            type: 'post',
-                            dataType: 'json',
-                            cache: false,
-                            success: function(data) {
-                                //var result = JSON.parse(data);
-                                jQuery('#curdatarent_wallet_balance').html('Rs. '+data);
+            // $.ajax({
+            //     url: '<?php echo base_url('campaign/step/2'); ?>',
+            //     type: 'post',
+            //     dataType: 'json',
+            //     data: fd,
+            //     cache: false,
+            //     success: function(data) {
+            //         //var result = JSON.parse(data);
+            //         console.log(data);
+            //         if (parseInt(data) > 0) {
+            //             jQuery('.bhoechie-tab-menu .step_menu3').click();
+            //             jQuery('#campaign_step3 #step3_id').val(data);
+            //             //current_wallet_balance
+            //             $.ajax({
+            //                 url: '<?php echo base_url('users/wallet'); ?>',
+            //                 type: 'post',
+            //                 dataType: 'json',
+            //                 cache: false,
+            //                 success: function(data) {
+            //                     //var result = JSON.parse(data);
+            //                     jQuery('#curdatarent_wallet_balance').html('Rs. '+data);
 
-                                if(data<(parseInt(jQuery('#campaign_pack').val()) * parseInt(jQuery('#budget_per_day').val())))
-                                {
-                                    jQuery('#requied_payment').show();
-                                    jQuery('#add_balance').val((parseInt(jQuery('#campaign_pack').val()) * parseInt(jQuery('#budget_per_day').val()))-data);
+            //                     if(data<(parseInt(jQuery('#campaign_pack').val()) * parseInt(jQuery('#budget_per_day').val())))
+            //                     {
+            //                         jQuery('#requied_payment').show();
+            //                         jQuery('#add_balance').val((parseInt(jQuery('#campaign_pack').val()) * parseInt(jQuery('#budget_per_day').val()))-data);
 
 
-                                }
-                            }
-                        });
+            //                     }
+            //                 }
+            //             });
 
-                    } else {
-                        swal("Opps!", "Something went wrong, please try again", "error");
-                        jQuery('#campaign_step2')[0].reset();
-                        jQuery('.bhoechie-tab-menu .step_menu2').click();
-                    }
-                }
-            });
+            //         } else {
+            //             swal("Opps!", "Something went wrong, please try again", "error");
+            //             jQuery('#campaign_step2')[0].reset();
+            //             jQuery('.bhoechie-tab-menu .step_menu2').click();
+            //         }
+            //     }
+            // });
+            
+            $('#campaign_step2')[0].submit();            
 
         }
+    });
+
+
+    jQuery('#campaign_step2').on('submit', function(e) {
+        e.preventDefault();
+            
     });
 
 });

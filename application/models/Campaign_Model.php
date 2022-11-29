@@ -45,11 +45,19 @@
 
 
         public function getcampiagns()
-		{
-			$this->db->order_by('vendor_campaigns.id', 'DESC');
+        {
+          $this->db->order_by('vendor_campaigns.id', 'DESC');
 
-			 	$query =$this->db->get('vendor_campaigns');
-				return $query->result_array(); 
-		}
+            $query =$this->db->get('vendor_campaigns');
+            return $query->result_array(); 
+        }
+
+        public function getcampiagn($campaignid)
+        {
+            $this->db->order_by('vendor_campaigns.id', 'DESC');
+            $this->db->where('id',$campaignid);
+            $query =$this->db->get('vendor_campaigns');
+            return $query->row_array(); 
+        }
     }
     ?>
