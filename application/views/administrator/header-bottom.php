@@ -66,8 +66,8 @@
                             </a>
                             <div class="submenu">
                                 <ul class="submenu-item">
-                                    <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>administrator/campaign-listing">Campaign Report</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>administrator/campaign-listing">Transaction Report</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>administrator/campaignreport">Campaign Report</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>administrator/transactionreport">Transaction Report</a></li>
                                 </ul>
                             </div>
                         </li>

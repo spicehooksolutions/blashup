@@ -691,4 +691,17 @@ public function dashboardtotaltransactions(){
 	"success"');
 	return $query->row();
 }
-	}
+
+public function getalltransaction(){
+	$query = $this->db->query('SELECT * FROM transactions');
+	
+	if($query->num_rows()>0){
+        return  $query->result_array();
+    }
+	else
+	return false;
+}
+}
+
+
+	

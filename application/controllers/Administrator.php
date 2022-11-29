@@ -648,4 +648,35 @@ public function userswallet($offset = 0)
 		   		 $this->load->view('administrator/userswallet', $data);
 		  		$this->load->view('administrator/footer');
 		}
+
+
+public function campaignreport(){
+
+	$data['title'] = 'Latest Users';
+
+			$data['vendor_campaigns'] = $this->Administrator_Model->campaign_listing_data();
+			
+
+			 	$this->load->view('administrator/header-script');
+		 	 	 $this->load->view('administrator/header');
+		  		 $this->load->view('administrator/header-bottom');
+		   		 $this->load->view('administrator/campaignreport', $data);
+		  		$this->load->view('administrator/footer');
+
+}		
+
+public function transactionreport(){
+
+	$data['title'] = 'Latest Users';
+
+			$data['totaltransactions']= $this->Administrator_Model->getalltransaction();
+
+			 	$this->load->view('administrator/header-script');
+		 	 	 $this->load->view('administrator/header');
+		  		 $this->load->view('administrator/header-bottom');
+		   		 $this->load->view('administrator/transactionreport', $data);
+		  		$this->load->view('administrator/footer');
+
+}	
+
 	}

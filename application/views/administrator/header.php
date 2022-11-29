@@ -99,11 +99,11 @@
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                                     aria-labelledby="nreportDropdown">
                                    
-                                    <a class="dropdown-item">
+                                    <a href="<?php echo base_url(); ?>administrator/campaignreport" class="dropdown-item">
                                     
                                        Campaign Report
                                    </a>
-                                   <a class="dropdown-item">
+                                   <a href="<?php echo base_url(); ?>administrator/transactionreport"  class="dropdown-item">
                                   
                                        Transaction Report
                                    </a>
