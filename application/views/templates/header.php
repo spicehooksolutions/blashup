@@ -166,7 +166,7 @@
                                     aria-labelledby="nreportDropdown">
                                     <p class="mb-0 font-weight-medium float-left dropdown-header">Reports</p>
                                     <a class="dropdown-item">
-                                        <i class="mdi mdi-file-pdf text-primary"></i>
+                                        <i class="mdi text-primary"></i>
                                         Pdf
                                     </a>
                                     <a class="dropdown-item">

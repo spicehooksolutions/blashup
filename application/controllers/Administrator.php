@@ -30,6 +30,64 @@
 		    show_404();
 		   }
 		   $data['title'] = ucfirst($page);
+		   
+		   $totalusers=$this->Administrator_Model->dashboarduser();
+
+		   
+		   if($totalusers!=FALSE)
+		   $data['totalusers']=$totalusers->CNT;
+		   else
+		   $data['totalusers']=0;
+
+		  $totalcampaigns=$this->Administrator_Model->dashboardcampaign();
+
+		  if($totalcampaigns!=FALSE)
+		  $data['totalcampaigns']=$totalcampaigns->CNT;
+		  else
+		  $data['totalcampaigns']=0;
+
+		  $totaltransactions=$this->Administrator_Model->dashboardtransaction();
+		  
+		  if($totaltransactions!=FALSE)
+		  $data['totaltransactions']=$totaltransactions->CNT;
+		  else
+		  $data['totaltransactions']=0;
+
+		  $totalrunningcampaigns=$this->Administrator_Model->dashboardrunningcampaign();
+
+		  if($totalrunningcampaigns!=FALSE)
+		  $data['totalrunningcampaigns']=$totalrunningcampaigns->CNT;
+		  else
+		  $data['totalrunningcampaigns']=0;
+
+		  $totalsuccessfultransactions=$this->Administrator_Model->dashboardsuccessfultransaction();
+		  
+		  if($totalsuccessfultransactions!=FALSE)
+		  $data['totalsuccessfultransactions']=$totalsuccessfultransactions->CNT;
+		  else
+		  $data['totalsuccessfultransactions']=0;
+
+		  $totalfailedtransactions=$this->Administrator_Model->dashboardfailedtransaction();
+		  
+		  if($totalfailedtransactions!=FALSE)
+		  $data['totalfailedtransactions']=$totalfailedtransactions->CNT;
+		  else
+		  $data['totalfailedtransactions']=0;
+
+		  $totalsales=$this->Administrator_Model->dashboardtotalsales();
+
+		  if($totalsales!=FALSE)
+		  $data['totalsales']=$totalsales->TOTAL;
+		  else
+		  $data['totalfailedtransactions']=0;
+
+		  $totaltransactions=$this->Administrator_Model->dashboardtotaltransactions();
+
+		  if($totaltransactions!=FALSE)
+		  $data['totaltransactions']=$totaltransactions->TOTAL;
+		  else
+		  $data['totaltransactions']=0;
+
 		   $this->load->view('administrator/header-script');
 		   $this->load->view('administrator/header');
 		   $this->load->view('administrator/header-bottom');

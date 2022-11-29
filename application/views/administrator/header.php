@@ -98,15 +98,15 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                                     aria-labelledby="nreportDropdown">
-                                    <p class="mb-0 font-weight-medium float-left dropdown-header">Reports</p>
+                                   
                                     <a class="dropdown-item">
-                                        <i class="mdi mdi-file-pdf text-primary"></i>
-                                        Pdf
-                                    </a>
-                                    <a class="dropdown-item">
-                                        <i class="mdi mdi-file-excel text-primary"></i>
-                                        Exel
-                                    </a>
+                                    
+                                       Campaign Report
+                                   </a>
+                                   <a class="dropdown-item">
+                                  
+                                       Transaction Report
+                                   </a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown d-lg-flex d-none">

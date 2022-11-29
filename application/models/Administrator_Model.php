@@ -642,4 +642,53 @@ public function is_temp_pass_valid($temp_pass){
     else return FALSE;
 }
 
+public function dashboarduser(){
+	$query = $this->db->query('SELECT COUNT(*) AS CNT FROM users WHERE role_id!=1');
+
+	if($query->num_rows()>0){
+        return  $query->row();
+    }
+	else
+	return false;
+	//var_dump($query->num_rows(), $query->row());
+}
+
+public function dashboardcampaign(){
+	$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  vendor_campaigns');
+	return $query->row();
+}
+
+public function dashboardtransaction(){
+	$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  transactions');
+	return $query->row();
+}
+
+public function dashboardrunningcampaign(){
+	$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  vendor_campaigns');
+	return $query->row();
+}
+
+public function dashboardsuccessfultransaction(){
+	$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  transactions WHERE payment_status=	
+	"succeful"');
+	return $query->row();
+}
+
+public function dashboardfailedtransaction(){
+	$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  transactions WHERE payment_status=	
+	"failed"');
+	return $query->row();
+}
+
+public function dashboardtotalsales(){
+	$query = $this->db->query('SELECT SUM(payment_amount) AS TOTAL FROM transactions WHERE payment_status=	
+	"succeful"');
+	return $query->row();
+}
+
+public function dashboardtotaltransactions(){
+	$query = $this->db->query('SELECT SUM(transaction_amount) AS TOTAL FROM campaign_transactions WHERE transaction_status=	
+	"success"');
+	return $query->row();
+}
 	}

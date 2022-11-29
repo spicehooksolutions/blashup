@@ -64,6 +64,12 @@
                                 <span class="menu-title">Reports</span>
                                 <i class="menu-arrow"></i>
                             </a>
+                            <div class="submenu">
+                                <ul class="submenu-item">
+                                    <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>administrator/campaign-listing">Campaign Report</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>administrator/campaign-listing">Transaction Report</a></li>
+                                </ul>
+                            </div>
                         </li>
 
                         <?php endif; ?>
