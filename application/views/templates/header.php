@@ -252,7 +252,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
+                            <a href="<?php echo base_url(); ?>wallet/transactions" class="nav-link">
                                 <i class="mdi mdi-currency-inr menu-icon"></i>
                                 <span class="menu-title">Wallet</span>
                                 <i class="menu-arrow"></i>

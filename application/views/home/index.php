@@ -1,6 +1,3 @@
-<?php if(!$this->session->userdata('login')):
-    redirect('users/login');
-endif; ?>
 <div class="container-fluid page-body-wrapper">
     <div class="main-panel">
         <div class="content-wrapper">
