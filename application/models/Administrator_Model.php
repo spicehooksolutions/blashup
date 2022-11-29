@@ -689,17 +689,14 @@ public function dashboardtotalsales(){
 public function dashboardtotaltransactions(){
 	$query = $this->db->query('SELECT SUM(transaction_amount) AS TOTAL FROM campaign_transactions WHERE transaction_status=	
 	"success"');
-	return $query->row();
+	
+       return $query->row();
 }
 
 public function getalltransaction(){
 	$query = $this->db->query('SELECT * FROM transactions');
+	return  $query->result_array();
 	
-	if($query->num_rows()>0){
-        return  $query->result_array();
-    }
-	else
-	return false;
 }
 }
 

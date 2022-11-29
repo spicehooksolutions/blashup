@@ -76,14 +76,14 @@
 
 		  $totalsales=$this->Administrator_Model->dashboardtotalsales();
 
-		  if($totalsales!=FALSE)
+		  if($totalsales->TOTAL>0)
 		  $data['totalsales']=$totalsales->TOTAL;
 		  else
-		  $data['totalfailedtransactions']=0;
+		  $data['totalsales']=0;
 
 		  $totaltransactions=$this->Administrator_Model->dashboardtotaltransactions();
 
-		  if($totaltransactions!=FALSE)
+		  if($totaltransactions->TOTAL>0)
 		  $data['totaltransactions']=$totaltransactions->TOTAL;
 		  else
 		  $data['totaltransactions']=0;
@@ -650,10 +650,19 @@ public function userswallet($offset = 0)
 		}
 
 
-public function campaignreport(){
+public function campaignreport($offset = 0){
 
-	$data['title'] = 'Latest Users';
 
+		// Pagination Config
+		$config['base_url'] = base_url(). 'administrator/campaignreport';
+		$config['total_rows'] = $this->db->get('vendor_campaigns');
+		$config['per_page'] = 3;
+		$config['uri_segment'] = 3;
+		$config['attributes'] = array('class' => 'paginate-link');
+		// Init Pagination
+		$this->pagination->initialize($config);
+
+			$data['title'] = 'Latest Users';
 			$data['vendor_campaigns'] = $this->Administrator_Model->campaign_listing_data();
 			
 
@@ -665,10 +674,19 @@ public function campaignreport(){
 
 }		
 
-public function transactionreport(){
+public function transactionreport($offset = 0){
 
-	$data['title'] = 'Latest Users';
+	
+			// Pagination Config
+	 		$config['base_url'] = base_url(). 'administrator/transactionreport';
+			$config['total_rows'] = $this->db->get('transactions');
+			$config['per_page'] = 3;
+			$config['uri_segment'] = 3;
+			$config['attributes'] = array('class' => 'paginate-link');
+			// Init Pagination
+			$this->pagination->initialize($config);
 
+			$data['title'] = 'Latest Users';
 			$data['totaltransactions']= $this->Administrator_Model->getalltransaction();
 
 			 	$this->load->view('administrator/header-script');

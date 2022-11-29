@@ -1,15 +1,8 @@
-<link rel="stylesheet" type="text/css"
-    href="<?php echo base_url(); ?>admintemplate/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" type="text/css"
-    href="<?php echo base_url(); ?>admintemplate/assets/pages/data-table/css/buttons.dataTables.min.css">
-<link rel="stylesheet" type="text/css"
-    href="<?php echo base_url(); ?>admintemplate/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css">
-<link rel="stylesheet" type="text/css"
-    href="<?php echo base_url(); ?>admintemplate/bower_components/ekko-lightbox/dist/ekko-lightbox.css">
-<link rel="stylesheet" type="text/css"
-    href="<?php echo base_url(); ?>admintemplate/bower_components/lightbox2/dist/css/lightbox.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://kit.fontawesome.com/bc4d6d3f18.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>admintemplate/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>admintemplate/assets/pages/data-table/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>admintemplate/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>admintemplate/bower_components/ekko-lightbox/dist/ekko-lightbox.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>admintemplate/bower_components/lightbox2/dist/css/lightbox.css">
 
 
 <div class="container-fluid page-body-wrapper">
@@ -25,7 +18,7 @@
                                 <!-- Add class <code>.table-striped</code> -->
                             </p>
                             <div class="table-responsive">
-                                <table class="table table-striped">
+                                <table id="dom-jqry" class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
@@ -54,7 +47,10 @@
                                         </tr>
                                         <?php endforeach; ?>
 
-
+<!--                                                 
+                                    <div class="paginate-link">
+                                        <?php //echo $this->pagination->create_links(); ?>
+                                    </div>   -->
                                     </tbody>
                                 </table>
                             </div>
@@ -74,4 +70,3 @@
 
 
     }
-?>
