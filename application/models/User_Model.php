@@ -92,6 +92,19 @@
 
 		public function wallet($userid)
 		{
-			return 0;
+			$walletbalance=0;
+			$this->db->where('user_id',$userid);
+			$this->db->where('payment_status','succeful');
+			$result = $this->db->get('transactions');
+			if ($result->num_rows()>=1) {
+				foreach($result->result_array() as $row)
+				{
+					$walletbalance +=$row['payment_amount'];
+				}
+
+				return $walletbalance;
+			}else{
+				return $walletbalance;
+			}
 		}
 	}

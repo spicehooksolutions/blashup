@@ -5,7 +5,7 @@
             $this->db->where('user_id',$this->session->userdata('user_id'));
 			$result = $this->db->get('transactions');
 
-			if ($result->num_rows() == 1) {
+			if ($result->num_rows()>=1) {
 				return $result->result_array();
 			}else{
 				return false;
@@ -16,7 +16,7 @@
 		{
 			$data = array('user_id' => $userid, 
 						  'payment_order_id' =>str_shuffle('ABCDUGHFDR').'-'.rand(111111,999999),
-						  'payment_initiate_date' =>date('Y-m-d'),
+						  'payment_initiate_date' =>date('Y-m-d h:i'),
 						  'payment_amount' =>$amount,
 						  'payment_initiate_by'=>$userid
 						  );
@@ -27,6 +27,21 @@
 			}
 			else
 			return 0;
+		}
+
+
+
+
+		function completeWallet($rid,$responsetext,$status)
+		{
+			$data = array(
+						  'payment_status' =>(($status==true)?'succeful':'failed'),
+						  'payment_response_time' =>date('Y-m-d h:i'),
+						  'payment_responses' =>((!empty($responsetext) && count($responsetext)>0)?$responsetext['razorpay_payment_id']:''),
+						  );
+
+						  $this->db->where('id', $rid);              
+                        $this->db->update('transactions', $data);
 		}
     }
 ?>

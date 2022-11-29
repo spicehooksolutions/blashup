@@ -10,7 +10,7 @@
                                 Your wallet balance : Rs. <mark id="current_balance"
                                     class="bg-danger text-white"></mark>
                             </p>
-                            <form class="form-inline">
+                         
                                 <label class="sr-only" for="funds">Amount ( in Rs., min Rs. 10 ) </label>
                                 <input type="number" min="1" class="form-control mb-2 mr-sm-2" id="funds" name="funds"
                                     placeholder="e.g. 100">
@@ -28,8 +28,10 @@
                                 $Paymentconfig=$queryPayment->row_array();
                                 
                                 ?>
-                                <script>
-                                var options = {
+                                <script>                                                               
+                                document.getElementById('rzp-button1').onclick = function(e) {
+                                   
+                                    var options = {
                                     "key": "<?php echo $Paymentconfig['payment_gateway_key_id'];?>", // Enter the Key ID generated from the Dashboard
                                     "amount": parseInt(jQuery('#funds').val()*100),
                                     "currency": "INR",
@@ -40,12 +42,13 @@
 
                                     },
                                     "handler": function(response) {
-                                        alert(response.razorpay_payment_id);
+                                       
+
                                         $.ajax({
                                             url: '<?php echo base_url('wallet/transactioncomplete'); ?>',
                                             type: 'post',
                                             dataType: 'json',
-                                            data:{keys:jQuery('#keys').val(),response:response},
+                                            data:{keys:jQuery('#keys').val(),responsetext:response},
                                             cache: false,
                                             success: function(data) {
                                             if(data!=0)
@@ -60,13 +63,34 @@
                                             }
                                             }
                                             });
+
+                                                    jQuery('#add_fund_mask').show();
+                                                    jQuery('#rzp-button1').hide();
+                                                    jQuery('#funds').val('');
+                                                    jQuery('#funds').focus();
                                     },
                                     theme: {
-                                        color: '#00FFFF'
-                                    }
+                                        color: '#464dee'
+                                    },
+                                    "modal": {
+                                            "ondismiss": function () {
+                                                $.ajax({
+                                                url: '<?php echo base_url('wallet/transactioncomplete'); ?>',
+                                                type: 'post',
+                                                dataType: 'json',
+                                                data:{keys:jQuery('#keys').val(),responsetext:"",failed:1},
+                                                cache: false,
+                                                success: function(data) {      
+
+                                                    jQuery('#add_fund_mask').show();
+                                                    jQuery('#rzp-button1').hide();
+                                                    jQuery('#funds').val('');
+                                                    jQuery('#funds').focus();
+                                                }
+                                                });
+                                            }
+                                        }
                                 };
-                               
-                                document.getElementById('rzp-button1').onclick = function(e) {
                                     var rzp1 = new Razorpay(options);
                                     rzp1.open();
                                     e.preventDefault();
@@ -74,7 +98,7 @@
                                 </script>
 
                                 <input type="hidden" id="keys" />
-                            </form>
+                          
                         </div>
                     </div>
                 </div>
@@ -107,6 +131,9 @@
                                             <td><?php echo $i++; ?></td>
                                             <td>
                                                 Rs. <?php echo $post['payment_amount']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $post['payment_order_id']; ?>
                                             </td>
 
                                             <td><?php echo (($post['payment_response_time']!=NULL)?$post['payment_response_time']:$post['payment_initiate_date']); ?>

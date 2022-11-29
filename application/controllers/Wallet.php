@@ -8,6 +8,7 @@
 			$data['title'] = 'Wallet transactions';
 			$data['wallettransactions'] = $this->Wallet_Model->getTransactions();
 
+			
 			$this->load->view('templates/header');
 			$this->load->view('wallet/transactions', $data);
 			$this->load->view('templates/footer');
@@ -17,8 +18,9 @@
 		{
 			if(isset($_POST['amount']))
 			{
-				if($this->Wallet_Model->initiateWallet($this->session->userdata('user_id'),$_POST['amount'])>0)
-				{	echo 1;
+				$rid=$this->Wallet_Model->initiateWallet($this->session->userdata('user_id'),$_POST['amount']);
+				if($rid>0)
+				{	echo $rid;
 					exit;
 				}
 				else
@@ -34,9 +36,18 @@
 			}
 		}
 
-		public function transactioncomplete($keys,$response)
+		public function transactioncomplete()
 		{
-			var_dump($keys,$response);
+			if(isset($_POST['keys']) && $_POST['responsetext']!='')
+			{
+				$this->Wallet_Model->completeWallet($_POST['keys'],$_POST['responsetext'],true);
+				echo 1;
+			}
+			else
+			{
+				$this->Wallet_Model->completeWallet($_POST['keys'],$_POST['responsetext'],false);
+				echo 0;
+			}
 			exit;
 		}
 
