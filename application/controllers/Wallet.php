@@ -13,4 +13,31 @@
 			$this->load->view('templates/footer');
 		}
 
+		public function transactioninitiate()
+		{
+			if(isset($_POST['amount']))
+			{
+				if($this->Wallet_Model->initiateWallet($this->session->userdata('user_id'),$_POST['amount'])>0)
+				{	echo 1;
+					exit;
+				}
+				else
+				{
+					echo 0;
+					exit;
+				}
+			}
+			else
+			{
+				echo 0;
+				exit;
+			}
+		}
+
+		public function transactioncomplete($keys,$response)
+		{
+			var_dump($keys,$response);
+			exit;
+		}
+
 	}

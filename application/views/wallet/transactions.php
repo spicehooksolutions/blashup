@@ -17,7 +17,7 @@
 
                                 <button type="button" class="btn btn-primary mb-2" id="add_fund_mask">Add fund</button>
 
-                                <html>
+                               
                                 <button id="rzp-button1" class="btn btn-primary mb-2" style="display:none;"><i class="mdi mdi-cart-plus"></i> Pay now</button>
                                 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
                                 <?php
@@ -25,7 +25,8 @@
                                 $sitconfig=$query->row_array();
                                 
                                 $queryPayment = $this->db->get_where('paymentgateways', array('gatewaytag' => 'razorpay'));
-                                $Paymentconfig=$query->row_array();
+                                $Paymentconfig=$queryPayment->row_array();
+                                
                                 ?>
                                 <script>
                                 var options = {
@@ -40,19 +41,39 @@
                                     },
                                     "handler": function(response) {
                                         alert(response.razorpay_payment_id);
+                                        $.ajax({
+                                            url: '<?php echo base_url('wallet/transactioncomplete'); ?>',
+                                            type: 'post',
+                                            dataType: 'json',
+                                            data:{keys:jQuery('#keys').val(),response:response},
+                                            cache: false,
+                                            success: function(data) {
+                                            if(data!=0)
+                                            {
+                                                swal('Wow!','Funds successfuly added to your wallet','success');
+                                                location.href=location.href;
+                                            }
+                                            else
+                                            {
+                                                swal('Opps!','Something went wrong, please try again','error');
+                                                location.href=location.href;
+                                            }
+                                            }
+                                            });
                                     },
                                     theme: {
                                         color: '#00FFFF'
                                     }
                                 };
-                                var rzp1 = new Razorpay(options);
+                               
                                 document.getElementById('rzp-button1').onclick = function(e) {
+                                    var rzp1 = new Razorpay(options);
                                     rzp1.open();
                                     e.preventDefault();
                                 }
                                 </script>
 
-
+                                <input type="hidden" id="keys" />
                             </form>
                         </div>
                     </div>
@@ -155,6 +176,41 @@ jQuery(document).ready(function() {
         cache: false,
         success: function(data) {
             jQuery('#current_balance').html(data);
+        }
+    });
+
+
+    jQuery('#add_fund_mask').on('click',function(){
+
+        if(jQuery('#funds').val()!='')
+        {
+            $.ajax({
+            url: '<?php echo base_url('wallet/transactioninitiate'); ?>',
+            type: 'post',
+            dataType: 'json',
+            data:{amount:jQuery('#funds').val()},
+            cache: false,
+            success: function(data) {
+            if(data!=0)
+            {
+                jQuery('#keys').val(data);
+                jQuery('#add_fund_mask').hide();
+                jQuery('#rzp-button1').show();
+                jQuery('#rzp-button1').click();
+            }
+            else
+            {
+                swal('Opps!','Something went wrong, please try again','error');
+                location.href=location.href;
+            }
+            }
+            });
+        }
+        else
+        {
+            swal('Opps!','Enter amount first','error');
+            jQuery('#funds').focus();
+            return false;
         }
     });
 
