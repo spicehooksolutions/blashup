@@ -41,7 +41,7 @@
                                             <td><?php echo $post['payment_initiate_date']; ?>
                                             </td>
                                             <td><?php echo $post['payment_amount']; ?></td>
-                                            <td><?php echo $post['payment_status']; ?></td>
+                                            <td><?php echo statusconversion($post['payment_status']); ?></td>
                                             <td><?php echo $post['payment_gateway']; ?></td>
                                            
                                         </tr>
@@ -66,7 +66,31 @@
     </div>
     <!-- main-panel ends -->
 </div>
+<?php 
+//'initiated','failed','succeful','canceled'
+    function statusconversion($status)
+    {
+        $returnval="";
+        switch($status)
+        {
+            case 'succeful':
+                $returnval="<a href='javascript:;' class='btn btn-success'>Success</a>";
+                break;
+            case 'failed':
+                $returnval="<a href='javascript:;' class='btn btn-inverse'>Failed</a>";
+                break;
+            case 'initiated':
+                $returnval="<a href='javascript:;' class='btn btn-info'>Not completed</a>";
+                break;
+            case 'canceled':
+                $returnval="<a href='javascript:;' class='btn btn-danger'>Failed</a>";
+                break;
+            
+        }
 
+        return $returnval;
+    }
+?>
 
 
     }
