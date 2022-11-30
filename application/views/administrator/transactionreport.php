@@ -26,7 +26,7 @@
                                             <th>Payment initiated date</th>
                                             <th>Payment amount</th>
                                             <th>Payment status</th>
-                                            <th>Payment gateway</th>
+                                           
                                            
                                         </tr>
                                     </thead>
@@ -42,7 +42,7 @@
                                             </td>
                                             <td><?php echo $post['payment_amount']; ?></td>
                                             <td><?php echo statusconversion($post['payment_status']); ?></td>
-                                            <td><?php echo $post['payment_gateway']; ?></td>
+                                            
                                            
                                         </tr>
                                         <?php endforeach; ?>
