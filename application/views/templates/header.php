@@ -237,15 +237,22 @@
                                 <span class="menu-title">Dashboard</span>
                             </a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url(); ?>campaign/add">
+                            <a href="#" class="nav-link">
                                 <i class="mdi mdi-file-video menu-icon"></i>
-                                <span class="menu-title">Campaign</span>
+                                <span class="menu-title">Campaigns</span>
+                                <i class="menu-arrow"></i>
                             </a>
+                            <div class="submenu">
+                                <ul class="submenu-item">
+                                    <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>campaign/add">Add Campaign</a></li>
+                                     <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>campaign/manage">Manage Campaign</a></li>
+                                </ul>
+                            </div>
                         </li>
+                        
                         <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
+                            <a href="<?php echo base_url(); ?>wallet/alltransaction" class="nav-link">
                                 <i class="mdi mdi-format-list-bulleted-type menu-icon"></i>
                                 <span class="menu-title">Transactions</span>
                                 <i class="menu-arrow"></i>
@@ -259,7 +266,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
+                            <a href="<?php echo base_url(); ?>campaign/reports" class="nav-link">
                                 <i class="mdi mdi-table menu-icon"></i>
                                 <span class="menu-title">Reports</span>
                                 <i class="menu-arrow"></i>

@@ -76,6 +76,13 @@
 			}
 		}
 
-		
+		public function manage()
+		{
+			$data['title'] = 'Manage Campaigns';
+			$data['campaigns'] = $this->Campaign_Model->getcampiagns();
+			$this->load->view('templates/header');
+			$this->load->view('campaign/manage', $data);
+			$this->load->view('templates/footer');
+		}
 
 	}
