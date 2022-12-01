@@ -3,7 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 //user routes
 $route['users/register'] = 'users/register';
-$route['default_controller'] = 'home/index';
+$route['default_controller'] = 'users/dashboard';
+// $route['users/register'] = 'users/register';
+// $route['default_controller'] = 'home/index';
+ $route['users/dashboard']='users/dashboard';
 
 //admin routs
 $route['administrator'] = 'administrator/view';

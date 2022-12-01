@@ -124,6 +124,8 @@
 				 				'site_logo' => $sitelogo['logo_img']
 				 	);
 				 	$this->session->set_userdata($user_data);
+					//Login activity log
+					$this->User_Model->login_log();
 					//Set Message
 					$this->session->set_flashdata('success', 'Welcome to administrator Dashboard.');
 					redirect('administrator/dashboard');

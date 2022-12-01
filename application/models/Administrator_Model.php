@@ -698,6 +698,56 @@ public function getalltransaction(){
 	return  $query->result_array();
 	
 }
+
+// Login activity log
+public function login_log(){
+	function get_ip()
+	{
+		$ip = null;
+		$deep_detect=true;
+		if (filter_var($ip, FILTER_VALIDATE_IP) === false) {
+			$ip = $_SERVER["REMOTE_ADDR"];
+			if ($deep_detect) {
+				if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)) {
+					$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+				}
+				if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP)) {
+					$ip = $_SERVER['HTTP_CLIENT_IP'];
+				}
+			}
+		}
+		return $ip;
+	}
+			function getBrowser()
+			{
+			$user_agent = $_SERVER['HTTP_USER_AGENT'];
+			$browser = "N/A";
+			$browsers = [
+				'/msie/i' => 'Internet explorer',
+				'/firefox/i' => 'Firefox',
+				'/safari/i' => 'Safari',
+				'/chrome/i' => 'Chrome',
+				'/edge/i' => 'Edge',
+				'/opera/i' => 'Opera',
+				'/mobile/i' => 'Mobile browser',
+			];
+			foreach ($browsers as $regex => $value) {
+				if (preg_match($regex, $user_agent)) {
+				$browser = $value;
+				}
+			}
+			return $browser;
+			}
+			//echo "Browser: " . getBrowser();
+			$user_ip=get_ip();
+			$user_browser=getbrowser();
+			$data = array('user_id'=>$this->session->userdata('user_id'),
+				  'login_ip' => $user_ip,
+				  'browser' => $user_browser,
+				  'browser_detail'=>$_SERVER['HTTP_USER_AGENT']					  
+				  );
+			return $this->db->insert('login_activity_log', $data);
+	}
 }
 
 

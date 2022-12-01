@@ -1,10 +1,44 @@
 <?php
 	class Users extends CI_Controller
 	{
-		public function dashboard(){
+		public function dashboard($page = 'dashboard'){
 			if(!$this->session->userdata('login')) {
 				redirect('users/login');
 			}
+			if (!file_exists(APPPATH.'views/users/'.$page.'.php')) {
+				show_404();
+			   }
+			   $data['title'] = ucfirst($page);
+
+			$totalcampaigns=$this->User_Model->dashboardtotalcampaign();
+	
+			if($totalcampaigns!=FALSE)
+			$data['totalcampaigns']=$totalcampaigns->CNT;
+			else
+			$data['totalcampaigns']=0;
+
+			$totalrunningcampaigns=$this->User_Model->dashboardtotalrunning();
+	
+			if($totalrunningcampaigns!=FALSE)
+			$data['totalrunningcampaigns']=$totalrunningcampaigns->CNT;
+			else
+			$data['totalrunningcampaigns']=0;
+
+			$totalfailedcampaigns=$this->User_Model->dashboardfailedcampaign();
+	
+			if($totalfailedcampaigns!=FALSE)
+			$data['totalfailedcampaigns']=$totalfailedcampaigns->CNT;
+			else
+			$data['totalfailedcampaigns']=0;
+		
+			$data['totalwalletbalance']=$this->Wallet_Model->getTransactions();
+			
+			$totalcampaignsale=$this->User_Model->dashboardtotalcampaignsale();
+	
+			if($totalcampaignsale->TOTAL>0)
+			$data['totalcampaignsale']=$totalcampaignsale->TOTAL;
+			else
+			$data['totalcampaignsale']=0;
 			$data['title'] = 'Dashboard';
 
 			$this->load->view('templates/header');
@@ -131,6 +165,7 @@
 
 				//Set Message
 				$this->session->set_flashdata('success', 'Profile data has been updated successfull.');
+
 				redirect('users/myaccount');
 			}
 			
@@ -165,6 +200,9 @@
 				 	);
 
 				 	$this->session->set_userdata($user_data);
+
+					//Login activity log
+					 $this->User_Model->login_log();
 
 					//Set Message
 					$this->session->set_flashdata('user_loggedin', 'You are now logged in.');

@@ -232,7 +232,7 @@
                         <?php if($this->session->userdata('login')): ?>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url(); ?>">
+                            <a class="nav-link" href="<?php echo base_url(); ?>users/dashboard">
                                 <i class="mdi mdi-file-document-box menu-icon"></i>
                                 <span class="menu-title">Dashboard</span>
                             </a>
