@@ -161,7 +161,7 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
 
                             <script>
                                 jQuery('#campaign_media_type').on('change',function(){
-                                    if(jQuery(this).val()=='in_between_video')
+                                    if(jQuery(this).val()=='video')
                                     jQuery('#video_or_image').html('Video');
                                     else
                                     jQuery('#video_or_image').html('Image');
@@ -217,7 +217,7 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
 
                             <div class="mt-3">
                                 <button type="button"
-                                    class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Save</button>
+                                    class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Next</button>
                             </div>
                             <?php echo form_close() ?>
 
@@ -235,7 +235,8 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
 
 
                             <?php echo form_open_multipart('campaign/step/3',array('class'=>'pt-3','id'=>'campaign_step3','name'=>'campaign_step3')); ?>
-                            <input type="hidden" name="step3_id" id="step3_id" value="" />
+                            <input type="hidden" name="step3_id" id="step3_id" value="<?php echo (isset($campaign['id'])? $campaign['id']:"");?>" />
+                            <input type="hidden" name="step3_trans_id" id="step3_trans_id" value="<?php echo (isset($transaction['id'])? $transaction['id']:"");?>" />
                             <div class="form-group">
                                 <label>Wallet balance</label>
                                 <div class="input-group">
@@ -243,12 +244,30 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
                                 </div>
                             </div>                          
                             
-
-                            <div class="form-group" id="requied_payment" style="display:none;">
+                                <?php
+                                $style="style='display:none;'";
+                                $addbalance=0;
+                                $requiredfund=false;
+                                    if(isset($campaign['budget_per_day']))
+                                    {
+                                        if($wallaetbalance>=($campaign['budget_per_day']*$campaign['campaign_pack']))
+                                        {
+                                            $style="style='display:none;'";
+                                        }
+                                        else
+                                        {
+                                            $style="style='display:block;'";
+                                            $addbalance=(($campaign['budget_per_day']*$campaign['campaign_pack'])-$wallaetbalance);
+                                            $requiredfund=true;
+                                        }
+                                    }
+                                ?>
+                            <div class="form-group" id="requied_payment" <?php echo $style;?>>
                                 <label>Add balance</label>
                                 <div class="input-group">
                                     <input type="number" class="form-control form-control-lg border-left-0"
-                                        name="add_balance" id="add_balance" value="" readonly>
+                                        name="add_balance" id="add_balance" value="<?php echo $addbalance;?>" readonly>
+                                      
                                 </div>
                             </div>
 
@@ -256,16 +275,46 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
                                 <label>Total budget of the Campiagn</label>
                                 <div class="input-group">
                                     <input type="number" class="form-control form-control-lg border-left-0"
-                                        name="total_campaign_value" id="total_campaign_value" value="" readonly>
+                                        name="total_campaign_value" id="total_campaign_value" value="<?php echo (isset($campaign['budget_per_day'])? ($campaign['budget_per_day']*$campaign['campaign_pack']):"");?>" readonly>
                                 </div>
                             </div>
 
 
                             <div class="mt-3">
+
+                            <button id="rzp-button1" class="btn btn-primary mb-2" <?php echo $style;?>><i class="mdi mdi-cart-plus"></i> Add balance</button>
+                                    <?php 
+
+                                    if($requiredfund==false)
+                                    {
+                                        ?>
                                 <button type="button"
-                                    class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" disabled>Next</button>
+                                    class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn stpe3_button" >Next</button>
+                                    <?php 
+                                    }
+                                    ?>
                             </div>
                             <?php echo form_close() ?>
+                        </div>
+
+
+                        <!-- preview -->
+
+                        <div class="bhoechie-tab-content ">
+                            <div id="preview"></div>
+                            <?php echo form_open_multipart('campaign/step/4',array('class'=>'pt-3','id'=>'campaign_step4','name'=>'campaign_step4')); ?>
+                            <input type="hidden" name="step4_id" id="step4_id" value="<?php echo (isset($campaign['id'])? $campaign['id']:"");?>" />
+
+                            <div class="form-group">
+                              
+                                <div class="input-group">
+                                    <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn stpe4_button">Submit for review</button>
+                                </div>
+                            </div>
+
+                            <?php echo form_close() ?>
+
+
                         </div>
 
                     </div>
@@ -282,6 +331,117 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
 </div>
 </div>
 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                                <?php
+                                $query = $this->db->get_where('site_config', array('id' => 1));
+                                $sitconfig=$query->row_array();
+                                
+                                $queryPayment = $this->db->get_where('paymentgateways', array('gatewaytag' => 'razorpay'));
+                                $Paymentconfig=$queryPayment->row_array();
+                                
+                                ?>
+                                <script>                                                               
+                                document.getElementById('rzp-button1').onclick = function(e) {
+                                    e.preventDefault();
+
+                                    if(jQuery('#add_balance').val()!='')
+                                    {
+                                        $.ajax({
+                                        url: '<?php echo base_url('campaign/transactioninitiate'); ?>',
+                                        type: 'post',
+                                        dataType: 'json',
+                                        data:{amount:jQuery('#add_balance').val()},
+                                        cache: false,
+                                        success: function(data) {
+                                        if(data!=0)
+                                        {
+                                            jQuery('#keys').val(data);
+                                            var options = {
+                                                "key": "<?php echo $Paymentconfig['payment_gateway_key_id'];?>", // Enter the Key ID generated from the Dashboard
+                                                "amount": parseInt(jQuery('#add_balance').val()*100),
+                                                "currency": "INR",
+                                                "description": "<?php echo $sitconfig['site_name'];?>",
+                                                "image": "https://s3.amazonaws.com/rzp-mobile/images/rzp.jpg",
+                                                "prefill": {
+                                                    "email": "<?php echo $this->session->userdata('email'); ?>",
+
+                                                },
+                                                "handler": function(response) {
+                                                
+
+                                                    $.ajax({
+                                                        url: '<?php echo base_url('campaign/transactioncomplete'); ?>',
+                                                        type: 'post',
+                                                        dataType: 'json',
+                                                        data:{keys:jQuery('#keys').val(),responsetext:response},
+                                                        cache: false,
+                                                        success: function(data) {
+                                                        if(data!=0)
+                                                        {
+                                                            swal('Wow!','Funds successfuly added to your wallet','success');
+                                                                jQuery('.stpe3_button').show();
+                                                                jQuery('#rzp-button1').hide();
+                                                        }
+                                                        else
+                                                        {
+                                                            swal('Opps!','Something went wrong, please try again','error');
+                                                            location.href=location.href;
+                                                        }
+                                                        }
+                                                        });
+
+                                                               
+                                                              
+                                                },
+                                                theme: {
+                                                    color: '#464dee'
+                                                },
+                                                "modal": {
+                                                        "ondismiss": function () {
+                                                            $.ajax({
+                                                            url: '<?php echo base_url('campaign/transactioncomplete'); ?>',
+                                                            type: 'post',
+                                                            dataType: 'json',
+                                                            data:{keys:jQuery('#keys').val(),responsetext:"",failed:1},
+                                                            cache: false,
+                                                            success: function(data) {      
+
+                                                                jQuery('.stpe3_button').hide();
+                                                                jQuery('#rzp-button1').show();
+                                                            }
+                                                            });
+                                                        }
+                                                    }
+                                            };
+                                                var rzp1 = new Razorpay(options);
+                                                rzp1.open();
+                                               
+                                        }
+                                        else
+                                        {
+                                            swal('Opps!','Something went wrong, please try again','error');
+                                            jQuery('.stpe3_button').hide();
+                                            jQuery('#rzp-button1').show();  
+                                        }
+                                        }
+                                        });
+                                    }
+                                    else
+                                    {
+                                        swal('Opps!','Something went wrong please try again','error'); 
+                                        
+                                         jQuery('.stpe3_button').hide();
+                                         jQuery('#rzp-button1').show();                                       
+                                        return false;
+                                    }
+
+
+                                    
+                                }
+                                </script>
+
+                                <input type="hidden" id="keys" />
+
 <script>
 $(function() {
     $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
@@ -297,6 +457,20 @@ $(function() {
 
 jQuery(document).ready(function(e) {
 
+      <?php if(isset($steps) && $steps==3) { ?>
+                jQuery('.step_menu3').click();
+                $.ajax({
+                            url: '<?php echo base_url('users/wallet'); ?>',
+                            type: 'post',
+                            dataType: 'json',
+                            cache: false,
+                            success: function(data) {
+                                //var result = JSON.parse(data);
+                                jQuery('#current_wallet_balance').html('Rs. '+data);
+                            }
+                        });
+     <?php } ?>
+        
     jQuery('.bhoechie-tab-menu .step_menu3').on('click',function(){
                     $.ajax({
                             url: '<?php echo base_url('users/wallet'); ?>',
@@ -369,66 +543,27 @@ jQuery(document).ready(function(e) {
             jQuery('#campaign_step2')[0].reset();
             jQuery('.bhoechie-tab-menu .step_menu1').click();
         }
+
+        <?php if(isset($campaign['banner_add']) && $campaign['banner_add']!='') { ?>
+
         if (jQuery('#banner_add').val() == '') {
             swal("Opps!", "Missing campiagn banner ad!", "error");
             jQuery('#banner_add').focus();
             return false;
         }
+        <?php } ?>
+        <?php if(isset($campaign['video_or_image_file']) && $campaign['video_or_image_file']!='') { ?>
         if (jQuery('#video_or_image_file').val() == '') {
             swal("Opps!", "Missing campiagn video or image file!", "error");
             jQuery('#video_or_image_file').focus();
             return false;
         }
+        <?php } ?>
         if (jQuery('#budget_per_day').val() == '') {
             swal("Opps!", "Missing budget!", "error");
             jQuery('#budget_per_day').focus();
             return false;
         } else {
-
-            // var fd = new FormData($('#campaign_step2')[0]);    
-            // fd.append( 'banner_add',  $('#banner_add')[0].files[0]);
-            // fd.append( 'video_or_image_file', $('#video_or_image_file')[0].files[0]);
-
-            
-            // $.ajax({
-            //     url: '<?php echo base_url('campaign/step/2'); ?>',
-            //     type: 'post',
-            //     dataType: 'json',
-            //     data: fd,
-            //     cache: false,
-            //     success: function(data) {
-            //         //var result = JSON.parse(data);
-            //         console.log(data);
-            //         if (parseInt(data) > 0) {
-            //             jQuery('.bhoechie-tab-menu .step_menu3').click();
-            //             jQuery('#campaign_step3 #step3_id').val(data);
-            //             //current_wallet_balance
-            //             $.ajax({
-            //                 url: '<?php echo base_url('users/wallet'); ?>',
-            //                 type: 'post',
-            //                 dataType: 'json',
-            //                 cache: false,
-            //                 success: function(data) {
-            //                     //var result = JSON.parse(data);
-            //                     jQuery('#curdatarent_wallet_balance').html('Rs. '+data);
-
-            //                     if(data<(parseInt(jQuery('#campaign_pack').val()) * parseInt(jQuery('#budget_per_day').val())))
-            //                     {
-            //                         jQuery('#requied_payment').show();
-            //                         jQuery('#add_balance').val((parseInt(jQuery('#campaign_pack').val()) * parseInt(jQuery('#budget_per_day').val()))-data);
-
-
-            //                     }
-            //                 }
-            //             });
-
-            //         } else {
-            //             swal("Opps!", "Something went wrong, please try again", "error");
-            //             jQuery('#campaign_step2')[0].reset();
-            //             jQuery('.bhoechie-tab-menu .step_menu2').click();
-            //         }
-            //     }
-            // });
             
             $('#campaign_step2')[0].submit();            
 
@@ -436,9 +571,84 @@ jQuery(document).ready(function(e) {
     });
 
 
-    jQuery('#campaign_step2').on('submit', function(e) {
+    jQuery('#campaign_step3 .stpe3_button').on('click', function(e) {
+     
+        if(jQuery('#total_campaign_value').val()<=0)
+        {
+            swal("Opps!", "Something went wrong!", "error");
+            return false;
+        }
+        else
+        {
+            $.ajax({
+                url: '<?php echo base_url('campaign/step/3'); ?>',
+                type: 'post',
+                dataType: 'json',
+                data: jQuery('#campaign_step3').serialize(),
+                cache: false,
+                success: function(data) {
+                   
+                    if (parseInt(data) > 0) {
+                        jQuery('#step3_trans_id').val(data);
+                        jQuery('.bhoechie-tab-menu .step_menu4').click();
+
+                        $.ajax({
+                            url: '<?php echo base_url('campaign/preview/'); ?>'+data,
+                            type: 'post',
+                            dataType: 'json',
+                            cache: false,
+                            success: function(data) {
+                                var response=JSON.parse(data);
+                               jQuery('#preview').html(response.html);
+                            }
+                        });
+
+                    } else {
+                        swal("Opps!", "Something went wrong, please try again", "error");                        
+                        jQuery('.bhoechie-tab-menu .step_menu3').click();
+                    }
+                }
+            });
+        }   
+    });
+
+
+    jQuery('.stpe4_button').click(function(e){
         e.preventDefault();
-            
+        $.ajax({
+                url: '<?php echo base_url('campaign/step/4'); ?>',
+                type: 'post',
+                dataType: 'json',
+                data: jQuery('#campaign_step4').serialize(),
+                cache: false,
+                success: function(data) {
+                    //var result = JSON.parse(data);
+                    console.log(data);
+                    if (parseInt(data) > 0) {
+                        swal("Wow! your campiagn has been submitted successfuly for approval", {
+                                buttons: {                                    
+                                    catch: {
+                                    text: "Thanks",
+                                    value: "catch",
+                                    }
+                                },
+                                })
+                                .then((value) => {
+                                switch (value) {
+                                
+                                    case "catch":
+                                    location.href="<?php echo base_url(); ?>campaign/manage";
+                                    break;
+                                
+                                   
+                                }
+                                });
+                    } else {
+                        swal("Opps!", "Something went wrong, please try again", "error");
+                       return false;
+                    }
+                }
+            });
     });
 
 });

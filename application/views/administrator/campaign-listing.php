@@ -123,8 +123,7 @@ $.ajax({
                                             <td>
                                                 <span><a href="javascript:;"><button
                                                             class="btn btn-primary waves-effect waves-light" id="btn_id" onclick="javascript: jQuery('#campaigndetails_<?php echo $post['id']; ?>').modal('show');">View</button></a></span>
-                                                <span><a href="javascript:;"><button
-                                                            class="btn btn-info waves-effect waves-light">Edit</button></a></span>
+                                              
 
                                             </td>
                                         </tr>

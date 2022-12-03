@@ -12,13 +12,14 @@
 			}
         }
 
-		function initiateWallet($userid,$amount)
+		function initiateWallet($userid,$amount,$walletfrom='W')
 		{
 			$data = array('user_id' => $userid, 
 						  'payment_order_id' =>str_shuffle('ABCDUGHFDR').'-'.rand(111111,999999),
 						  'payment_initiate_date' =>date('Y-m-d h:i'),
 						  'payment_amount' =>$amount,
-						  'payment_initiate_by'=>$userid
+						  'payment_initiate_by'=>$userid,
+						  'direct_from_campaign_or_wallet'=>$walletfrom
 						  );
 
 			if($this->db->insert('transactions', $data))

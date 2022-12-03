@@ -44,9 +44,11 @@
                                             <td>
                                                 <span><a href="javascript:;"><button
                                                             class="btn btn-primary waves-effect waves-light" id="btn_id" onclick="javascript: jQuery('#campaigndetails_<?php echo $post['id']; ?>').modal('show');">View</button></a></span>
-                                                <span><a href="javascript:;"><button
-                                                            class="btn btn-info waves-effect waves-light">Edit</button></a></span>
 
+                                                 <?php if($post['campaign_status']=='Draft') { ?>           
+                                                <span><a href="<?php echo base_url(); ?>campaign/add/<?php echo $post['id']; ?>"><button
+                                                            class="btn btn-info waves-effect waves-light">Edit</button></a></span>
+                                                <?php } ?>           
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>

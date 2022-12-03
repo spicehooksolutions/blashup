@@ -18,7 +18,7 @@
                                 <button type="button" class="btn btn-primary mb-2" id="add_fund_mask">Add fund</button>
 
                                
-                                <button id="rzp-button1" class="btn btn-primary mb-2" style="display:none;"><i class="mdi mdi-cart-plus"></i> Pay now</button>
+                                <button id="rzp-button1" class="btn btn-primary mb-2" style="display:none;"><i class="mdi mdi-cart-plus"></i> Add balance</button>
                                 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
                                 <?php
                                 $query = $this->db->get_where('site_config', array('id' => 1));
