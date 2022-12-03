@@ -18,7 +18,8 @@
                                             'campaign_media_type' => $this->input->post('campaign_media_type'),
                                             'link_of_product' => $this->input->post('link_of_product'),
                                             'ad_type' => $this->input->post('ad_type'),
-                                            'campaign_created_by' => $this->session->userdata('user_id')
+                                            'campaign_created_by' => $this->session->userdata('user_id'),
+                                            'user_id' => $this->session->userdata('user_id')
                                         );
                                         $this->db->where('id', $this->input->post('step1_id'));    
                                         $this->db->update('vendor_campaigns', $data);
@@ -94,7 +95,7 @@
                         if($step==3)
                         {
                             $data = array(
-                                'transaction_code' => 'Deducted from wallet',
+                                'transaction_code' => 'Paid from wallet',
                                 'campaign_id' => $this->input->post('step3_id'),
                                 'user_id' => $this->session->userdata('user_id'),
                                 'transaction_date' => date('Y-m-d h:i'), 
@@ -175,9 +176,12 @@
                             $this->db->update('vendor_campaigns', $data);
         }
 
-        public function getcampiagns()
+        public function getcampiagns($userid=NULL)
         {
+
           $this->db->order_by('vendor_campaigns.id', 'DESC');
+            if($userid!=NULL)
+            $this->db->where('user_id', $userid);  
 
             $query =$this->db->get('vendor_campaigns');
             return $query->result_array(); 

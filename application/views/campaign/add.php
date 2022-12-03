@@ -253,12 +253,13 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
                                         if($wallaetbalance>=($campaign['budget_per_day']*$campaign['campaign_pack']))
                                         {
                                             $style="style='display:none;'";
+                                            $requiredfund=true;
                                         }
                                         else
                                         {
                                             $style="style='display:block;'";
                                             $addbalance=(($campaign['budget_per_day']*$campaign['campaign_pack'])-$wallaetbalance);
-                                            $requiredfund=true;
+                                            $requiredfund=false;
                                         }
                                     }
                                 ?>
@@ -283,16 +284,10 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
                             <div class="mt-3">
 
                             <button id="rzp-button1" class="btn btn-primary mb-2" <?php echo $style;?>><i class="mdi mdi-cart-plus"></i> Add balance</button>
-                                    <?php 
-
-                                    if($requiredfund==false)
-                                    {
-                                        ?>
+                                   
                                 <button type="button"
-                                    class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn stpe3_button" >Next</button>
-                                    <?php 
-                                    }
-                                    ?>
+                                    class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn stpe3_button"  <?php if($requiredfund==false){ echo 'style="display:none;"';}?>>Next</button>
+                                    
                             </div>
                             <?php echo form_close() ?>
                         </div>
@@ -301,7 +296,15 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
                         <!-- preview -->
 
                         <div class="bhoechie-tab-content ">
-                            <div id="preview"></div>
+                            <div id="preview">
+
+                                    <div class="smartphone">
+                                        <div class="content">
+                                       
+                                        </div>
+                                    </div>
+                            </div>
+
                             <?php echo form_open_multipart('campaign/step/4',array('class'=>'pt-3','id'=>'campaign_step4','name'=>'campaign_step4')); ?>
                             <input type="hidden" name="step4_id" id="step4_id" value="<?php echo (isset($campaign['id'])? $campaign['id']:"");?>" />
 
@@ -381,6 +384,16 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
                                                             swal('Wow!','Funds successfuly added to your wallet','success');
                                                                 jQuery('.stpe3_button').show();
                                                                 jQuery('#rzp-button1').hide();
+                                                                $.ajax({
+                                                                url: '<?php echo base_url('users/wallet'); ?>',
+                                                                type: 'post',
+                                                                dataType: 'json',
+                                                                cache: false,
+                                                                success: function(data) {
+                                                                    //var result = JSON.parse(data);
+                                                                    jQuery('#current_wallet_balance').html('Rs. '+data);
+                                                                }
+                                                            });
                                                         }
                                                         else
                                                         {
@@ -653,3 +666,51 @@ jQuery(document).ready(function(e) {
 
 });
 </script>
+<style>
+    /* The device with borders */
+.smartphone {
+  position: relative;
+  width: 360px;
+  height: 640px;
+  margin: auto;
+  border: 16px black solid;
+  border-top-width: 60px;
+  border-bottom-width: 60px;
+  border-radius: 36px;
+}
+
+/* The horizontal line on the top of the device */
+.smartphone:before {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 5px;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #333;
+  border-radius: 10px;
+}
+
+/* The circle on the bottom of the device */
+.smartphone:after {
+  content: '';
+  display: block;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  left: 50%;
+  bottom: -65px;
+  transform: translate(-50%, -50%);
+  background: #333;
+  border-radius: 50%;
+}
+
+/* The screen (or content) of the device */
+.smartphone .content {
+  width: 335px;
+  height: 535px;
+  background: white;
+}
+</style>

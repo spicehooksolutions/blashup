@@ -158,10 +158,10 @@
                 dataType: 'json',
                 data: {id:id,status:status},
                 cache: false,
-                success: function(data) {
-                   
-                    console.log(data);
-                   jQuery('#status_'+id).html(data);
+                success: function(response) {
+                    //var result = JSON.parse(response);
+                    console.log(response);
+                   jQuery('#status_'+id).html("<a href='javascript:;' class='btn "+response.class+"'>"+response.status+"</a>");
                     
                 }
             });

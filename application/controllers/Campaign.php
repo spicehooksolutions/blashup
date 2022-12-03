@@ -129,7 +129,7 @@
 		public function manage()
 		{
 			$data['title'] = 'Manage Campaigns';
-			$data['campaigns'] = $this->Campaign_Model->getcampiagns();
+			$data['campaigns'] = $this->Campaign_Model->getcampiagns($this->session->userdata('user_id'));
 			$this->load->view('templates/header');
 			$this->load->view('campaign/manage', $data);
 			$this->load->view('templates/footer');
@@ -185,32 +185,32 @@
         switch($status)
         {
             case 'Active':
-                $returnval="<a href='javascript:;' class='btn btn-success'>".$status."</a>";
+                $returnval=array('class'=>'btn-success','status'=>$status);
                 break;
             case 'Inactive':
-                $returnval="<a href='javascript:;' class='btn btn-inverse'>".$status."</a>";
+                $returnval=array('class'=>'btn-inverse','status'=>$status);
                 break;
             case 'Pending':
-                $returnval="<a href='javascript:;' class='btn btn-info'>".$status."</a>";
+                $returnval=array('class'=>'btn-info','status'=>$status);
                 break;
             case 'Approve':
-                $returnval="<a href='javascript:;' class='btn btn-success'>".$status."</a>";
+                $returnval=array('class'=>'btn-success','status'=>$status);
                 break;
             case 'Pause':
-                $returnval="<a href='javascript:;' class='btn btn-warning'>".$status."</a>";
+                $returnval=array('class'=>'btn-warning','status'=>$status);
                 break;
             case 'Completed':
-                $returnval="<a href='javascript:;' class='btn btn-disabled'>".$status."</a>";
+                $returnval=array('class'=>'btn-disabled','status'=>$status);
                 break;
             case 'Draft':
-                $returnval="<a href='javascript:;' class='btn btn-warning'>".$status."</a>";
+                $returnval=array('class'=>'btn-warning','status'=>$status);
                 break;
             case 'Suspend':
-                $returnval="<a href='javascript:;' class='btn btn-danger'>".$status."</a>";
+                $returnval=array('class'=>'btn-danger','status'=>$status);
                 break;   
         }
 
-        echo $returnval;
+        echo json_encode($returnval);
 		exit;
 
 			}
