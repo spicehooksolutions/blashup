@@ -409,3 +409,5 @@ jQuery(document).ready(function() {
     });
 });
 </script>
+
+<script src="<?php echo base_url(); ?>assets/frontend/js/dashboard.js"></script>
