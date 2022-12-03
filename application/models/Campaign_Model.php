@@ -33,7 +33,8 @@
                                             'link_of_product' => $this->input->post('link_of_product'),
                                             'ad_type' => $this->input->post('ad_type'),
                                             'campaign_creation_date' => date("Y-m-d H:i:s"),
-                                            'campaign_created_by' => $this->session->userdata('user_id')
+                                            'campaign_created_by' => $this->session->userdata('user_id'),
+                                            'user_id' => $this->session->userdata('user_id')
                                         );
                                         
                                             $this->db->insert('vendor_campaigns', $data);

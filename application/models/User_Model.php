@@ -137,22 +137,102 @@
 				return $walletbalance;
 			}
 		}
-		public function dashboardtotalcampaign(){
-			$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  vendor_campaigns');
+		public function dashboardtotalcampaign($userid){
+			$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  vendor_campaigns WHERE user_id="'.$userid.'"');
 			return $query->row();
 		}
-		public function dashboardtotalrunning(){
-			$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  vendor_campaigns');
+		public function dashboardtotalrunning($userid){
+			$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  vendor_campaigns WHERE user_id="'.$userid.'" AND campaign_status="Approved" AND NOW() BETWEEN campaign_start_date AND campaign_end_date');
 			return $query->row();
 		}
-		public function dashboardfailedcampaign(){
+		public function dashboardfailedcampaign($userid){
 			$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  vendor_campaigns WHERE campaign_status=	
-			"Suspend"');
+			"Suspend" AND user_id="'.$userid.'"');
 			return $query->row();
 		}
-		public function dashboardtotalcampaignsale(){
+		public function dashboardtotalcampaignsale($userid){
 			$query = $this->db->query('SELECT SUM(total_campaign_value) AS TOTAL FROM  vendor_campaigns WHERE campaign_status=	
-			"Completed"');
+			"Completed" AND user_id="'.$userid.'"');
 			return $query->row();
 		}
+
+
+
+		public function dashboardsixmonthcampaign($userid,$type)
+		{
+			if($type=='all')
+			{
+				$monthwisevalues="0,0,0,0,0,0";
+
+				$query = $this->db->query('SELECT MONTH(`campaign_creation_date`) AS MONTH, COUNT(*) AS TOTALCAMPAIGN FROM vendor_campaigns WHERE MONTH(`campaign_creation_date`) BETWEEN MONTH(CURDATE() - INTERVAL 6 MONTH) AND MONTH(CURDATE()) AND user_id="'.$userid.'" GROUP BY MONTH');
+				if ($query->num_rows()>0) {
+					$monthwisevalues="";
+					foreach($query->result_array() as $row)
+					{
+						$monthwisevalues .=$row['TOTALCAMPAIGN'].",";
+					}
+					if ($query->num_rows()<6)
+					{
+						for($i=1;$i<=6-$query->num_rows();$i++)
+						$monthwisevalues .="0".",";
+					}
+
+				}
+
+				return rtrim($monthwisevalues,",");
+			}
+
+
+
+			if($type=='running')
+			{
+				$monthwisevalues="0,0,0,0,0,0";
+
+				$query = $this->db->query('SELECT MONTH(`campaign_creation_date`) AS MONTH, COUNT(*) AS TOTALCAMPAIGN FROM vendor_campaigns WHERE MONTH(`campaign_creation_date`) BETWEEN MONTH(CURDATE() - INTERVAL 6 MONTH) AND MONTH(CURDATE()) AND user_id="'.$userid.'" AND campaign_status="Approved" AND NOW() BETWEEN campaign_start_date AND campaign_end_date GROUP BY MONTH');
+				if ($query->num_rows()>0) {
+					$monthwisevalues="";
+					foreach($query->result_array() as $row)
+					{
+						$monthwisevalues .=$row['TOTALCAMPAIGN'].",";
+					}
+					if ($query->num_rows()<6)
+					{
+						for($i=1;$i<=6-$query->num_rows();$i++)
+						$monthwisevalues .="0".",";
+					}
+
+				}
+
+				return rtrim($monthwisevalues,",");
+			}
+
+
+			if($type=='failed')
+			{
+				$monthwisevalues="0,0,0,0,0,0";
+
+				$query = $this->db->query('SELECT MONTH(`campaign_creation_date`) AS MONTH, COUNT(*) AS TOTALCAMPAIGN FROM vendor_campaigns WHERE MONTH(`campaign_creation_date`) BETWEEN MONTH(CURDATE() - INTERVAL 6 MONTH) AND MONTH(CURDATE()) AND user_id="'.$userid.'" AND campaign_status="Suspend" GROUP BY MONTH');
+				if ($query->num_rows()>0) {
+					$monthwisevalues="";
+					foreach($query->result_array() as $row)
+					{
+						$monthwisevalues .=$row['TOTALCAMPAIGN'].",";
+					}
+					if ($query->num_rows()<6)
+					{
+						for($i=1;$i<=6-$query->num_rows();$i++)
+						$monthwisevalues .="0".",";
+					}
+
+				}
+
+				return rtrim($monthwisevalues,",");
+			}
+
+		}
+
+
+
+
+		
 	}

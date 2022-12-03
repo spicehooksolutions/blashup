@@ -10,22 +10,27 @@
 			   }
 			   $data['title'] = ucfirst($page);
 
-			$totalcampaigns=$this->User_Model->dashboardtotalcampaign();
+			$totalcampaigns=$this->User_Model->dashboardtotalcampaign($this->session->userdata('user_id'));
+			$data['sixmonthscampaogns']=$this->User_Model->dashboardsixmonthcampaign($this->session->userdata('user_id'),'all');
 	
 			if($totalcampaigns!=FALSE)
 			$data['totalcampaigns']=$totalcampaigns->CNT;
 			else
 			$data['totalcampaigns']=0;
 
-			$totalrunningcampaigns=$this->User_Model->dashboardtotalrunning();
+			$totalrunningcampaigns=$this->User_Model->dashboardtotalrunning($this->session->userdata('user_id'));
 	
+			$data['sixmonthsrunnings']=$this->User_Model->dashboardsixmonthcampaign($this->session->userdata('user_id'),'running');
+
 			if($totalrunningcampaigns!=FALSE)
 			$data['totalrunningcampaigns']=$totalrunningcampaigns->CNT;
 			else
 			$data['totalrunningcampaigns']=0;
 
-			$totalfailedcampaigns=$this->User_Model->dashboardfailedcampaign();
+			$totalfailedcampaigns=$this->User_Model->dashboardfailedcampaign($this->session->userdata('user_id'));
 	
+			$data['sixmonthsfailed']=$this->User_Model->dashboardsixmonthcampaign($this->session->userdata('user_id'),'failed');
+
 			if($totalfailedcampaigns!=FALSE)
 			$data['totalfailedcampaigns']=$totalfailedcampaigns->CNT;
 			else
@@ -33,7 +38,7 @@
 		
 			$data['totalwalletbalance']=$this->Wallet_Model->getTransactions();
 			
-			$totalcampaignsale=$this->User_Model->dashboardtotalcampaignsale();
+			$totalcampaignsale=$this->User_Model->dashboardtotalcampaignsale($this->session->userdata('user_id'));
 	
 			if($totalcampaignsale->TOTAL>0)
 			$data['totalcampaignsale']=$totalcampaignsale->TOTAL;

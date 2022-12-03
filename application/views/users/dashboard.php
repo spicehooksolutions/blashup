@@ -1,3 +1,4 @@
+<script src="<?php echo base_url(); ?>assets/frontend/js/dashboard.js"></script>
 <div class="container-fluid page-body-wrapper">
     <div class="main-panel">
         <div class="content-wrapper">
@@ -7,7 +8,7 @@
                         <div class="card-body pb-0">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h2 class="text-success font-weight-bold"><?php echo $totalcampaigns;?></h2>
-                                <i class="mdi mdi-account-outline mdi-18px text-dark"></i>
+                                <i class="mdi mdi-file-video mdi-18px text-dark"></i>
                             </div>
                         </div>
                         <canvas id="newClient"></canvas>
@@ -19,7 +20,7 @@
                         <div class="card-body pb-0">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h2 class="text-danger font-weight-bold"><?php echo $totalrunningcampaigns; ?></h2>
-                                <i class="mdi mdi-refresh mdi-18px text-dark"></i>
+                                <i class="mdi mdi-file-video mdi-18px text-dark"></i>
                             </div>
                         </div>
                         <canvas id="allProducts"></canvas>
@@ -31,7 +32,7 @@
                         <div class="card-body pb-0">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h2 class="text-info font-weight-bold"><?php echo $totalfailedcampaigns; ?></h2>
-                                <i class="mdi mdi-file-document-outline mdi-18px text-dark"></i>
+                                <i class="mdi mdi-file-video mdi-18px text-dark"></i>
                             </div>
                         </div>
                         <canvas id="invoices"></canvas>
@@ -141,7 +142,7 @@
                                
                                 <div class="card-body">
                                     <h3 class="text-dark mb-2 font-weight-bold"><mark id="current_balance"
-                                    class="bg-danger text-white"></mark></h3>
+                                    class="bg-danger text-white"></mark> INR</h3>
                                     <h4 class="card-title mb-2">WALLET BALANCE</h4>
                                     <small class="text-muted"><?php echo date("F Y"); ?></small>
                                 </div>
@@ -163,8 +164,8 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h4 class="card-title">Support Tracker</h4>
-                                <h4 class="text-success font-weight-bold">Tickets<span class="text-dark ms-3">163</span>
+                                <h4 class="card-title">Impression report</h4>
+                                <h4 class="text-success font-weight-bold">Impression<span class="text-dark ms-3">163</span>
                                 </h4>
                             </div>
                             <div id="support-tracker-legend" class="support-tracker-legend"></div>
@@ -407,7 +408,165 @@ jQuery(document).ready(function() {
             jQuery('#current_balance').html(data);
         }
     });
+
+    var newClientData = {
+			labels: [<?php for ($i = 1; $i <=6; $i++) {
+  echo '"'.date('F', strtotime("-$i month")).'",';
+} ?>],
+			datasets: [{
+				label: 'TOTAL CAMPAIGNS',
+				data: [<?php echo $sixmonthscampaogns;?>],
+				backgroundColor: [
+						'#f7f7f7',
+				],
+				borderColor: [
+						'#dcdcdc'
+				],
+				borderWidth: 2,
+				fill: true,
+			},],
+		};
+		var newClientOptions = {
+			scales: {
+				yAxes: [{
+					display: false,
+				}],
+				xAxes: [{
+					display: false,
+				}],
+			},
+			legend: {
+				display: false,
+			},
+			elements: {
+				point: {
+					radius: 0
+				},		
+			},
+			plugins: {
+				datalabels: {
+					display: false,
+					align: 'center',
+					anchor: 'center'
+				}
+			}				
+		};
+		if ($("#newClient").length) {
+			var lineChartCanvas = $("#newClient").get(0).getContext("2d");
+			var saleschart = new Chart(lineChartCanvas, {
+				type: 'line',
+				data: newClientData,
+				options: newClientOptions
+			});
+		}
+
+
+
+        var allProductsData = {
+			labels: [<?php for ($i = 1; $i <=6; $i++) {
+  echo '"'.date('F', strtotime("-$i month")).'",';
+} ?>],
+			datasets: [{
+				label: 'RUNNING CAMPAIGNS',
+				data: [<?php echo $sixmonthsrunnings;?>],
+				backgroundColor: [
+						'#f7f7f7',
+				],
+				borderColor: [
+						'#dcdcdc'
+				],
+				borderWidth: 2,
+				fill: true,
+			}, ],
+		};
+		var allProductsOptions = {
+			scales: {
+				yAxes: [{
+					display: false,
+				}],
+				xAxes: [{
+					display: false,
+				}],
+			},
+			legend: {
+				display: false,
+			},
+			elements: {
+				point: {
+					radius: 0
+				},
+			},
+			plugins: {
+				datalabels: {
+					display: false,
+					align: 'center',
+					anchor: 'center'
+				}
+			}				
+	
+		};
+		if ($("#allProducts").length) {
+			var lineChartCanvas = $("#allProducts").get(0).getContext("2d");
+			var saleschart = new Chart(lineChartCanvas, {
+				type: 'line',
+				data: allProductsData,
+				options: allProductsOptions
+			});
+		}
+
+
+        var invoicesData = {
+			labels: [<?php for ($i = 1; $i <=6; $i++) {
+  echo '"'.date('F', strtotime("-$i month")).'",';
+} ?>],
+			datasets: [{
+				label: 'FAILED CAMPAIGNS',
+				data: [<?php echo $sixmonthsfailed;?>],
+				backgroundColor: [
+						'#f7f7f7',
+				],
+				borderColor: [
+						'#dcdcdc'
+				],
+				borderWidth: 2,
+				fill: true,
+			}, ],
+		};
+		var invoicesOptions = {
+			scales: {
+				yAxes: [{
+					display: false,
+				}],
+				xAxes: [{
+					display: false,
+				}],
+			},
+			legend: {
+				display: false,
+			},
+			elements: {
+					point: {
+						radius: 0
+					},
+			},
+			plugins: {
+				datalabels: {
+					display: false,
+					align: 'center',
+					anchor: 'center'
+				}
+			}				
+	
+		};
+		if ($("#invoices").length) {
+			var lineChartCanvas = $("#invoices").get(0).getContext("2d");
+			var saleschart = new Chart(lineChartCanvas, {
+				type: 'line',
+				data: invoicesData,
+				options: invoicesOptions
+			});
+		}
+
 });
 </script>
 
-<script src="<?php echo base_url(); ?>assets/frontend/js/dashboard.js"></script>
