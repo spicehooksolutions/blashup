@@ -55,7 +55,13 @@
                                  </div>
                              </div>
 
-
+                             <div class="form-group row">
+                                 <label class="col-sm-3 col-form-label">Mobile App API Token Key</label>
+                                 <div class="col-sm-9">
+                                     <input class="form-control" value="<?php echo $siteconfiguration['app_token_key']; ?>"
+                                         placeholder="" name="app_token_key" type="text">
+                                 </div>
+                             </div>
 
                              <div class="form-group">
                                  <button type="submit" class="btn btn-primary waves-effect waves-light">Submit

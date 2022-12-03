@@ -390,6 +390,7 @@
 		{
 			$data = array('site_title' => $this->input->post('site_title'),
 						  'site_name' => $this->input->post('site_name'),
+						  'app_token_key' => $this->input->post('app_token_key'),
 						  'logo_img' => $post_image
 						);
 

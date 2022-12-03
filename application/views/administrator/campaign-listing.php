@@ -1,82 +1,3 @@
-<link rel="stylesheet" type="text/css"
-    href="<?php echo base_url(); ?>admintemplate/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" type="text/css"
-    href="<?php echo base_url(); ?>admintemplate/assets/pages/data-table/css/buttons.dataTables.min.css">
-<link rel="stylesheet" type="text/css"
-    href="<?php echo base_url(); ?>admintemplate/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css">
-<link rel="stylesheet" type="text/css"
-    href="<?php echo base_url(); ?>admintemplate/bower_components/ekko-lightbox/dist/ekko-lightbox.css">
-<link rel="stylesheet" type="text/css"
-    href="<?php echo base_url(); ?>admintemplate/bower_components/lightbox2/dist/css/lightbox.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://kit.fontawesome.com/bc4d6d3f18.js" crossorigin="anonymous"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $(".delete").click(function(e) {
-        alert('as');
-        $this = $(this);
-        e.preventDefault();
-        var url = $(this).attr("href");
-        $.get(url, function(r) {
-            if (r.success) {
-                $this.closest("tr").remove();
-            }
-        })
-    });
-});
-$(document).ready(function() {
-    $(".enable").click(function(e) {
-        alert('as');
-        $this = $(this);
-        e.preventDefault();
-        var url = $(this).attr("href");
-        $.get(url, function(r) {
-            if (r.success) {
-                $this.closest("tr").remove();
-            }
-        })
-    });
-});
-$(document).ready(function() {
-    $(".desable").click(function(e) {
-        alert('as');
-        $this = $(this);
-        e.preventDefault();
-        var url = $(this).attr("href");
-        $.get(url, function(r) {
-            if (r.success) {
-                $this.closest("tr").remove();
-            }
-        })
-    });
-});
-
-
-$.ajax({
-    type: 'post',
-    url: 'campaign-listing.php',
-    data: {
-        txt: txtbox,
-
-    },
-    cache: false,
-    success: function(returndata) {
-        if (returndata[4] === 1) {
-
-            $("#btn_id").modal('show');
-
-        } else {
-            // other code
-        }
-    },
-    error: function() {
-        console.error('Failed to process ajax !');
-    }
-});
-</script>
-
-
-
 <div class="container-fluid page-body-wrapper">
     <div class="main-panel">
         <div class="content-wrapper">
@@ -118,12 +39,27 @@ $.ajax({
                                             <td><?php echo $post['campaign_end_date']; ?></td>
                                             <td>
 
-                                                <?php echo statusconversion($post['campaign_status']); ?>
+                                                <span id="status_<?php echo $post['id']; ?>"><?php echo statusconversion($post['campaign_status']); ?></span>
                                             </td>
                                             <td>
                                                 <span><a href="javascript:;"><button
                                                             class="btn btn-primary waves-effect waves-light" id="btn_id" onclick="javascript: jQuery('#campaigndetails_<?php echo $post['id']; ?>').modal('show');">View</button></a></span>
-                                              
+                                                
+                                                <?php if($post['campaign_status']=='Pending') { ?>             
+                                               <span><a href="javascript:;"><button
+                                                            class="btn btn-success waves-effect waves-light" id="btn_id" onclick="javascript: updatestatus(<?php echo $post['id']; ?>,'Approve');">Approve</button></a></span>
+                                                <?php } ?>             
+
+                                                <?php if($post['campaign_status']=='Approved') { ?>             
+                                               <span><a href="javascript:;"><button
+                                                            class="btn btn-danger waves-effect waves-light" id="btn_id" onclick="javascript: updatestatus(<?php echo $post['id']; ?>,'Suspend');">Suspend</button></a></span>
+                                                <?php } ?>
+
+                                                <?php if($post['campaign_status']=='Approved') { ?>             
+                                               <span><a href="javascript:;"><button
+                                                            class="btn btn-warning waves-effect waves-light" id="btn_id" onclick="javascript: updatestatus(<?php echo $post['id']; ?>,'Pause');">Pause</button></a></span>
+                                                <?php } ?>
+
 
                                             </td>
                                         </tr>
@@ -162,7 +98,7 @@ $.ajax({
             <p><strong>Campaign Title :</strong> <?php echo $post['campaign_title']; ?></p>
                     <p><strong>Campaign Description :</strong> <?php echo $post['campaign_description']; ?></p>
                     <p><strong>Ad Type :</strong> <?php echo $post['ad_type']; ?></p>
-                    <p><strong>Banner Image :</strong> <?php echo $post['video_or_image_file']; ?></p>
+                    <!-- <p><strong>Banner Image :</strong> <?php echo $post['video_or_image_file']; ?></p> -->
                     <p><strong>Campaign Start Date :</strong> <?php echo $post['campaign_start_date']; ?></p>
                     <p><strong>Campaign End Date :</strong> <?php echo $post['campaign_end_date']; ?></p>
                     <p><strong>Budget Per Day :</strong> <?php echo $post['budget_per_day']; ?></p>
@@ -212,3 +148,22 @@ $.ajax({
         return $returnval;
     }
 ?>
+
+<script>
+    function updatestatus(id,status)
+    {
+        $.ajax({
+                url: '<?php echo base_url('campaign/statusupdate/'); ?>',
+                type: 'post',
+                dataType: 'json',
+                data: {id:id,status:status},
+                cache: false,
+                success: function(data) {
+                   
+                    console.log(data);
+                   jQuery('#status_'+id).html(data);
+                    
+                }
+            });
+    }
+</script>

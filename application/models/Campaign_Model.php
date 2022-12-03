@@ -131,6 +131,49 @@
 
         }
 
+        public function updateStatus($id,$status)
+        {
+            $this->db->order_by('vendor_campaigns.id', 'DESC');
+            $this->db->where('id',$id);
+            $query =$this->db->get('vendor_campaigns');
+            $campaign=$query->row_array(); 
+
+                        if($status=='Approve')
+                        {
+                            $enddate=date('Y-m-d',strtotime('+'.$campaign['campaign_pack'].' days',strtotime(date('Y-m-d h:i'))));
+                            $data=array(
+                                'campaign_status'=>'Approved',
+                                'campaign_approval_date'=>date('Y-m-d h:i'),
+                                'campaign_approved_by'=>$this->session->userdata('user_id'),
+                                'campaign_start_date'=>date('Y-m-d h:i'),
+                                'campaign_end_date'=>($enddate),
+                            );
+                        }
+
+                        if($status=='Suspend')
+                        {
+                            
+                            $data=array(
+                                'campaign_status'=>'Suspend',
+                                'campaign_pause_date'=>date('Y-m-d h:i'),
+                                'campaign_pause_by'=>$this->session->userdata('user_id')
+                            );
+                        }
+
+                        if($status=='Pause')
+                        {
+                            
+                            $data=array(
+                                'campaign_status'=>'Paused',
+                                'campaign_pause_date'=>date('Y-m-d h:i'),
+                                'campaign_pause_by'=>$this->session->userdata('user_id')
+                            );
+                        }
+
+                            
+                            $this->db->where('id', $id);              
+                            $this->db->update('vendor_campaigns', $data);
+        }
 
         public function getcampiagns()
         {

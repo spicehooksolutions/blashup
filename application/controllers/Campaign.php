@@ -173,4 +173,47 @@
 			exit;
 		}
 
+
+
+		public function statusupdate()
+		{
+			if(isset($_POST['id']) && isset($_POST['status']))
+			{
+				$this->Campaign_Model->updateStatus($_POST['id'],$_POST['status']);
+				$status=$_POST['status'];
+				$returnval="";
+        switch($status)
+        {
+            case 'Active':
+                $returnval="<a href='javascript:;' class='btn btn-success'>".$status."</a>";
+                break;
+            case 'Inactive':
+                $returnval="<a href='javascript:;' class='btn btn-inverse'>".$status."</a>";
+                break;
+            case 'Pending':
+                $returnval="<a href='javascript:;' class='btn btn-info'>".$status."</a>";
+                break;
+            case 'Approve':
+                $returnval="<a href='javascript:;' class='btn btn-success'>".$status."</a>";
+                break;
+            case 'Pause':
+                $returnval="<a href='javascript:;' class='btn btn-warning'>".$status."</a>";
+                break;
+            case 'Completed':
+                $returnval="<a href='javascript:;' class='btn btn-disabled'>".$status."</a>";
+                break;
+            case 'Draft':
+                $returnval="<a href='javascript:;' class='btn btn-warning'>".$status."</a>";
+                break;
+            case 'Suspend':
+                $returnval="<a href='javascript:;' class='btn btn-danger'>".$status."</a>";
+                break;   
+        }
+
+        echo $returnval;
+		exit;
+
+			}
+		}
+
 	}

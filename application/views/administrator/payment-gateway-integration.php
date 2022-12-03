@@ -44,14 +44,14 @@
                                                  type="text">
                                          </div>
                                      </div>
-                                     <div class="form-group row">
+                                     <!-- <div class="form-group row">
                                          <label class="col-sm-2 col-form-label">RAZORPAY API PATH</label>
                                          <div class="col-sm-6">
                                              <input class="form-control" id="razorpay_api_path"
                                                  value="<?php echo (isset($paymentconfiguration['payment_gateway_api_path'])?$paymentconfiguration['payment_gateway_api_path']:'');?>"
                                                  placeholder="RAZORPAY API PATH" name="razorpay_api_path" type="text">
                                          </div>
-                                     </div>
+                                     </div> -->
 
                                      <div class="form-group">
                                          <button type="button" onclick="submit_check()"
