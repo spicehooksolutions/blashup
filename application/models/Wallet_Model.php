@@ -44,5 +44,12 @@
 						  $this->db->where('id', $rid);              
                         $this->db->update('transactions', $data);
 		}
+
+		public function alltransaction(){
+			$this->db->where('user_id',$this->session->userdata('user_id'));
+			$result = $this->db->get('campaign_transactions');
+
+			return $result->result_array();
+		}
     }
 ?>

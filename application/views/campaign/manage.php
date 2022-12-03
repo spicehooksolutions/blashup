@@ -35,8 +35,9 @@
                                             <td><?php echo (($post['ad_type']=='full_screen_video')? 'Full screen Video':'In Between Video'); ?>
                                             </td>
                                             <td><?php echo $post['budget_per_day']; ?></td>
-                                            <td><?php echo $post['campaign_start_date']; ?></td>
-                                            <td><?php echo $post['campaign_end_date']; ?></td>
+                                           
+                                            <td><?php echo date('F j, Y h:i a',strtotime($post['campaign_start_date'])); ?></td>
+                                            <td><?php echo date('F j, Y h:i a',strtotime($post['campaign_end_date'])); ?></td>
                                             <td>
 
                                                 <?php echo statusconversion($post['campaign_status']); ?>

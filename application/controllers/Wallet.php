@@ -51,4 +51,17 @@
 			exit;
 		}
 
+		public function alltransaction(){
+			if(!$this->session->userdata('login')) {
+				redirect('users/login');
+			}
+			$data['title'] = 'All transactions';
+			$data['alltransactions'] = $this->Wallet_Model->alltransaction();
+			// var_dump($data['alltransactions']);
+			// die();
+			
+			$this->load->view('templates/header');
+			$this->load->view('wallet/alltransactions', $data);
+			$this->load->view('templates/footer');
+		}
 	}

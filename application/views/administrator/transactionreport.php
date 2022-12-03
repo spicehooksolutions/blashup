@@ -37,8 +37,8 @@
                                             <td><?php echo $post['id']; ?></td>
                                             <td>
                                                 <?php echo $post['payment_order_id']; ?>
-                                            </td>
-                                            <td><?php echo $post['payment_initiate_date']; ?>
+                                            </td>  
+                                            <td><?php echo  date('F j, Y h:i a',strtotime($post['payment_initiate_date'])); ?>
                                             </td>
                                             <td><?php echo $post['payment_amount']; ?></td>
                                             <td><?php echo statusconversion($post['payment_status']); ?></td>
