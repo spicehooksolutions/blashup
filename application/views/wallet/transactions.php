@@ -136,7 +136,7 @@
                                                 <?php echo $post['payment_order_id']; ?>
                                             </td>
 
-                                            <td><?php echo (($post['payment_response_time']!=NULL)?$post['payment_response_time']:$post['payment_initiate_date']); ?>
+                                            <td><?php echo date('F j, Y h:i a',strtotime(($post['payment_response_time']!=NULL)?$post['payment_response_time']:$post['payment_initiate_date'])); ?>
                                             </td>
                                             <td>
 
