@@ -32,14 +32,17 @@
 		   $data['title'] = ucfirst($page);
 		   
 		   $totalusers=$this->Administrator_Model->dashboarduser();
-
 		   
+		   $data['sixmonthsusers']=$this->Administrator_Model->dashboardsixmonthusers('all');
+
 		   if($totalusers!=FALSE)
 		   $data['totalusers']=$totalusers->CNT;
 		   else
 		   $data['totalusers']=0;
 
 		  $totalcampaigns=$this->Administrator_Model->dashboardcampaign();
+		
+		  $data['sixmonthscampaogns']=$this->Administrator_Model->dashboardsixmonthcampaign('all');
 
 		  if($totalcampaigns!=FALSE)
 		  $data['totalcampaigns']=$totalcampaigns->CNT;
@@ -48,12 +51,16 @@
 
 		  $totaltransactions=$this->Administrator_Model->dashboardtransaction();
 		  
+		  $data['sixmonthstransactions']=$this->Administrator_Model->dashboardsixmonthtransactions('all');
+
 		  if($totaltransactions!=FALSE)
-		  $data['totaltransactions']=$totaltransactions->CNT;
+		  $data['totaltransactions']=$totaltransactions->AMOUNT;
 		  else
 		  $data['totaltransactions']=0;
 
 		  $totalrunningcampaigns=$this->Administrator_Model->dashboardrunningcampaign();
+
+		  $data['sixmonthsrunnings']=$this->Administrator_Model->dashboardsixmonthcampaign('running');
 
 		  if($totalrunningcampaigns!=FALSE)
 		  $data['totalrunningcampaigns']=$totalrunningcampaigns->CNT;
@@ -62,13 +69,15 @@
 
 		  $totalsuccessfultransactions=$this->Administrator_Model->dashboardsuccessfultransaction();
 		  
+		  $data['sixmonthssuccessfultransactions']=$this->Administrator_Model->dashboardsixmonthtransactions('countsuccess');
+
 		  if($totalsuccessfultransactions!=FALSE)
 		  $data['totalsuccessfultransactions']=$totalsuccessfultransactions->CNT;
 		  else
 		  $data['totalsuccessfultransactions']=0;
 
 		  $totalfailedtransactions=$this->Administrator_Model->dashboardfailedtransaction();
-		  
+		  $data['sixmonthsfailedtransactions']=$this->Administrator_Model->dashboardsixmonthtransactions('countfailed');
 		  if($totalfailedtransactions!=FALSE)
 		  $data['totalfailedtransactions']=$totalfailedtransactions->CNT;
 		  else
@@ -81,12 +90,12 @@
 		  else
 		  $data['totalsales']=0;
 
-		  $totaltransactions=$this->Administrator_Model->dashboardtotaltransactions();
+		//   $totaltransactions=$this->Administrator_Model->dashboardtotaltransactions();
 
-		  if($totaltransactions->TOTAL>0)
-		  $data['totaltransactions']=$totaltransactions->TOTAL;
-		  else
-		  $data['totaltransactions']=0;
+		//   if($totaltransactions->TOTAL>0)
+		//   $data['totaltransactions']=$totaltransactions->TOTAL;
+		//   else
+		//   $data['totaltransactions']=0;
 
 		   $this->load->view('administrator/header-script');
 		   $this->load->view('administrator/header');

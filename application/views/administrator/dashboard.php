@@ -1,3 +1,4 @@
+<script src="<?php echo base_url(); ?>assets/frontend/js/dashboard.js"></script>
 <div class="container-fluid page-body-wrapper">
     <div class="main-panel">
         <div class="content-wrapper">
@@ -427,3 +428,325 @@
     </div>
     <!-- main-panel ends -->
 </div>
+<script>
+jQuery(document).ready(function() {
+
+   
+
+    var newClientData = {
+			labels: [<?php for ($i = 1; $i <=6; $i++) {
+  echo '"'.date('F', strtotime("-$i month")).'",';
+} ?>],
+			datasets: [{
+				label: 'USERS',
+				data: [<?php echo $sixmonthsusers;?>],
+				backgroundColor: [
+						'#f7f7f7',
+				],
+				borderColor: [
+						'#dcdcdc'
+				],
+				borderWidth: 2,
+				fill: true,
+			},],
+		};
+		var newClientOptions = {
+			scales: {
+				yAxes: [{
+					display: false,
+				}],
+				xAxes: [{
+					display: false,
+				}],
+			},
+			legend: {
+				display: false,
+			},
+			elements: {
+				point: {
+					radius: 0
+				},		
+			},
+			plugins: {
+				datalabels: {
+					display: false,
+					align: 'center',
+					anchor: 'center'
+				}
+			}				
+		};
+		if ($("#newClient").length) {
+			var lineChartCanvas = $("#newClient").get(0).getContext("2d");
+			var saleschart = new Chart(lineChartCanvas, {
+				type: 'line',
+				data: newClientData,
+				options: newClientOptions
+			});
+		}
+
+
+
+        var allProductsData = {
+			labels: [<?php for ($i = 1; $i <=6; $i++) {
+  echo '"'.date('F', strtotime("-$i month")).'",';
+} ?>],
+			datasets: [{
+				label: 'CAMPAIGNS',
+				data: [<?php echo $sixmonthscampaogns;?>],
+				backgroundColor: [
+						'#f7f7f7',
+				],
+				borderColor: [
+						'#dcdcdc'
+				],
+				borderWidth: 2,
+				fill: true,
+			}, ],
+		};
+		var allProductsOptions = {
+			scales: {
+				yAxes: [{
+					display: false,
+				}],
+				xAxes: [{
+					display: false,
+				}],
+			},
+			legend: {
+				display: false,
+			},
+			elements: {
+				point: {
+					radius: 0
+				},
+			},
+			plugins: {
+				datalabels: {
+					display: false,
+					align: 'center',
+					anchor: 'center'
+				}
+			}				
+	
+		};
+		if ($("#allProducts").length) {
+			var lineChartCanvas = $("#allProducts").get(0).getContext("2d");
+			var saleschart = new Chart(lineChartCanvas, {
+				type: 'line',
+				data: allProductsData,
+				options: allProductsOptions
+			});
+		}
+
+
+        var invoicesData = {
+			labels: [<?php for ($i = 1; $i <=6; $i++) {
+  echo '"'.date('F', strtotime("-$i month")).'",';
+} ?>],
+			datasets: [{
+				label: 'TRANSACTIONS',
+				data: [<?php echo $sixmonthstransactions;?>],
+				backgroundColor: [
+						'#f7f7f7',
+				],
+				borderColor: [
+						'#dcdcdc'
+				],
+				borderWidth: 2,
+				fill: true,
+			}, ],
+		};
+		var invoicesOptions = {
+			scales: {
+				yAxes: [{
+					display: false,
+				}],
+				xAxes: [{
+					display: false,
+				}],
+			},
+			legend: {
+				display: false,
+			},
+			elements: {
+					point: {
+						radius: 0
+					},
+			},
+			plugins: {
+				datalabels: {
+					display: false,
+					align: 'center',
+					anchor: 'center'
+				}
+			}				
+	
+		};
+		if ($("#invoices").length) {
+			var lineChartCanvas = $("#invoices").get(0).getContext("2d");
+			var saleschart = new Chart(lineChartCanvas, {
+				type: 'line',
+				data: invoicesData,
+				options: invoicesOptions
+			});
+		}
+
+
+        var projectsData = {
+			labels: [<?php for ($i = 1; $i <=6; $i++) {
+  echo '"'.date('F', strtotime("-$i month")).'",';
+} ?>],
+			datasets: [{
+				label: 'RUNNING CAMPAIGNS',
+				data: [<?php echo $sixmonthsrunnings;?>],
+					backgroundColor: [
+							'#f7f7f7',
+					],
+				borderColor: [
+						'#dcdcdc'
+				],
+				borderWidth: 2,
+				fill: true,
+			}, ],
+		};
+		var projectsOptions = {
+			scales: {
+				yAxes: [{
+					display: false,
+				}],
+				xAxes: [{
+					display: false,
+				}],
+			},
+			legend: {
+				display: false,
+			},
+			elements: {
+				point: {
+					radius: 0
+				},
+			},
+			plugins: {
+				datalabels: {
+					display: false,
+					align: 'center',
+					anchor: 'center'
+				}
+			}					
+		};
+		if ($("#projects").length) {
+			var lineChartCanvas = $("#projects").get(0).getContext("2d");
+			var saleschart = new Chart(lineChartCanvas, {
+				type: 'line',
+				data: projectsData,
+				options: projectsOptions
+			});
+		}
+
+
+        var orderRecievedData = {
+			labels: [<?php for ($i = 1; $i <=6; $i++) {
+  echo '"'.date('F', strtotime("-$i month")).'",';
+} ?>],
+			datasets: [{
+				label: 'SUCCESSFUL TRANSACTIONS',
+				data: [<?php echo $sixmonthssuccessfultransactions;?>],
+				backgroundColor: [
+						'#f7f7f7',
+				],
+				borderColor: [
+						'#dcdcdc'
+				],
+				borderWidth: 2,
+				fill: true,
+			}, ],
+		};
+		var orderRecievedOptions = {
+			scales: {
+				yAxes: [{
+					display: false,
+				}],
+				xAxes: [{
+					display: false,
+				}],
+			},
+			legend: {
+				display: false,
+			},
+			elements: {
+				point: {
+					radius: 0
+				},
+			},
+			plugins: {
+				datalabels: {
+					display: false,
+					align: 'center',
+					anchor: 'center'
+				}
+			}				
+	
+		};
+		if ($("#orderRecieved").length) {
+			var lineChartCanvas = $("#orderRecieved").get(0).getContext("2d");
+			var saleschart = new Chart(lineChartCanvas, {
+				type: 'line',
+				data: orderRecievedData,
+				options: orderRecievedOptions
+			});
+		}
+
+
+        var transactionsData = {
+			labels: [<?php for ($i = 1; $i <=6; $i++) {
+  echo '"'.date('F', strtotime("-$i month")).'",';
+} ?>],
+			datasets: [{
+				label: 'FAILED TRANSACTIONS',
+				data: [<?php echo $sixmonthsfailedtransactions;?>],
+				backgroundColor: [
+						'#f7f7f7',
+				],
+				borderColor: [
+						'#dcdcdc'
+				],
+				borderWidth: 2,
+				fill: true,
+			}, ],
+		};
+		var transactionsOptions = {
+			scales: {
+				yAxes: [{
+					display: false,
+				}],
+				xAxes: [{
+					display: false,
+				}],
+			},
+			legend: {
+				display: false,
+			},
+			elements: {
+				point: {
+					radius: 0
+				},
+			},
+			plugins: {
+				datalabels: {
+					display: false,
+					align: 'center',
+					anchor: 'center'
+				}
+			}				
+		};
+		if ($("#transactions").length) {
+			var lineChartCanvas = $("#transactions").get(0).getContext("2d");
+			var saleschart = new Chart(lineChartCanvas, {
+				type: 'line',
+				data: transactionsData,
+				options: transactionsOptions
+			});
+		}
+
+});
+</script>

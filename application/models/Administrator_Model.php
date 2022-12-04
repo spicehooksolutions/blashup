@@ -660,12 +660,12 @@ public function dashboardcampaign(){
 }
 
 public function dashboardtransaction(){
-	$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  transactions');
+	$query = $this->db->query('SELECT SUM(payment_amount) AS AMOUNT FROM  transactions WHERE payment_status="succeful"');
 	return $query->row();
 }
 
 public function dashboardrunningcampaign(){
-	$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  vendor_campaigns');
+	$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  vendor_campaigns WHERE campaign_status="Approved" AND NOW() BETWEEN campaign_start_date AND campaign_end_date');
 	return $query->row();
 }
 
@@ -676,8 +676,8 @@ public function dashboardsuccessfultransaction(){
 }
 
 public function dashboardfailedtransaction(){
-	$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  transactions WHERE payment_status=	
-	"failed"');
+	$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  transactions WHERE payment_status !=	
+	"succeful"');
 	return $query->row();
 }
 
@@ -749,7 +749,172 @@ public function login_log(){
 				  );
 			return $this->db->insert('login_activity_log', $data);
 	}
-}
+
+	public function dashboardsixmonthtransactions($type)
+	{
+			if($type=='all')
+			{
+				$monthwisevalues="0,0,0,0,0,0";
+
+				$query = $this->db->query('SELECT MONTH(`payment_initiate_date`) AS MONTH, COUNT(*) AS TOTALWALLET FROM transactions WHERE MONTH(`payment_initiate_date`) BETWEEN MONTH(CURDATE() - INTERVAL 6 MONTH) AND MONTH(CURDATE()) GROUP BY MONTH');
+				if ($query->num_rows()>0) {
+					$monthwisevalues="";
+					foreach($query->result_array() as $row)
+					{
+						$monthwisevalues .=$row['TOTALWALLET'].",";
+					}
+					if ($query->num_rows()<6)
+					{
+						for($i=1;$i<=6-$query->num_rows();$i++)
+						$monthwisevalues .="0".",";
+					}
+
+				}
+
+				return rtrim($monthwisevalues,",");
+			}
 
 
-	
+			if($type=='countsuccess')
+			{
+				$monthwisevalues="0,0,0,0,0,0";
+
+				$query = $this->db->query('SELECT MONTH(`payment_initiate_date`) AS MONTH, COUNT(*) AS TOTALWALLET FROM transactions WHERE MONTH(`payment_initiate_date`) BETWEEN MONTH(CURDATE() - INTERVAL 6 MONTH) AND MONTH(CURDATE()) AND payment_status="succeful" GROUP BY MONTH');
+				if ($query->num_rows()>0) {
+					$monthwisevalues="";
+					foreach($query->result_array() as $row)
+					{
+						$monthwisevalues .=$row['TOTALWALLET'].",";
+					}
+					if ($query->num_rows()<6)
+					{
+						for($i=1;$i<=6-$query->num_rows();$i++)
+						$monthwisevalues .="0".",";
+					}
+
+				}
+
+				return rtrim($monthwisevalues,",");
+			}
+			if($type=='countfailed')
+			{
+				$monthwisevalues="0,0,0,0,0,0";
+
+				$query = $this->db->query('SELECT MONTH(`payment_initiate_date`) AS MONTH, COUNT(*) AS TOTALWALLET FROM transactions WHERE MONTH(`payment_initiate_date`) BETWEEN MONTH(CURDATE() - INTERVAL 6 MONTH) AND MONTH(CURDATE()) AND payment_status!="succeful" GROUP BY MONTH');
+				if ($query->num_rows()>0) {
+					$monthwisevalues="";
+					foreach($query->result_array() as $row)
+					{
+						$monthwisevalues .=$row['TOTALWALLET'].",";
+					}
+					if ($query->num_rows()<6)
+					{
+						for($i=1;$i<=6-$query->num_rows();$i++)
+						$monthwisevalues .="0".",";
+					}
+
+				}
+
+				return rtrim($monthwisevalues,",");
+			}
+	}
+
+	public function dashboardsixmonthusers($type)
+	{
+		if($type=='all')
+			{
+				$monthwisevalues="0,0,0,0,0,0";
+
+				$query = $this->db->query('SELECT MONTH(`register_date`) AS MONTH, COUNT(*) AS TOTALUSERS FROM users WHERE MONTH(`register_date`) BETWEEN MONTH(CURDATE() - INTERVAL 6 MONTH) AND MONTH(CURDATE()) GROUP BY MONTH');
+				if ($query->num_rows()>0) {
+					$monthwisevalues="";
+					foreach($query->result_array() as $row)
+					{
+						$monthwisevalues .=$row['TOTALUSERS'].",";
+					}
+					if ($query->num_rows()<6)
+					{
+						for($i=1;$i<=6-$query->num_rows();$i++)
+						$monthwisevalues .="0".",";
+					}
+
+				}
+
+				return rtrim($monthwisevalues,",");
+			}
+	}
+
+	public function dashboardsixmonthcampaign($type)
+		{
+			if($type=='all')
+			{
+				$monthwisevalues="0,0,0,0,0,0";
+
+				$query = $this->db->query('SELECT MONTH(`campaign_creation_date`) AS MONTH, COUNT(*) AS TOTALCAMPAIGN FROM vendor_campaigns WHERE MONTH(`campaign_creation_date`) BETWEEN MONTH(CURDATE() - INTERVAL 6 MONTH) AND MONTH(CURDATE()) GROUP BY MONTH');
+				if ($query->num_rows()>0) {
+					$monthwisevalues="";
+					foreach($query->result_array() as $row)
+					{
+						$monthwisevalues .=$row['TOTALCAMPAIGN'].",";
+					}
+					if ($query->num_rows()<6)
+					{
+						for($i=1;$i<=6-$query->num_rows();$i++)
+						$monthwisevalues .="0".",";
+					}
+
+				}
+
+				return rtrim($monthwisevalues,",");
+			}
+
+
+
+			if($type=='running')
+			{
+				$monthwisevalues="0,0,0,0,0,0";
+
+				$query = $this->db->query('SELECT MONTH(`campaign_creation_date`) AS MONTH, COUNT(*) AS TOTALCAMPAIGN FROM vendor_campaigns WHERE MONTH(`campaign_creation_date`) BETWEEN MONTH(CURDATE() - INTERVAL 6 MONTH) AND MONTH(CURDATE()) AND campaign_status="Approved" AND NOW() BETWEEN campaign_start_date AND campaign_end_date GROUP BY MONTH');
+				if ($query->num_rows()>0) {
+					$monthwisevalues="";
+					foreach($query->result_array() as $row)
+					{
+						$monthwisevalues .=$row['TOTALCAMPAIGN'].",";
+					}
+					if ($query->num_rows()<6)
+					{
+						for($i=1;$i<=6-$query->num_rows();$i++)
+						$monthwisevalues .="0".",";
+					}
+
+				}
+
+				return rtrim($monthwisevalues,",");
+			}
+
+
+			if($type=='failed')
+			{
+				$monthwisevalues="0,0,0,0,0,0";
+
+				$query = $this->db->query('SELECT MONTH(`campaign_creation_date`) AS MONTH, COUNT(*) AS TOTALCAMPAIGN FROM vendor_campaigns WHERE MONTH(`campaign_creation_date`) BETWEEN MONTH(CURDATE() - INTERVAL 6 MONTH) AND MONTH(CURDATE())  AND campaign_status="Suspend" GROUP BY MONTH');
+				if ($query->num_rows()>0) {
+					$monthwisevalues="";
+					foreach($query->result_array() as $row)
+					{
+						$monthwisevalues .=$row['TOTALCAMPAIGN'].",";
+					}
+					if ($query->num_rows()<6)
+					{
+						for($i=1;$i<=6-$query->num_rows();$i++)
+						$monthwisevalues .="0".",";
+					}
+
+				}
+
+				return rtrim($monthwisevalues,",");
+			}
+
+		}
+
+}	

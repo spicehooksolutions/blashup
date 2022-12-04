@@ -757,297 +757,297 @@
 			});
 			bar.animate(.36); // Number from 0.0 to 1.0
 		}
-		var newClientData = {
-			labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-			datasets: [{
-				label: 'Margin',
-				data: [35, 37, 34, 36, 32],
-				backgroundColor: [
-						'#f7f7f7',
-				],
-				borderColor: [
-						'#dcdcdc'
-				],
-				borderWidth: 2,
-				fill: true,
-			},],
-		};
-		var newClientOptions = {
-			scales: {
-				yAxes: [{
-					display: false,
-				}],
-				xAxes: [{
-					display: false,
-				}],
-			},
-			legend: {
-				display: false,
-			},
-			elements: {
-				point: {
-					radius: 0
-				},		
-			},
-			plugins: {
-				datalabels: {
-					display: false,
-					align: 'center',
-					anchor: 'center'
-				}
-			}				
-		};
-		if ($("#newClient").length) {
-			var lineChartCanvas = $("#newClient").get(0).getContext("2d");
-			var saleschart = new Chart(lineChartCanvas, {
-				type: 'line',
-				data: newClientData,
-				options: newClientOptions
-			});
-		}
-		var allProductsData = {
-			labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-			datasets: [{
-				label: 'Margin',
-				data: [37, 36, 37, 35, 36],
-				backgroundColor: [
-						'#f7f7f7',
-				],
-				borderColor: [
-						'#dcdcdc'
-				],
-				borderWidth: 2,
-				fill: true,
-			}, ],
-		};
-		var allProductsOptions = {
-			scales: {
-				yAxes: [{
-					display: false,
-				}],
-				xAxes: [{
-					display: false,
-				}],
-			},
-			legend: {
-				display: false,
-			},
-			elements: {
-				point: {
-					radius: 0
-				},
-			},
-			plugins: {
-				datalabels: {
-					display: false,
-					align: 'center',
-					anchor: 'center'
-				}
-			}				
+		// var newClientData = {
+		// 	labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+		// 	datasets: [{
+		// 		label: 'Margin',
+		// 		data: [35, 37, 34, 36, 32],
+		// 		backgroundColor: [
+		// 				'#f7f7f7',
+		// 		],
+		// 		borderColor: [
+		// 				'#dcdcdc'
+		// 		],
+		// 		borderWidth: 2,
+		// 		fill: true,
+		// 	},],
+		// };
+		// var newClientOptions = {
+		// 	scales: {
+		// 		yAxes: [{
+		// 			display: false,
+		// 		}],
+		// 		xAxes: [{
+		// 			display: false,
+		// 		}],
+		// 	},
+		// 	legend: {
+		// 		display: false,
+		// 	},
+		// 	elements: {
+		// 		point: {
+		// 			radius: 0
+		// 		},		
+		// 	},
+		// 	plugins: {
+		// 		datalabels: {
+		// 			display: false,
+		// 			align: 'center',
+		// 			anchor: 'center'
+		// 		}
+		// 	}				
+		// };
+		// if ($("#newClient").length) {
+		// 	var lineChartCanvas = $("#newClient").get(0).getContext("2d");
+		// 	var saleschart = new Chart(lineChartCanvas, {
+		// 		type: 'line',
+		// 		data: newClientData,
+		// 		options: newClientOptions
+		// 	});
+		// }
+		// var allProductsData = {
+		// 	labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+		// 	datasets: [{
+		// 		label: 'Margin',
+		// 		data: [37, 36, 37, 35, 36],
+		// 		backgroundColor: [
+		// 				'#f7f7f7',
+		// 		],
+		// 		borderColor: [
+		// 				'#dcdcdc'
+		// 		],
+		// 		borderWidth: 2,
+		// 		fill: true,
+		// 	}, ],
+		// };
+		// var allProductsOptions = {
+		// 	scales: {
+		// 		yAxes: [{
+		// 			display: false,
+		// 		}],
+		// 		xAxes: [{
+		// 			display: false,
+		// 		}],
+		// 	},
+		// 	legend: {
+		// 		display: false,
+		// 	},
+		// 	elements: {
+		// 		point: {
+		// 			radius: 0
+		// 		},
+		// 	},
+		// 	plugins: {
+		// 		datalabels: {
+		// 			display: false,
+		// 			align: 'center',
+		// 			anchor: 'center'
+		// 		}
+		// 	}				
 	
-		};
-		if ($("#allProducts").length) {
-			var lineChartCanvas = $("#allProducts").get(0).getContext("2d");
-			var saleschart = new Chart(lineChartCanvas, {
-				type: 'line',
-				data: allProductsData,
-				options: allProductsOptions
-			});
-		}
-		var invoicesData = {
-			labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-			datasets: [{
-				label: 'Margin',
-				data: [35, 37, 34, 36, 32],
-				backgroundColor: [
-						'#f7f7f7',
-				],
-				borderColor: [
-						'#dcdcdc'
-				],
-				borderWidth: 2,
-				fill: true,
-			}, ],
-		};
-		var invoicesOptions = {
-			scales: {
-				yAxes: [{
-					display: false,
-				}],
-				xAxes: [{
-					display: false,
-				}],
-			},
-			legend: {
-				display: false,
-			},
-			elements: {
-					point: {
-						radius: 0
-					},
-			},
-			plugins: {
-				datalabels: {
-					display: false,
-					align: 'center',
-					anchor: 'center'
-				}
-			}				
+		// };
+		// if ($("#allProducts").length) {
+		// 	var lineChartCanvas = $("#allProducts").get(0).getContext("2d");
+		// 	var saleschart = new Chart(lineChartCanvas, {
+		// 		type: 'line',
+		// 		data: allProductsData,
+		// 		options: allProductsOptions
+		// 	});
+		// }
+		// var invoicesData = {
+		// 	labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+		// 	datasets: [{
+		// 		label: 'Margin',
+		// 		data: [35, 37, 34, 36, 32],
+		// 		backgroundColor: [
+		// 				'#f7f7f7',
+		// 		],
+		// 		borderColor: [
+		// 				'#dcdcdc'
+		// 		],
+		// 		borderWidth: 2,
+		// 		fill: true,
+		// 	}, ],
+		// };
+		// var invoicesOptions = {
+		// 	scales: {
+		// 		yAxes: [{
+		// 			display: false,
+		// 		}],
+		// 		xAxes: [{
+		// 			display: false,
+		// 		}],
+		// 	},
+		// 	legend: {
+		// 		display: false,
+		// 	},
+		// 	elements: {
+		// 			point: {
+		// 				radius: 0
+		// 			},
+		// 	},
+		// 	plugins: {
+		// 		datalabels: {
+		// 			display: false,
+		// 			align: 'center',
+		// 			anchor: 'center'
+		// 		}
+		// 	}				
 	
-		};
-		if ($("#invoices").length) {
-			var lineChartCanvas = $("#invoices").get(0).getContext("2d");
-			var saleschart = new Chart(lineChartCanvas, {
-				type: 'line',
-				data: invoicesData,
-				options: invoicesOptions
-			});
-		}
-		var projectsData = {
-			labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-			datasets: [{
-				label: 'Margin',
-				data: [38, 39, 37, 40, 36],
-					backgroundColor: [
-							'#f7f7f7',
-					],
-				borderColor: [
-						'#dcdcdc'
-				],
-				borderWidth: 2,
-				fill: true,
-			}, ],
-		};
-		var projectsOptions = {
-			scales: {
-				yAxes: [{
-					display: false,
-				}],
-				xAxes: [{
-					display: false,
-				}],
-			},
-			legend: {
-				display: false,
-			},
-			elements: {
-				point: {
-					radius: 0
-				},
-			},
-			plugins: {
-				datalabels: {
-					display: false,
-					align: 'center',
-					anchor: 'center'
-				}
-			}					
-		};
-		if ($("#projects").length) {
-			var lineChartCanvas = $("#projects").get(0).getContext("2d");
-			var saleschart = new Chart(lineChartCanvas, {
-				type: 'line',
-				data: projectsData,
-				options: projectsOptions
-			});
-		}
-		var orderRecievedData = {
-			labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-			datasets: [{
-				label: 'Margin',
-				data: [35, 37, 34, 36, 32],
-				backgroundColor: [
-						'#f7f7f7',
-				],
-				borderColor: [
-						'#dcdcdc'
-				],
-				borderWidth: 2,
-				fill: true,
-			}, ],
-		};
-		var orderRecievedOptions = {
-			scales: {
-				yAxes: [{
-					display: false,
-				}],
-				xAxes: [{
-					display: false,
-				}],
-			},
-			legend: {
-				display: false,
-			},
-			elements: {
-				point: {
-					radius: 0
-				},
-			},
-			plugins: {
-				datalabels: {
-					display: false,
-					align: 'center',
-					anchor: 'center'
-				}
-			}				
+		// };
+		// if ($("#invoices").length) {
+		// 	var lineChartCanvas = $("#invoices").get(0).getContext("2d");
+		// 	var saleschart = new Chart(lineChartCanvas, {
+		// 		type: 'line',
+		// 		data: invoicesData,
+		// 		options: invoicesOptions
+		// 	});
+		// }
+		// var projectsData = {
+		// 	labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+		// 	datasets: [{
+		// 		label: 'Margin',
+		// 		data: [38, 39, 37, 40, 36],
+		// 			backgroundColor: [
+		// 					'#f7f7f7',
+		// 			],
+		// 		borderColor: [
+		// 				'#dcdcdc'
+		// 		],
+		// 		borderWidth: 2,
+		// 		fill: true,
+		// 	}, ],
+		// };
+		// var projectsOptions = {
+		// 	scales: {
+		// 		yAxes: [{
+		// 			display: false,
+		// 		}],
+		// 		xAxes: [{
+		// 			display: false,
+		// 		}],
+		// 	},
+		// 	legend: {
+		// 		display: false,
+		// 	},
+		// 	elements: {
+		// 		point: {
+		// 			radius: 0
+		// 		},
+		// 	},
+		// 	plugins: {
+		// 		datalabels: {
+		// 			display: false,
+		// 			align: 'center',
+		// 			anchor: 'center'
+		// 		}
+		// 	}					
+		// };
+		// if ($("#projects").length) {
+		// 	var lineChartCanvas = $("#projects").get(0).getContext("2d");
+		// 	var saleschart = new Chart(lineChartCanvas, {
+		// 		type: 'line',
+		// 		data: projectsData,
+		// 		options: projectsOptions
+		// 	});
+		// }
+		// var orderRecievedData = {
+		// 	labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+		// 	datasets: [{
+		// 		label: 'Margin',
+		// 		data: [35, 37, 34, 36, 32],
+		// 		backgroundColor: [
+		// 				'#f7f7f7',
+		// 		],
+		// 		borderColor: [
+		// 				'#dcdcdc'
+		// 		],
+		// 		borderWidth: 2,
+		// 		fill: true,
+		// 	}, ],
+		// };
+		// var orderRecievedOptions = {
+		// 	scales: {
+		// 		yAxes: [{
+		// 			display: false,
+		// 		}],
+		// 		xAxes: [{
+		// 			display: false,
+		// 		}],
+		// 	},
+		// 	legend: {
+		// 		display: false,
+		// 	},
+		// 	elements: {
+		// 		point: {
+		// 			radius: 0
+		// 		},
+		// 	},
+		// 	plugins: {
+		// 		datalabels: {
+		// 			display: false,
+		// 			align: 'center',
+		// 			anchor: 'center'
+		// 		}
+		// 	}				
 	
-		};
-		if ($("#orderRecieved").length) {
-			var lineChartCanvas = $("#orderRecieved").get(0).getContext("2d");
-			var saleschart = new Chart(lineChartCanvas, {
-				type: 'line',
-				data: orderRecievedData,
-				options: orderRecievedOptions
-			});
-		}
-		var transactionsData = {
-			labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-			datasets: [{
-				label: 'Margin',
-				data: [38, 35, 36, 38, 34],
-				backgroundColor: [
-						'#f7f7f7',
-				],
-				borderColor: [
-						'#dcdcdc'
-				],
-				borderWidth: 2,
-				fill: true,
-			}, ],
-		};
-		var transactionsOptions = {
-			scales: {
-				yAxes: [{
-					display: false,
-				}],
-				xAxes: [{
-					display: false,
-				}],
-			},
-			legend: {
-				display: false,
-			},
-			elements: {
-				point: {
-					radius: 0
-				},
-			},
-			plugins: {
-				datalabels: {
-					display: false,
-					align: 'center',
-					anchor: 'center'
-				}
-			}				
-		};
-		if ($("#transactions").length) {
-			var lineChartCanvas = $("#transactions").get(0).getContext("2d");
-			var saleschart = new Chart(lineChartCanvas, {
-				type: 'line',
-				data: transactionsData,
-				options: transactionsOptions
-			});
-		}
+		// };
+		// if ($("#orderRecieved").length) {
+		// 	var lineChartCanvas = $("#orderRecieved").get(0).getContext("2d");
+		// 	var saleschart = new Chart(lineChartCanvas, {
+		// 		type: 'line',
+		// 		data: orderRecievedData,
+		// 		options: orderRecievedOptions
+		// 	});
+		// }
+		// var transactionsData = {
+		// 	labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+		// 	datasets: [{
+		// 		label: 'Margin',
+		// 		data: [38, 35, 36, 38, 34],
+		// 		backgroundColor: [
+		// 				'#f7f7f7',
+		// 		],
+		// 		borderColor: [
+		// 				'#dcdcdc'
+		// 		],
+		// 		borderWidth: 2,
+		// 		fill: true,
+		// 	}, ],
+		// };
+		// var transactionsOptions = {
+		// 	scales: {
+		// 		yAxes: [{
+		// 			display: false,
+		// 		}],
+		// 		xAxes: [{
+		// 			display: false,
+		// 		}],
+		// 	},
+		// 	legend: {
+		// 		display: false,
+		// 	},
+		// 	elements: {
+		// 		point: {
+		// 			radius: 0
+		// 		},
+		// 	},
+		// 	plugins: {
+		// 		datalabels: {
+		// 			display: false,
+		// 			align: 'center',
+		// 			anchor: 'center'
+		// 		}
+		// 	}				
+		// };
+		// if ($("#transactions").length) {
+		// 	var lineChartCanvas = $("#transactions").get(0).getContext("2d");
+		// 	var saleschart = new Chart(lineChartCanvas, {
+		// 		type: 'line',
+		// 		data: transactionsData,
+		// 		options: transactionsOptions
+		// 	});
+		// }
 		var supportTrackerData = {
 			labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", ],
 			datasets: [{
