@@ -86,12 +86,23 @@
             <div class="modal-body">
             <p><strong>Campaign Title :</strong> <?php echo $post['campaign_title']; ?></p>
                     <p><strong>Campaign Description :</strong> <?php echo $post['campaign_description']; ?></p>
-                    <p><strong>Ad Type :</strong> <?php echo $post['ad_type']; ?></p>
-                    <p><strong>Banner Image :</strong> <?php echo $post['video_or_image_file']; ?></p>
-                    <p><strong>Campaign Start Date :</strong> <?php echo $post['campaign_start_date']; ?></p>
-                    <p><strong>Campaign End Date :</strong> <?php echo $post['campaign_end_date']; ?></p>
-                    <p><strong>Budget Per Day :</strong> <?php echo $post['budget_per_day']; ?></p>
-                    <p><strong>Campaign Duration :</strong> <?php echo $post['campaign_pack']; ?></p>
+                    <?php if($post['ad_type']=="full_screen_video"){?>
+                    <p><strong>Ad Type :</strong> <?php echo "Full Screen Video"; ?></p> <?php }
+                    else{ ?>
+                        <p><strong>Ad Type :</strong> <?php echo "In Between Video"; ?></p>
+                <?php    }?>
+                <?php if($post['campaign_media_type']=="image"){ ?>
+                    <p><strong>Media :</strong> <br> <img src="<?php echo base_url('assets/images/campaigns/').$post['video_or_image_file']; ?>"  width="300" height="200"> </p>
+                    <?php }
+                    else{?>
+                        <p><strong>Media :</strong>  <br><video  width="300" height="200" controls> <source src="<?php echo base_url('assets/images/campaigns/').$post['video_or_image_file']; ?>" type="video/MP4"> </video> </p><?php
+                    }?>
+                    <p><strong>Product URL : </strong> <?php echo $post['link_of_product']; ?></p>
+                    <!-- <p><strong>Banner Image :</strong> <?php echo $post['video_or_image_file']; ?></p> -->
+                    <p><strong>Campaign Start Date :</strong> <?php echo date('F j, Y h:i a',strtotime($post['campaign_start_date'])); ?></p>
+                    <p><strong>Campaign End Date :</strong> <?php echo date('F j, Y h:i a',strtotime($post['campaign_end_date'])); ?></p>
+                    <p><strong>Budget Per Day :</strong> INR. <?php echo $post['budget_per_day']; ?></p>
+                    <p><strong>Campaign Duration :</strong> <?php echo $post['campaign_pack']." Days"; ?></p>
                     <p><strong>Campaign Status :</strong> <?php echo statusconversion($post['campaign_status']); ?></p>
             </div>
             <div class="modal-footer">
@@ -102,6 +113,7 @@
 </div>
 <?php endforeach; ?>
 <?php 
+
 //'Active','Inactive','Pending','Approved','Suspend','Paused','Completed','Draft'
     function statusconversion($status)
     {
