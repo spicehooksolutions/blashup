@@ -41,6 +41,7 @@
                                     $campaigndata[$i]['campaignTitle']=$camp['campaign_title'];
                                     $campaigndata[$i]['campaignMediatype']=$camp['campaign_media_type'];
                                     $campaigndata[$i]['adPosition']=$camp['ad_type'];
+                                    $campaigndata[$i]['adTargetLink']=$camp['link_of_product'];
                                     $campaigndata[$i++]['campaign']=base_url().'api/v1/campaign/'.$param2.'/'.($camp['id']);
                                     $campaigndata[$i++]['adv']=base_url().'api/v1/adv/'.$param2.'/'.($camp['id']);
 
@@ -73,7 +74,8 @@
                                     $campaigndata[$i]['campaignendDate']=$campaignDetails['campaign_end_date'];
                                     $campaigndata[$i]['campaignTitle']=$campaignDetails['campaign_title'];
                                     $campaigndata[$i]['campaignMediatype']=$campaignDetails['campaign_media_type'];
-                                    $campaigndata[$i]['adPosition']=$campaignDetails['ad_type'];                                   
+                                    $campaigndata[$i]['adPosition']=$campaignDetails['ad_type'];
+                                    $campaigndata[$i]['adTargetLink']=$campaignDetails['link_of_product'];
                                     $campaigndata[$i++]['adv']=base_url().'api/v1/adv/'.$param2.'/'.$param3;
                         }
                         else
@@ -109,12 +111,10 @@
                             $campaignDetails=$this->Administrator_Model->campaign_listing_data(($param3));
                             $i=0;
 
-                                    $campaigndata[$i]['campaignstartDate']=$campaignDetails['campaign_start_date'];
-                                    $campaigndata[$i]['campaignendDate']=$campaignDetails['campaign_end_date'];
-                                    $campaigndata[$i]['campaignTitle']=$campaignDetails['campaign_title'];
-                                    $campaigndata[$i]['campaignMediatype']=$campaignDetails['campaign_media_type'];
-                                    $campaigndata[$i]['adPosition']=$campaignDetails['ad_type'];                                   
-                                    $campaigndata[$i++]['adv']=base_url().'api/v1/adv/'.$param2.'/'.$param3;
+                                                                    
+                                    $campaigndata[$i]['advBanner']=base_url().'images/campaign/'.$campaignDetails['banner_add'];
+                                    $campaigndata[$i]['advFile']=base_url().'images/campaign/'.$campaignDetails['video_or_image_file'];
+                                    $campaigndata[$i]['adTargetLink']=$campaignDetails['link_of_product'];
                         }
                         else
                         {
