@@ -654,6 +654,13 @@ public function dashboarduser(){
 	//var_dump($query->num_rows(), $query->row());
 }
 
+public function getRecentCampaigns()
+{
+	$query = $this->db->query('SELECT * FROM  vendor_campaigns WHERE campaign_status="Pending" AND campaign_creation_date >= DATE_SUB( "'.date('Y-m-d h:i').'", INTERVAL 15 MINUTE ) LIMIT 5');
+
+	return $query->result_array();
+}
+
 public function dashboardcampaign(){
 	$query = $this->db->query('SELECT COUNT(*) AS CNT FROM  vendor_campaigns');
 	return $query->row();
@@ -915,6 +922,22 @@ public function login_log(){
 				return rtrim($monthwisevalues,",");
 			}
 
+		}
+
+
+		public function apikeyvalidation($app_token_key)
+		{
+			$query = $this->db->query('SELECT * FROM site_config WHERE app_token_key="'.$app_token_key.'"');
+				
+			$result=$query->row();
+			if ($query->num_rows()>0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 }	

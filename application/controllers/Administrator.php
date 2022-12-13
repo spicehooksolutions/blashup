@@ -708,4 +708,23 @@ public function transactionreport($offset = 0){
 
 }	
 
+public function shownotifications()
+{
+	$html=array();
+	
+	 $recentcampaigns=$this->Administrator_Model->getRecentCampaigns();
+	 $i=0;
+
+	 	foreach( $recentcampaigns as $rcn)
+		{
+
+			$html[$i]['campaign_title']=$rcn['campaign_title'];
+			$html[$i++]['campaign_creation_date']=date('F j Y h:i a', strtotime($rcn['campaign_creation_date']));
+
+		}
+
+		echo json_encode($html);
+	exit;
+}
+
 	}

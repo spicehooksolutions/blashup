@@ -12,50 +12,13 @@
                                 <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center"
                                     id="notificationDropdown" href="#" data-bs-toggle="dropdown">
                                     <i class="mdi mdi-bell mx-0"></i>
-                                    <span class="count bg-success">2</span>
+                                    <span class="count bg-success"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                                     aria-labelledby="notificationDropdown">
                                     <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-success">
-                                                <i class="mdi mdi-information mx-0"></i>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <h6 class="preview-subject font-weight-normal">Application Error</h6>
-                                            <p class="font-weight-light small-text mb-0 text-muted">
-                                                Just now
-                                            </p>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-warning">
-                                                <i class="mdi mdi-settings mx-0"></i>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <h6 class="preview-subject font-weight-normal">Settings</h6>
-                                            <p class="font-weight-light small-text mb-0 text-muted">
-                                                Private message
-                                            </p>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-info">
-                                                <i class="mdi mdi-account-box mx-0"></i>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <h6 class="preview-subject font-weight-normal">New user registration</h6>
-                                            <p class="font-weight-light small-text mb-0 text-muted">
-                                                2 days ago
-                                            </p>
-                                        </div>
-                                    </a>
+
+                                    <div id="shownotifications"></div>
                                 </div>
                             </li>
 
@@ -160,4 +123,30 @@
                 </div>
             </nav>
 
-           
+<script>
+    jQuery(document).ready(function(){
+
+        setInterval(function(){
+
+            $.ajax({
+                            url: '<?php echo base_url('administrator/shownotifications'); ?>',
+                            type: 'post',
+                            dataType: 'json',
+                            cache: false,
+                            success: function(result) {
+                               
+                                var html="";
+                                for(var i=0;i<result.length;i++)
+                                {
+                                    html +='<a class="dropdown-item preview-item"><div class="preview-thumbnail"><div class="preview-icon bg-success"><i class="mdi mdi-information mx-0"></i></div></div><div class="preview-item-content"><h6 class="preview-subject font-weight-normal">'+result[i]['campaign_title']+'</h6><p class="font-weight-light small-text mb-0 text-muted">'+result[i]['campaign_creation_date']+'</p></div></a>';
+                                }
+
+                               jQuery('#notificationDropdown .count').html(result.length);
+                                jQuery('#shownotifications').html(html);
+                            }
+                        });
+            
+        }, 5000);
+        
+    });
+    </script>
